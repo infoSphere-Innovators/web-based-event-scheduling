@@ -28,15 +28,15 @@
         <form>
           <div class="form-group">
             <label for="firstName">First Name</label>
-            <input type="text" id="firstName" placeholder="Enter First Name" />
+            <input type="text" id="firstName" placeholder="Enter First Name" required/>
           </div>
           <div class="form-group">
             <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" placeholder="Enter Last Name" />
+            <input type="text" id="lastName" placeholder="Enter Last Name" required/>
           </div>
           <div class="form-group">
             <label for="position">Position</label>
-            <select id="position">
+            <select id="position" required>
               <option value="" disabled selected>Select...</option>
               <option value="member">Member</option>
               <option value="leader">Leader</option>
@@ -45,7 +45,7 @@
           </div>
           <div class="form-group">
             <label for="zone">Zone</label>
-            <select id="zone">
+            <select id="zone" required>
               <option value="" disabled selected>Select...</option>
               <option value="north">North</option>
               <option value="south">South</option>
@@ -55,14 +55,14 @@
           </div>
           <div class="form-group">
             <label for="chapel">Chapel</label>
-            <select id="chapel">
+            <select id="chapel" required>
               <option value="" disabled selected>Select...</option>
               <option value="main">Main Chapel</option>
               <option value="youth">Youth Chapel</option>
               <option value="family">Family Chapel</option>
             </select>
           </div>
-          <button type="submit" class="submit-btn">Sign Up</button>
+          <button type="submit" valu="submit" id="submit" class="submit-btn">Sign Up</button>
         </form>
       </div>
 
@@ -74,5 +74,7 @@
       </p>
     </main>
   </div>
+  <script type="module" src="script.js"></script>
+
 </body>
 </html>
