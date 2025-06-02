@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <img
+          src="/signup-page/logo.png"
+          alt="Logo"
+        />
+      </div>
+      <button class="login-btn">Login</button>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Sign Up Form -->
+      <div class="form-card">
+        <h1>Sign Up</h1>
+        <form>
+          <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" placeholder="Enter First Name" />
+          </div>
+          <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" placeholder="Enter Last Name" />
+          </div>
+          <div class="form-group">
+            <label for="position">Position</label>
+            <select id="position">
+              <option value="" disabled selected>Select...</option>
+              <option value="member">Member</option>
+              <option value="leader">Leader</option>
+              <option value="pastor">Pastor</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="zone">Zone</label>
+            <select id="zone">
+              <option value="" disabled selected>Select...</option>
+              <option value="north">North</option>
+              <option value="south">South</option>
+              <option value="east">East</option>
+              <option value="west">West</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="chapel">Chapel</label>
+            <select id="chapel">
+              <option value="" disabled selected>Select...</option>
+              <option value="main">Main Chapel</option>
+              <option value="youth">Youth Chapel</option>
+              <option value="family">Family Chapel</option>
+            </select>
+          </div>
+          <button type="submit" class="submit-btn">Sign Up</button>
+        </form>
+      </div>
+
+      <!-- Info Text -->
+      <p class="info-text">
+        Sign up for an account by filling out the registration form. Once completed,
+        your unique QR code will be automatically generated — use this code to check
+        in at events and services easily.
+      </p>
+    </main>
+  </div>
+</body>
+</html>

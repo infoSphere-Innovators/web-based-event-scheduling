@@ -1,0 +1,203 @@
+/* Base Styles */
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(to bottom, #f5f3ff, #9D62F5);
+  color: #222222;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 40px; /* Left and right padding adjusted */
+}
+
+.logo img {
+  height: 48px;
+  width: 48px;
+  border-radius: 50%; /* Make logo circular */
+}
+
+.login-btn {
+  font-family: 'Inter', sans-serif;
+  background-color: #222222;
+  color: white;
+  padding: 0.5rem 1rem;
+  height: 40px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.login-btn:hover {
+  background-color: #374151;
+}
+
+/* Main Content */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Form Card */
+.form-card {
+  background-color: white;
+  padding: 1rem 40px; /* top-bottom: 1rem, left-right: 40px */
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-card h1 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #1f2937;
+}
+
+/* Form Group */
+.form-group {
+  margin-bottom: 1rem;
+}
+
+form {
+  padding: 10px 40px; /* top-bottom: 60px, left-right: 40px */
+  box-sizing: border-box;
+}
+
+
+label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 700; /* Inter Bold */
+  margin-bottom: 0.25rem;
+  color: #4b5563;
+  font-family: 'Inter', sans-serif;
+}
+
+input,
+select {
+  width: 100%;
+  height: 40px;
+  padding: 0 0.75rem;
+  line-height: 1;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-family: 'Inter', sans-serif;
+  appearance: none;
+  box-sizing: border-box;
+  outline: none;
+  transition: border 0.2s ease-in-out;
+
+  color: #222222;
+}
+
+/* Dropdown arrow styling for select */
+select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 0.65rem;
+  padding-right: 2rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+input::placeholder,
+select::placeholder {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  transition: opacity 0.3s ease;
+  opacity: 1; /* fully visible by default */
+}
+
+input:focus::placeholder,
+select:focus::placeholder {
+  opacity: 0; /* fade out on focus */
+}
+
+input:focus,
+select:focus {
+  border-color: #9D62F5;
+  box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.5);
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  height: 48px;
+  background-color: #222222;
+  color: white;
+  padding: 0.5rem 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem; /* Extra space below button */
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.submit-btn:hover {
+  background-color: #374151;
+}
+
+/* Info Text */
+.info-text {
+  max-width: 400px;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 1rem;
+  color: #222222;
+}
+
+/* Fade-in animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Apply fade-in animation to the whole body */
+body {
+  animation: fadeIn 1s ease-in forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* starts 20px below */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* ends at original position */
+  }
+}
+
+/* Apply to your form */
+form {
+  animation: fadeInUp 2s ease forwards;
+}
+
