@@ -20,7 +20,7 @@
 
   document.getElementById("submit").addEventListener('click', function(e){
     e.preventDefault();
-    set(ref(db, 'member/' + document.getElementById("position").value),
+    set(ref(db, 'member/' + document.getElementById("firstName").value),
     {
         firstname: document.getElementById("firstName").value,
         lastname: document.getElementById("lastName").value,
