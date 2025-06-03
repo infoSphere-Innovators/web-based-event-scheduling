@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(180deg, #006400 0%, #2F4F4F 100%);
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+    display: flex;
+    padding: 2rem;
+    gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1600px; /* Increased from 1200px */
+    margin: 0 auto;
+}
+
+.left-section {
+    color: white;
+    max-width: 400px; /* Increased from 400px */
+}
+
+.left-section h1 {
+    font-weight: bold;
+    font-size: 4rem; /* Increased from 2.5rem */
+    margin-bottom: 1rem;
+}
+
+.left-section p {
+    line-height: 1.5;
+    font-size: 1rem;
+    opacity: 0.9;
+}
+
+.sign-in-card {
+    background: white;
+    padding: 2.5rem 3rem; /* Reduced padding to give more space for form */
+    border-radius: 12px;
+    width: 100%;
+    max-width: 700px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.sign-in-card h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #333;
+}
+
+.form-group {
+    margin-bottom: 1.5rem; /* Increased from 1rem for better spacing */
+}
+
+.form-group label {
+    font-size: 0.9rem; /* Fixed the font-size unit (was just 12) */
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #666;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.9rem; /* Increased padding */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.sign-up-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 1rem; /* Added some space above the button */
+}
+
+.sign-up-btn:hover {
+    background-color: #444;
+}
+
+footer {
+    padding: 1rem 2rem; /* Added horizontal padding */
+    color: white;
+    background-color: rgb(0, 0, 0);
+    text-align: left; /* Changed from center to left */
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    .left-section {
+        margin-bottom: 2rem;
+    }
+
+    .left-section h1 {
+        font-size: 2.8rem; /* Slightly smaller on mobile */
+    }
+
+    .sign-in-card {
+        width: 100%;
+    }
+}
