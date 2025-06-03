@@ -1,0 +1,202 @@
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    color: #222;
+}
+
+.hero-section {
+    background: linear-gradient(to bottom, #E8A900 0%, #fff 100%);
+    text-align: center;
+    padding: 72px 16px 120px 16px; /* Increased top and bottom padding */
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.07);
+    border: none;
+}
+
+.hero-section h1 {
+    font-size: 3.2rem;      /* Increased font size */
+    font-weight: 700;
+    margin: 0 0 28px 0;     /* More space below */
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.13);
+}
+
+.hero-section h1 span {
+    color: #fff;
+    font-size: 3.6rem;      /* Increased font size */
+    font-weight: 700;
+}
+
+.hero-img {
+    width: 600px;           /* Increased width */
+    max-width: 98vw;
+    border-radius: 20px;
+    margin: 0 auto 28px auto;
+    display: block;
+    box-shadow: 0 6px 32px 0 rgba(0,0,0,0.10);
+}
+
+.hero-desc {
+    color: #444;
+    font-size: 1.08rem;
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+.main-btn {
+    display: inline-block;
+    background: #222;
+    color: #fff;
+    padding: 0.9rem 2.2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 8px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+    border: none;
+    cursor: pointer;
+}
+.main-btn.small {
+    padding: 0.6rem 1.3rem;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.main-btn:hover {
+    background: #E8A900;
+    color: #222;
+}
+
+.features-section {
+    background: linear-gradient(to bottom, #fff 0%, #E8A900 100%);
+    padding: 100px 0 40px 0;
+}
+
+.feature {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 900px;
+    margin: 0 auto 32px auto;
+    gap: 32px;
+}
+
+.feature-left {
+    flex-direction: row;
+}
+
+.feature-right {
+    flex-direction: row-reverse;
+}
+
+.feature-img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+    margin: 0 18px;
+}
+
+.feature h2 {
+    margin: 0 0 8px 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #222;
+}
+
+.feature p {
+    margin: 0 0 8px 0;
+    color: #444;
+    font-size: 1.05rem;
+    font-weight: 400;
+}
+
+.faq-section {
+    background: linear-gradient(to bottom, #1A5C2A 0%, #0f3d1a 100%);
+    padding: 40px 0 40px 0;
+    text-align: center;
+}
+
+.faq-section h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+
+.faq-box {
+    background: #fff;
+    border-radius: 14px;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 22px 28px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+    text-align: left;
+}
+
+.faq-item {
+    color: #222;
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.register-section {
+    background: linear-gradient(to bottom, #fff 0%, #FFE7B0 100%);
+    text-align: center;
+    padding: 44px 0 44px 0;
+}
+
+.register-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #222;
+}
+
+footer {
+    background: #111;
+    color: #fff;
+    text-align: left;
+    padding: 12px 24px;
+    font-size: 0.98rem;
+    letter-spacing: 0.5px;
+    margin-top: 0;
+}
+
+@media (max-width: 900px) {
+    .feature {
+        flex-direction: column !important;
+        gap: 18px;
+        text-align: center;
+    }
+    .feature-img {
+        margin: 0 auto 12px auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-section h1, .hero-section h1 span {
+        font-size: 1.3rem;
+    }
+    .hero-img {
+        width: 98vw;
+        min-width: 0;
+    }
+    .features-section {
+        padding: 24px 0;
+    }
+    .faq-box {
+        padding: 14px 8px;
+    }
+    .register-section {
+        padding: 24px 0;
+    }
+}
