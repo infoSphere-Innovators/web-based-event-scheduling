@@ -15,105 +15,202 @@ body {
 .container {
     flex: 1;
     display: flex;
-    padding: 2rem;
-    gap: 2rem;
+    padding: 3rem;
+    gap: 8rem; /* Increased gap to accommodate wider form */
     align-items: center;
-    justify-content: space-between;
-    max-width: 1600px; /* Increased from 1200px */
+    justify-content: center;
+    max-width: 1800px;
     margin: 0 auto;
 }
 
 .left-section {
     color: white;
-    max-width: 400px; /* Increased from 400px */
+    max-width: 500px;
 }
 
 .left-section h1 {
-    font-weight: bold;
-    font-size: 4rem; /* Increased from 2.5rem */
-    margin-bottom: 1rem;
+    font-weight: 700;
+    font-size: 3.8rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: -1px;
+    line-height: 1.1;
 }
 
 .left-section p {
-    line-height: 1.5;
-    font-size: 1rem;
+    line-height: 1.6;
+    font-size: 1.2rem;
     opacity: 0.9;
+    font-weight: 500;
 }
 
 .sign-in-card {
-    background: white;
-    padding: 2.5rem 3rem; /* Reduced padding to give more space for form */
-    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 3rem 4.5rem;
+    border-radius: 20px;
     width: 100%;
-    max-width: 700px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px; /* Increased from 500px */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
 }
 
 .sign-in-card h2 {
     text-align: center;
-    margin-bottom: 1.5rem;
-    color: #333;
+    margin-bottom: 2rem;
+    color: #1a1a1a;
+    font-size: 2rem;
+    font-weight: 600;
 }
 
 .form-group {
-    margin-bottom: 1.5rem; /* Increased from 1rem for better spacing */
+    margin-bottom: 1.8rem;
+    width: 100%;
 }
 
 .form-group label {
-    font-size: 0.9rem; /* Fixed the font-size unit (was just 12) */
+    font-size: 14px;
     display: block;
-    margin-bottom: 0.5rem;
-    color: #666;
+    margin-bottom: 0.8rem;
+    color: #444;
+    font-weight: 500;
 }
 
 .form-group input {
-    width: 100%;
-    padding: 0.9rem; /* Increased padding */
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1rem;
+    width: 350px;
+    padding: 1.2rem 1.5rem; /* Increased horizontal padding */
+    border: 2px solid #eee;
+    border-radius: 12px;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #006400;
+    box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #aaa;
 }
 
 .sign-up-btn {
     width: 100%;
-    padding: 0.75rem;
-    background-color: #333;
+    padding: 1.2rem;
+    background-color: #1f1f1f;
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 12px;
     font-size: 1rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s;
-    margin-top: 1rem; /* Added some space above the button */
+    transition: all 0.3s ease;
+    margin-top: 1.5rem;
 }
 
 .sign-up-btn:hover {
-    background-color: #444;
+    background-color: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 100, 0, 0.2);
 }
 
 footer {
-    padding: 1rem 2rem; /* Added horizontal padding */
+    padding: 2.5rem 3rem;
     color: white;
     background-color: rgb(0, 0, 0);
-    text-align: left; /* Changed from center to left */
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    min-height: 80px;
+}
+
+footer p {
+    margin: 0;
+}
+
+@media (max-width: 1200px) {
+    .container {
+        gap: 4rem;
+        padding: 2rem;
+    }
+
+    .left-section {
+        max-width: 400px;
+    }
+
+    .left-section h1 {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 968px) {
+    .container {
+        gap: 3rem;
+    }
+
+    .left-section h1 {
+        font-size: 2.8rem;
+    }
+
+    .sign-in-card {
+        padding: 2.5rem 3rem;
+        max-width: 500px;
+    }
 }
 
 @media (max-width: 768px) {
     .container {
         flex-direction: column;
-        text-align: center;
-        padding: 1rem;
+        text-align: left;
+        padding: 2rem;
+        gap: 2rem;
     }
 
     .left-section {
-        margin-bottom: 2rem;
+        margin-bottom: 1rem;
+        max-width: 100%;
+        padding: 0 1rem;
     }
 
     .left-section h1 {
-        font-size: 2.8rem; /* Slightly smaller on mobile */
+        font-size: 2.5rem;
+        white-space: normal;
+    }
+
+    .left-section p {
+        font-size: 1rem;
     }
 
     .sign-in-card {
+        padding: 2rem;
+        max-width: 100%;
+    }
+
+    .form-group input {
         width: 100%;
+        padding: 1rem 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 1.5rem;
+    }
+
+    .left-section h1 {
+        font-size: 2rem;
+    }
+
+    .sign-in-card {
+        padding: 1.5rem;
+    }
+
+    .sign-in-card h2 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.2rem;
     }
 }
