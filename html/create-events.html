@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create Events - Navbar</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="/css/create-events.css" />
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <img src="/assets/logo.png" alt="Logo" style="height: 100%" />
+      </div>
+      <div class="nav-center">
+        <a href="#" class="nav-link"><i class="fa fa-key"></i> Events</a>
+        <a href="#" class="nav-link"><i class="fa fa-calendar"></i> Calendar</a>
+      </div>
+      <div class="nav-right">
+        <span class="time" id="currentTime">1:37 AM</span>
+        <a href="#" class="create-event">Create Event</a>
+        <button class="icon-btn"><i class="fa fa-search"></i></button>
+        <button class="icon-btn"><i class="fa fa-home"></i></button>
+        <div class="avatar"><i class="fa fa-user"></i></div>
+      </div>
+    </nav>
+    <div class="event-container">
+      <div class="event-left">
+        <div class="event-image-upload">
+          <i class="fa fa-image"></i>
+        </div>
+        <div class="event-image-label">Upload Event Image</div>
+      </div>
+      <div class="event-right">
+        <div class="event-date" style="max-width: 170px; margin-bottom: 0;">
+          <input type="text" class="event-input" placeholder="dd/mm/yyyy" />
+          <i class="fa fa-calendar"></i>
+        </div>
+        <input
+          type="text"
+          class="event-input"
+          placeholder="Event Name"
+          style="
+            font-size: 2.7rem;
+            font-weight: 700;
+            color: #d6c6f6;
+            padding-left: 0;
+            text-align: left;
+            background: transparent;
+          "
+        />
+        <div class="event-row">
+          <div class="event-time" style="flex: 1">
+            <input type="text" class="event-input" placeholder="--:-- --" />
+            <i class="fa fa-clock"></i>
+          </div>
+          <div class="event-time" style="flex: 1">
+            <input type="text" class="event-input" placeholder="--:-- --" />
+            <i class="fa fa-clock"></i>
+          </div>
+        </div>
+        <input type="text" class="event-input" placeholder="Location" />
+        <textarea class="event-textarea" placeholder="Description"></textarea>
+        <button class="event-submit">Submit</button>
+      </div>
+    </div>
+    <script src="/js/create-events.js"></script>
+  </body>
+</html>
