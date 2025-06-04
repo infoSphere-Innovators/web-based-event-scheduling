@@ -18,9 +18,9 @@ body {
     justify-content: center;
     background: linear-gradient(
         45deg,
-        #FF0844 0%,
-        #FFB199 50%,
-        #42E8E0 100%
+        #2d4f63 0%,
+        #ffe100 50%,
+        #b8b8ff 100%
     );
     transition: opacity 1s ease;
 }

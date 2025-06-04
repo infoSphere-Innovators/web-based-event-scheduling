@@ -1,137 +1,214 @@
-/* Base styles and reset */
-* {
+body {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    background: #fff;
+    color: #222;
 }
 
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-    min-height: 100vh;
-    background: linear-gradient(180deg, #E6B980 0%, #EAC7A8 100%);
-    color: #2D3748;
+.hero-section {
+    background: linear-gradient(to bottom, #E8A900 0%, #fff 100%);
+    text-align: center;
+    padding: 72px 16px 120px 16px; /* Increased top and bottom padding */
+    border-bottom-left-radius: 32px;
+    border-bottom-right-radius: 32px;
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.07);
+    border: none;
+}
+
+.hero-section h1 {
+    font-size: 3.2rem;      /* Increased font size */
+    font-weight: 700;
+    margin: 0 0 28px 0;     /* More space below */
+    color: #fff;
+    text-shadow: 0 2px 16px rgba(0,0,0,0.13);
+}
+
+.hero-section h1 span {
+    color: #fff;
+    font-size: 3.6rem;      /* Increased font size */
+    font-weight: 700;
+}
+
+.hero-img {
+    width: 600px;           /* Increased width */
+    max-width: 98vw;
+    border-radius: 20px;
+    margin: 0 auto 28px auto;
+    display: block;
+    box-shadow: 0 6px 32px 0 rgba(0,0,0,0.10);
+}
+
+.hero-desc {
+    color: #444;
+    font-size: 1.08rem;
+    margin-bottom: 18px;
     line-height: 1.5;
 }
 
-/* Container styles */
-.container {
-    min-height: 100vh;
+.main-btn {
+    display: inline-block;
+    background: #222;
+    color: #fff;
+    padding: 0.9rem 2.2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-decoration: none;
+    margin-top: 8px;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+    border: none;
+    cursor: pointer;
+}
+.main-btn.small {
+    padding: 0.6rem 1.3rem;
+    font-size: 1rem;
+    margin-top: 10px;
+}
+
+.main-btn:hover {
+    background: #E8A900;
+    color: #222;
+}
+
+.features-section {
+    background: linear-gradient(to bottom, #fff 0%, #E8A900 100%);
+    padding: 100px 0 40px 0;
+}
+
+.feature {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto 32px auto;
+    gap: 32px;
 }
 
-.content {
-    max-width: 800px;
-    width: 100%;
-    text-align: center;
-    padding: 2rem;
+.feature-left {
+    flex-direction: row;
+    gap: 0;
 }
 
-/* Typography */
-.title {
-    font-size: 2.5rem;
+.feature-left .feature-img {
+    margin-left: 0;
+    margin-right: 32px;
+}
+
+.feature-right {
+    flex-direction: row;
+    gap: 0;
+}
+
+.feature-right .feature-img {
+    margin-left: 32px;
+    margin-right: 0;
+}
+
+.feature-img {
+    width: 140px;
+    height: 140px;
+    object-fit: contain;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+    margin: 0 18px;
+}
+
+.feature h2 {
+    margin: 0 0 8px 0;
+    font-size: 1.4rem;
     font-weight: 700;
-    margin-bottom: 1.5rem;
-    color: #FFFFFF;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    color: #222;
 }
 
-.church-name {
-    display: block;
-    font-size: 3.5rem;
-    margin-top: 0.5rem;
+.feature p {
+    margin: 0 0 8px 0;
+    color: #444;
+    font-size: 1.05rem;
+    font-weight: 400;
 }
 
-.description {
-    font-size: 1.25rem;
-    color: #4A5568;
-    max-width: 600px;
-    margin: 2rem auto;
-    line-height: 1.8;
+.faq-section {
+    background: linear-gradient(to bottom, #1A5C2A 0%, #0f3d1a 100%);
+    padding: 40px 0 40px 0;
+    text-align: center;
 }
 
-/* Image styles */
-.image-container {
-    width: 100%;
-    max-width: 800px;
-    margin: 2rem auto;
-    border-radius: 1rem;
-    overflow: hidden;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
-                0 10px 10px -5px rgba(0, 0, 0, 0.04);
+.faq-section h2 {
+    color: #fff;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
 }
 
-.church-image {
-    width: 100%;
-    height: auto;
-    display: block;
-    object-fit: cover;
-    aspect-ratio: 16/9;
+.faq-box {
+    background: #fff;
+    border-radius: 14px;
+    max-width: 520px;
+    margin: 0 auto;
+    padding: 22px 28px;
+    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+    text-align: left;
 }
 
-/* Button styles */
-.cta-button {
-    background-color: #1A202C;
-    color: #FFFFFF;
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.125rem;
-    font-weight: 600;
-    border-radius: 0.5rem;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
-                0 2px 4px -1px rgba(0, 0, 0, 0.06);
+.faq-item {
+    color: #222;
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+    font-weight: 500;
 }
 
-.cta-button:hover {
-    background-color: #2D3748;
-    transform: translateY(-2px);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-                0 4px 6px -2px rgba(0, 0, 0, 0.05);
+.register-section {
+    background: linear-gradient(to bottom, #fff 0%, #FFE7B0 100%);
+    text-align: center;
+    padding: 44px 0 44px 0;
 }
 
-.cta-button:active {
-    transform: translateY(0);
+.register-section h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    color: #222;
 }
 
-/* Responsive design */
-@media (max-width: 768px) {
-    .title {
-        font-size: 2rem;
+footer {
+    background: #111;
+    color: #fff;
+    text-align: left;
+    padding: 12px 24px;
+    font-size: 0.98rem;
+    letter-spacing: 0.5px;
+    margin-top: 0;
+}
+
+@media (max-width: 900px) {
+    .feature {
+        flex-direction: column !important;
+        gap: 18px;
+        text-align: center;
     }
-    
-    .church-name {
-        font-size: 2.5rem;
-    }
-    
-    .description {
-        font-size: 1.125rem;
-        padding: 0 1rem;
-    }
-    
-    .content {
-        padding: 1rem;
+    .feature-img {
+        margin: 0 auto 12px auto;
     }
 }
 
-@media (max-width: 480px) {
-    .title {
-        font-size: 1.75rem;
+@media (max-width: 600px) {
+    .hero-section h1, .hero-section h1 span {
+        font-size: 1.3rem;
     }
-    
-    .church-name {
-        font-size: 2rem;
+    .hero-img {
+        width: 98vw;
+        min-width: 0;
     }
-    
-    .description {
-        font-size: 1rem;
+    .features-section {
+        padding: 24px 0;
     }
-    
-    .cta-button {
-        padding: 0.875rem 1.75rem;
-        font-size: 1rem;
+    .faq-box {
+        padding: 14px 8px;
+    }
+    .register-section {
+        padding: 24px 0;
     }
 }
