@@ -87,20 +87,23 @@ body {
 
 .feature-left {
     flex-direction: row;
+    margin: 0 auto 32px auto;
 }
 
 .feature-right {
-    flex-direction: row-reverse;
+    flex-direction: row;
 }
 
 .feature-img {
-    width: 140px;
-    height: 140px;
+    width: 350px;
+    height: 250px;
     object-fit: contain;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 2px 12px 0 rgba(0,0,0,0.08);
+    border-radius: 40px;
     margin: 0 18px;
+}
+
+.feature-left .feature-img {
+    margin-left: 0;
 }
 
 .feature h2 {
