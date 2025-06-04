@@ -33,8 +33,8 @@ nav button {
 }
 
 nav button.active-tab {
-  border-bottom: 2px solid #fff; /* Blue underline */
-  color: #000;
+  border-bottom: 2px solid #fff; 
+  color: #fff;
 }
 
 .nav-left,
