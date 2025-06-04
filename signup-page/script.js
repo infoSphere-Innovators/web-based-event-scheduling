@@ -18,15 +18,54 @@
 
   const db = getDatabase(app);
 
-  document.getElementById("submit").addEventListener('click', function(e){
-    e.preventDefault();
-    set(ref(db, 'member/' + document.getElementById("firstName").value),
-    {
-        firstname: document.getElementById("firstName").value,
-        lastname: document.getElementById("lastName").value,
-        position: document.getElementById("position").value,
-        zone: document.getElementById("zone").value,
-        chapel: document.getElementById("chapel").value
+  document.getElementById("submit").addEventListener('click', function (e) {
+  e.preventDefault();
+
+  const firstName = document.getElementById("firstName").value.trim();
+  const lastName = document.getElementById("lastName").value.trim();
+  const position = document.getElementById("position").value;
+  const zone = document.getElementById("zone").value;
+  const chapel = document.getElementById("chapel").value;
+
+  if (!firstName || !lastName || !position || !zone || !chapel) {
+    Swal.fire({
+      icon: 'warning',
+      title: 'Incomplete Fields',
+      text: 'Please fill in all fields before submitting.',
+      confirmButtonColor: '#9D62F5'
     });
-        alert("Login Successfull    !");
+    return;
+  }
+
+  set(ref(db, 'member/' + firstName), {
+    firstname: firstName,
+    lastname: lastName,
+    position: position,
+    zone: zone,
+    chapel: chapel
   })
+  .then(() => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Login Successful!',
+      text: 'Your information has been saved successfully.',
+      showConfirmButton: false,
+      timer: 2000,
+      backdrop: true,
+      customClass: {
+        popup: 'rounded-xl shadow-lg'
+      }
+    }).then(() => {
+      document.querySelector("form").reset(); // reset the form
+    });
+  })
+  .catch((error) => {
+    console.error(error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Failed to Save',
+      text: 'An error occurred while saving your data. Please try again.',
+      confirmButtonColor: '#d33'
+    });
+  });
+});

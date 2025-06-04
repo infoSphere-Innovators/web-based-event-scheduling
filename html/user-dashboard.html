@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/user-dashboard.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <nav class="nav-left">
+        <button id="events-btn">Events</button>
+        <button id="calendar-btn">Calendar</button>
+        <button class="inactive">Announcements</button>
+      </nav>
+      <div class="nav-right">
+        <span>10:08 PM GMT+8</span>
+        <button class="create-btn">Create Event</button>
+        <div class="icons">
+          <button>🔍</button>
+          <button>🔔</button>
+          <button class="avatar">G</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="main-header" id="main-header">
+        <h1>Events</h1>
+        <div class="toggle">
+            <button class="active">Upcoming</button>
+            <button>Past</button>
+        </div>
+        </div>
+
+      <div class="content">
+        <div class="timeline">
+          <div class="date">Today</div>
+          <div class="day">Tuesday</div>
+          <div class="line">
+            <div class="dot"></div>
+          </div>
+        </div>
+
+        <div class="events">
+          <!-- Repeatable Card -->
+          <div class="event-card">
+            <div class="card-left">
+              <div class="time">10:30 PM</div>
+              <h3>hello</h3>
+              <div class="meta">
+                <div><span>📍</span> Location Missing</div>
+                <div><span>👥</span> No guests</div>
+              </div>
+              <div class="buttons">
+                <button class="checkin">Check in</button>
+                <button class="manage">Manage</button>
+              </div>
+            </div>
+            <div class="card-image">
+              <img src="https://uploadthingy.s3.us-west-1.amazonaws.com/hxkaFur85qJKk1REwjKJNp/image.png" alt="event" />
+            </div>
+          </div>
+
+          <!-- Repeatable Card -->
+          <div class="event-card">
+            <div class="card-left">
+              <div class="time">10:30 PM</div>
+              <h3>hello</h3>
+              <div class="meta">
+                <div><span>📍</span> Location Missing</div>
+                <div><span>👥</span> No guests</div>
+              </div>
+              <div class="buttons">
+                <button class="checkin">Check in</button>
+                <button class="manage">Manage</button>
+              </div>
+            </div>
+            <div class="card-image">
+              <img src="https://uploadthingy.s3.us-west-1.amazonaws.com/hxkaFur85qJKk1REwjKJNp/image.png" alt="event" />
+            </div>
+          </div>
+
+          <!-- Repeatable Card -->
+          <div class="event-card">
+            <div class="card-left">
+              <div class="time">10:30 PM</div>
+              <h3>hello</h3>
+              <div class="meta">
+                <div><span>📍</span> Location Missing</div>
+                <div><span>👥</span> No guests</div>
+              </div>
+              <div class="buttons">
+                <button class="checkin">Check in</button>
+                <button class="manage">Manage</button>
+              </div>
+            </div>
+            <div class="card-image">
+              <img src="https://uploadthingy.s3.us-west-1.amazonaws.com/hxkaFur85qJKk1REwjKJNp/image.png" alt="event" />
+            </div>
+          </div>
+
+          <!-- Repeatable Card -->
+          <div class="event-card">
+            <div class="card-left">
+              <div class="time">10:30 PM</div>
+              <h3>hello</h3>
+              <div class="meta">
+                <div><span>📍</span> Location Missing</div>
+                <div><span>👥</span> No guests</div>
+              </div>
+              <div class="buttons">
+                <button class="checkin">Check in</button>
+                <button class="manage">Manage</button>
+              </div>
+            </div>
+            <div class="card-image">
+              <img src="https://uploadthingy.s3.us-west-1.amazonaws.com/hxkaFur85qJKk1REwjKJNp/image.png" alt="event" />
+            </div>
+          </div>
+
+          <!-- Duplicate this block for more events -->
+          <!-- ... -->
+        </div>
+      </div>
+
+      <div id="calendar-section" style="display: none;"></div>
+
+
+    </main>
+  </div>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const calendarBtn = document.getElementById('calendar-btn');
+  const eventsBtn = document.getElementById('events-btn');
+  const calendarSection = document.getElementById('calendar-section');
+  const mainHeader = document.getElementById('main-header');
+  const content = document.querySelector('.content');
+
+  function setActiveTab(button) {
+    document.querySelectorAll('.nav-left button').forEach(btn => {
+      btn.classList.remove('active-tab');
+    });
+    button.classList.add('active-tab');
+  }
+
+  function showCalendar() {
+    calendarSection.innerHTML = '';
+    calendarSection.style.display = 'none';
+    content.style.display = 'none';
+    mainHeader.style.display = 'none';
+
+    const timestamp = new Date().getTime();
+
+    fetch(`calendar.html?ts=${timestamp}`)
+      .then(res => res.text())
+      .then(html => {
+        calendarSection.innerHTML = `<div class="main">${html}</div>`;
+        calendarSection.style.display = 'block';
+
+        const script = document.createElement('script');
+        script.innerHTML = `
+          (function() {
+            const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                            'July', 'August', 'September', 'October', 'November', 'December'];
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const today = new Date();
+            let currentDate = new Date();
+
+            const events = {
+              '2025-06-03': ['Mid-Year Tech Summit'],
+              '2025-06-10': ['Dev Conference', 'UI/UX Workshop'],
+              '2025-06-15': ['Company Picnic'],
+              '2025-06-25': ['Hackathon Demo Day']
+            };
+
+            function renderCalendar() {
+              const dayNamesEl = document.getElementById('day-names');
+              const calendarBody = document.getElementById('calendar-body');
+              const monthYearEl = document.getElementById('month-year');
+              const eventDisplay = document.getElementById('event-display');
+              dayNamesEl.innerHTML = '';
+              days.forEach(day => {
+                const th = document.createElement('th');
+                th.textContent = day;
+                dayNamesEl.appendChild(th);
+              });
+
+              const year = currentDate.getFullYear();
+              const month = currentDate.getMonth();
+              const firstDayOfMonth = new Date(year, month, 1).getDay();
+              const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+              monthYearEl.textContent = \`\${months[month]} \${year}\`;
+              calendarBody.innerHTML = '';
+
+              let day = 1;
+              for (let i = 0; i < 6; i++) {
+                const row = document.createElement('tr');
+                for (let j = 0; j < 7; j++) {
+                  const cell = document.createElement('td');
+                  if (i === 0 && j < firstDayOfMonth) {
+                    cell.innerHTML = '';
+                  } else if (day <= daysInMonth) {
+                    const span = document.createElement('span');
+                    span.textContent = day;
+
+                    const isToday =
+                      day === today.getDate() &&
+                      month === today.getMonth() &&
+                      year === today.getFullYear();
+                    if (isToday) span.classList.add('today');
+
+                    const dayCopy = day;
+                    const monthCopy = month;
+                    const yearCopy = year;
+
+                    span.addEventListener('click', () => showEvent(yearCopy, monthCopy, dayCopy));
+                    cell.appendChild(span);
+                    day++;
+                  }
+                  row.appendChild(cell);
+                }
+                calendarBody.appendChild(row);
+              }
+            }
+
+            function showEvent(year, month, day) {
+              const eventDisplay = document.getElementById('event-display');
+              const key = \`\${year}-\${String(month + 1).padStart(2, '0')}-\${String(day).padStart(2, '0')}\`;
+              const eventList = events[key];
+              eventDisplay.innerHTML = \`<h3>Events on \${months[month]} \${day}, \${year}:</h3>\`;
+              if (eventList) {
+                eventList.forEach(e => {
+                  const p = document.createElement('p');
+                  p.textContent = \`• \${e}\`;
+                  eventDisplay.appendChild(p);
+                });
+              } else {
+                eventDisplay.innerHTML += \`<p>No events on this day.</p>\`;
+              }
+            }
+
+            document.getElementById('prev-month').addEventListener('click', () => {
+              currentDate.setMonth(currentDate.getMonth() - 1);
+              renderCalendar();
+            });
+
+            document.getElementById('next-month').addEventListener('click', () => {
+              currentDate.setMonth(currentDate.getMonth() + 1);
+              renderCalendar();
+            });
+
+            renderCalendar();
+          })();
+        `;
+        calendarSection.appendChild(script);
+      })
+      .catch(() => {
+        calendarSection.innerHTML = '<p style="color: red;">Failed to load calendar.</p>';
+        calendarSection.style.display = 'block';
+      });
+  }
+
+  function showEvents() {
+    content.style.display = 'flex';
+    mainHeader.style.display = 'flex';
+    calendarSection.style.display = 'none';
+    calendarSection.innerHTML = '';
+  }
+
+  calendarBtn.addEventListener('click', () => {
+    setActiveTab(calendarBtn);
+    showCalendar();
+  });
+
+  eventsBtn.addEventListener('click', () => {
+    setActiveTab(eventsBtn);
+    showEvents();
+  });
+});
+</script>
+</body>
+</html>
