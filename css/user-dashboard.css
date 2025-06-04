@@ -50,7 +50,7 @@ nav button.active-tab {
 .toggle button {
   background: transparent;
   border: none;
-  color: white;
+  color: gray;
   cursor: pointer;
 }
 

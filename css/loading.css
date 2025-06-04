@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    min-height: 100vh;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(
+        45deg,
+        #FF0844 0%,
+        #FFB199 50%,
+        #42E8E0 100%
+    );
+    transition: opacity 1s ease;
+}
+
+.container.fade-out {
+    opacity: 0;
+}
+
+.welcome-screen {
+    text-align: center;
+    color: white;
+    padding: 2rem;
+}
+
+.hello {
+    margin-bottom: 2rem;
+}
+
+.hello-text {
+    font-size: 4rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: slideUp 1s ease-out forwards;
+}
+
+.welcome-message {
+    font-size: 1.5rem;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+    animation-delay: 1s;
+    margin-bottom: 1rem;
+}
+
+.start-message {
+    font-size: 1rem;
+    opacity: 0;
+    animation: fadeInPulse 0.8s ease-out forwards;
+    animation-delay: 1.8s;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeInPulse {
+    0% {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@media (max-width: 768px) {
+    .hello-text {
+        font-size: 3rem;
+    }
+    
+    .welcome-message {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hello-text {
+        font-size: 2.5rem;
+    }
+    
+    .welcome-message {
+        font-size: 1.125rem;
+    }
+}

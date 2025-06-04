@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="/css/loading.css">
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-screen">
+            <div class="hello">
+                <span class="hello-text">hello</span>
+            </div>
+            <p class="welcome-message">Welcome to the Portal</p>
+            <p class="start-message">Click anywhere to start</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('click', () => {
+            document.querySelector('.container').classList.add('fade-out');
+            setTimeout(() => {
+                // Here you can redirect to your main portal page
+                window.location.href = 'home-portal.html';
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
