@@ -269,6 +269,25 @@ document.addEventListener('DOMContentLoaded', () => {
   eventsBtn.addEventListener('click', showEvents);
 });
 </script>
+<script>
+    function setActiveTab(button) {
+  document.querySelectorAll('.nav-left button').forEach(btn => {
+    btn.classList.remove('active-tab');
+  });
+  button.classList.add('active-tab');
+}
+
+calendarBtn.addEventListener('click', () => {
+  setActiveTab(calendarBtn);
+  showCalendar();
+});
+
+eventsBtn.addEventListener('click', () => {
+  setActiveTab(eventsBtn);
+  showEvents();
+});
+
+</script>
 
 
 
