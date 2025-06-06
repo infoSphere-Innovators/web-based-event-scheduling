@@ -25,27 +25,45 @@
       <!-- Sign Up Form -->
       <div class="form-card">
         <h1>Sign Up</h1>
-        <form>
-          
+        <form>       
           <div class="form-group">
             <label for="firstName">First Name</label>
-            <input type="text" id="firstName" placeholder="Enter first name" required/>
+            <input type="text" id="firstname" placeholder="Enter first name" required/>
           </div>
           <div class="form-group">
             <label for="midName">Middle Name</label>
-            <input type="text" id="midName" placeholder="Enter middle name" required/>
+            <input type="text" id="middlename" placeholder="Enter middle name" required/>
           </div>
           <div class="form-group">
             <label for="lastName">Last Name</label>
-            <input type="text" id="lastName" placeholder="Enter last name" required/>
+            <input type="text" id="lastname" placeholder="Enter last name" required/>
           </div>
           <div class="form-group">
             <label for="username">Username</label>
-            <input type="text" id="userName" placeholder="Enter username" required/>
+            <input type="text" id="username" placeholder="Enter username" required/>
           </div>
           <div class="form-group">
             <label for="address">Home Address</label>
             <input type="text" id="address" placeholder="Enter Adress" required/>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter email" required/>
+          </div>
+          <div class="form-group">
+            <label for="contactNumber">Contact Number</label>
+            <input type="text" id="contact" placeholder="Enter Number" required />
+          </div>
+
+          <div class="form-group">
+            <label for="ministry">Ministry</label>
+            <select id="ministry" required>
+              <option value="" disabled selected>Select...</option>
+              <option value="Alter Server">Altar Server</option>
+              <option value="Choir">Choir</option>
+              <option value="Lector">Lector</option>
+              <option value="Commentator">Commentator</option>
+            </select>
           </div>
           <div class="form-group">
             <label for="trasparochial">Transparochial</label>
@@ -59,35 +77,72 @@
             <label for="position">Position</label>
             <select id="position" required>
               <option value="" disabled selected>Select...</option>
-              <option value="member">Member</option>
-              <option value="leader">Leader</option>
-              <option value="pastor">Pastor</option>
+              <option value="Leader">Leader</option>
+              <option value="Assistant">Assistant</option>
+              <option value="Member">Member</option>
             </select>
           </div>
           <div class="form-group">
             <label for="zone">Zone</label>
             <select id="zone" required>
               <option value="" disabled selected>Select...</option>
-              <option value="north">North</option>
-              <option value="south">South</option>
-              <option value="east">East</option>
-              <option value="west">West</option>
+              <option value="No Zone">No Zone</option>
+              <option value="Zone 1">Zone 1</option>
+              <option value="Zone 2">Zone 2</option>
+              <option value="Zone 3">Zone 3</option>
+              <option value="Zone 4">Zone 4</option>
+              <option value="Zone 5">Zone 5</option>
+              <option value="Zone 6">Zone 6</option>
+              <option value="Zone 7">Zone 7</option>
             </select>
           </div>
           <div class="form-group">
             <label for="chapel">Chapel</label>
             <select id="chapel" required>
               <option value="" disabled selected>Select...</option>
-              <option value="main">Main Chapel</option>
-              <option value="youth">Youth Chapel</option>
-              <option value="family">Family Chapel</option>
+              <option value="No Chapel">No Chapel</option>
+              <option value="St. Peter Chapel">St. Peter Chapel</option>
+              <option value="St. Anne Chapel">St. Anne Chapel</option>
+              <option value="Sistine Chapel">Sistine Chapel</option>
+              <option value="Holy Spirit Chapel">Holy Spirit Chapel</option>
+              <option value="Our Lady of Sorrows Chapel">Our Lady of Sorrows Chapel</option>
+              <option value="San Lorenzo Chapel">San Lorenzo Chapel</option>
+              <option value="St. Jude Chapel">St. Jude Chapel</option>
+              <option value="Divine Mercy Chapel">Divine Mercy Chapel</option>
+              <option value="Immaculate Conception Chapel">Immaculate Conception Chapel</option>
+              <option value="St. Benedict Chapel">St. Benedict Chapel</option>
+              <option value="Sta. Maria Chapel">Sta. Maria Chapel</option>
+              <option value="St. Joseph Chapel">St. Joseph Chapel</option>
+              <option value="Christ the King Chapel">Christ the King Chapel</option>
+              <option value="San Sebastian Chapel">San Sebastian Chapel</option>
+              <option value="Our Lady of Mt. Carmel Chapel">Our Lady of Mt. Carmel Chapel</option>
+              <option value="St. Michael Chapel">St. Michael Chapel</option>
+              <option value="St. Augustine Chapel">St. Augustine Chapel</option>
+              <option value="Mother of Perpetual Help Chapel">Mother of Perpetual Help Chapel</option>
+              <option value="Sacred Heart Chapel">Sacred Heart Chapel</option>
+              <option value="San Antonio Chapel">San Antonio Chapel</option>
+              <option value="Holy Cross Chapel">Holy Cross Chapel</option>
+              <option value="St. Therese Chapel">St. Therese Chapel</option>
+              <option value="St. John the Baptist Chapel">St. John the Baptist Chapel</option>
+              <option value="San Roque Chapel">San Roque Chapel</option>
+              <option value="Our Lady of Guadalupe Chapel">Our Lady of Guadalupe Chapel</option>
+              <option value="St. Dominic Chapel">St. Dominic Chapel</option>
+              <option value="St. Paul Chapel">St. Paul Chapel</option>
+              <option value="St. Clare Chapel">St. Clare Chapel</option>
+              <option value="Our Lady of Fatima Chapel">Our Lady of Fatima Chapel</option>
+              <option value="St. Ignatius Chapel">St. Ignatius Chapel</option>
+              <option value="St. Francis Chapel">St. Francis Chapel</option>
+              <option value="St. Andrew Chapel">St. Andrew Chapel</option>
+              <option value="St. Cecilia Chapel">St. Cecilia Chapel</option>
+              <option value="St. Martin Chapel">St. Martin Chapel</option>
+              <option value="St. Matthew Chapel">St. Matthew Chapel</option>
             </select>
           </div>
           <div class="form-group">
             <label for="password">Password</label>
             <input type="password" id="password" placeholder="Enter password" required/>
           </div>
-          <button type="submit" valu="submit" id="submit" class="submit-btn">Sign Up</button>
+          <button type="submit" id="submit" class="submit-btn">Sign Up</button>
         </form>
       </div>
 

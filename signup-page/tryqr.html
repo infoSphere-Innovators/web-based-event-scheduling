@@ -3,13 +3,21 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Profile QR</title>
+  <title>Member QR Profile</title>
   <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    #qrcode { margin-top: 20px; }
-    .info { margin-top: 20px; }
-    .info div { margin: 6px 0; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #2b2b2b;
+      color: white;
+      padding: 20px;
+    }
+    #qrcode {
+      margin: 20px 0;
+    }
+    .info div {
+      margin: 6px 0;
+    }
   </style>
 </head>
 <body>
@@ -22,51 +30,71 @@
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
-    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+    import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 
     const firebaseConfig = {
       apiKey: "AIzaSyC4YDw8dhp1qsJ7BhlNUSNHq3BxYzg6GDI",
       authDomain: "web-based-event-scheduling.firebaseapp.com",
       projectId: "web-based-event-scheduling",
-      storageBucket: "web-based-event-scheduling.firebasestorage.app",
+      storageBucket: "web-based-event-scheduling.appspot.com",
       messagingSenderId: "925435406930",
       appId: "1:925435406930:web:48c759977c266a2cedcd8b"
     };
 
     const app = initializeApp(firebaseConfig);
     const db = getDatabase(app);
+    const auth = getAuth(app);
 
-    const uid = localStorage.getItem("currentUID");
-    if (!uid) {
-      document.getElementById("userInfo").innerHTML = "<p>No UID found. Please register again.</p>";
-    } else {
-      const userRef = ref(db, 'members/' + uid);
-      get(userRef).then(snapshot => {
-        if (snapshot.exists()) {
-          const user = snapshot.val();
+    const userInfoContainer = document.getElementById("userInfo");
+    const qrContainer = document.getElementById("qrcode");
 
-          // Generate QR code with UID or profile link
-          new QRCode(document.getElementById("qrcode"), uid);
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const uid = localStorage.getItem("currentUID");
+        const userRef = ref(db, 'members/' + uid);
 
-          // Show member info
-          const container = document.getElementById("userInfo");
-          container.innerHTML = `
-            <div><strong>Name:</strong> ${user.firstname} ${user.middlename} ${user.lastname}</div>
-            <div><strong>Username:</strong> ${user.username}</div>
-            <div><strong>Address:</strong> ${user.address}</div>
-            <div><strong>Transparochial:</strong> ${user.transparochial}</div>
-            <div><strong>Position:</strong> ${user.position}</div>
-            <div><strong>Zone:</strong> ${user.zone}</div>
-            <div><strong>Chapel:</strong> ${user.chapel}</div>
-          `;
-        } else {
-          document.getElementById("userInfo").innerHTML = "<p>User not found.</p>";
+        try {
+          const snapshot = await get(userRef);
+
+          if (snapshot.exists()) {
+            const userData = snapshot.val();
+
+            // Generate QR Code
+            new QRCode(qrContainer, {
+              text: uid,
+              width: 200,
+              height: 200
+            });
+
+            // Display user data
+            userInfoContainer.innerHTML = `
+              <div><strong>Name:</strong> ${userData.FirstName} ${userData.MiddleName} ${userData.LastName}</div>
+              <div><strong>Username:</strong> ${userData.Username}</div>
+              <div><strong>Address:</strong> ${userData.HomeAddress}</div>
+              <div><strong>Contact Number:</strong> ${userData.ContactNumber}</div>
+              <div><strong>Email:</strong> ${userData.Email}</div>
+              <div><strong>Ministry:</strong> ${userData.Ministry}</div>
+              <div><strong>Transparochial:</strong> ${userData.Transparochial}</div>
+              <div><strong>Position:</strong> ${userData.Position}</div>
+              <div><strong>Zone:</strong> ${userData.Zone}</div>
+              <div><strong>Chapel:</strong> ${userData.Chapel}</div>
+              <div><strong>Role:</strong> ${userData.Role}</div>
+              <div><strong>Member ID:</strong> ${userData["MemberID"]}</div>
+              <div><strong>Registered At:</strong> ${new Date(userData.RegisteredAt).toLocaleString()}</div>
+              <div><strong>Approved:</strong> ${userData.Approved ? "Yes" : "No"}</div>
+            `;
+          } else {
+            userInfoContainer.innerHTML = "<p><strong>User not found in database.</strong></p>";
+          }
+        } catch (err) {
+          console.error(err);
+          userInfoContainer.innerHTML = "<p><strong>Error loading data.</strong></p>";
         }
-      }).catch(err => {
-        console.error(err);
-        document.getElementById("userInfo").innerHTML = "<p>Error loading data.</p>";
-      });
-    }
+      } else {
+        userInfoContainer.innerHTML = "<p><strong>You are not logged in.</strong></p>";
+      }
+    });
   </script>
 </body>
 </html>

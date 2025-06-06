@@ -193,6 +193,14 @@ body {
     box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);
 }
 
+  .event-label {
+    color: white;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 4px;
+    font-weight: bold;
+  }
+  
 .event-textarea {
     min-height: 100px;
     resize: vertical;
