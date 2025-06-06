@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Profile QR</title>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    #qrcode { margin-top: 20px; }
+    .info { margin-top: 20px; }
+    .info div { margin: 6px 0; }
+  </style>
+</head>
+<body>
+  <h1>Member QR Profile</h1>
+  <div id="qrcode"></div>
+
+  <div class="info" id="userInfo">
+    <p>Loading member details...</p>
+  </div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+    import { getDatabase, ref, get, child } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC4YDw8dhp1qsJ7BhlNUSNHq3BxYzg6GDI",
+      authDomain: "web-based-event-scheduling.firebaseapp.com",
+      projectId: "web-based-event-scheduling",
+      storageBucket: "web-based-event-scheduling.firebasestorage.app",
+      messagingSenderId: "925435406930",
+      appId: "1:925435406930:web:48c759977c266a2cedcd8b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    const uid = localStorage.getItem("currentUID");
+    if (!uid) {
+      document.getElementById("userInfo").innerHTML = "<p>No UID found. Please register again.</p>";
+    } else {
+      const userRef = ref(db, 'members/' + uid);
+      get(userRef).then(snapshot => {
+        if (snapshot.exists()) {
+          const user = snapshot.val();
+
+          // Generate QR code with UID or profile link
+          new QRCode(document.getElementById("qrcode"), uid);
+
+          // Show member info
+          const container = document.getElementById("userInfo");
+          container.innerHTML = `
+            <div><strong>Name:</strong> ${user.firstname} ${user.middlename} ${user.lastname}</div>
+            <div><strong>Username:</strong> ${user.username}</div>
+            <div><strong>Address:</strong> ${user.address}</div>
+            <div><strong>Transparochial:</strong> ${user.transparochial}</div>
+            <div><strong>Position:</strong> ${user.position}</div>
+            <div><strong>Zone:</strong> ${user.zone}</div>
+            <div><strong>Chapel:</strong> ${user.chapel}</div>
+          `;
+        } else {
+          document.getElementById("userInfo").innerHTML = "<p>User not found.</p>";
+        }
+      }).catch(err => {
+        console.error(err);
+        document.getElementById("userInfo").innerHTML = "<p>Error loading data.</p>";
+      });
+    }
+  </script>
+</body>
+</html>
