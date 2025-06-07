@@ -143,7 +143,7 @@ document.getElementById("submit").addEventListener('click', async function (e) {
       showConfirmButton: false,
       timer: 2000
     }).then(() => {
-      window.location.href = "/html/create-events.html";
+      window.location.href = "/html/profile-details.html";
     });
 
 
