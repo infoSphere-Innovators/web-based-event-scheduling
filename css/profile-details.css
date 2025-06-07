@@ -131,31 +131,42 @@ body {
 
 .event-image-upload {
     width: 100%;
-    height: 380px;
-    border: 2px solid rgba(255, 255, 255, 0.8);
-    border-radius: 20px;
-    background: rgba(255,255,255,0.07);
+    height: 390px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #fff;
-    box-sizing: border-box;
-    transition: all 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     padding: 20px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+}
+
+.event-image-upload:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 255, 255, 0.25);
 }
 
 .event-image-label {
     width: 100%;
     min-height: 56px;
-    border: 2px solid rgba(255, 255, 255, 0.8);
+    background: linear-gradient(145deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+    border: 2px solid rgba(255, 255, 255, 0.15);
     border-radius: 16px;
-    background: rgba(255,255,255,0.07);
     color: #fff;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.1rem;
     font-weight: 500;
+    letter-spacing: 0.5px;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
 }
 
 /* Right Section - Form Fields */
@@ -458,5 +469,61 @@ body {
 
     .event-image-upload {
         height: 240px;
+    }
+}
+
+/* QR Code Container */
+.event-image-upload {
+    padding: 20px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.15), rgba(255,255,255,0.08));
+}
+
+/* QR Code Styling */
+#qrcode {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+#qrcode img,
+#qrcode canvas {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain;
+    border-radius: 12px;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+}
+
+/* Update JavaScript QR generation size */
+@media (max-width: 768px) {
+    #qrcode {
+        padding: 12px;
+    }
+    
+    .event-image-upload {
+        height: 320px;
+    }
+}
+
+@media (max-width: 480px) {
+    #qrcode {
+        padding: 10px;
+        border-radius: 16px;
+    }
+    
+    #qrcode img,
+    #qrcode canvas {
+        border-radius: 10px;
+    }
+    
+    .event-image-upload {
+        height: 280px;
     }
 }

@@ -54,21 +54,31 @@
             <div class="form-col">
               <div class="form-group">
                 <label class="event-label">First Name</label>
-                <input type="text" class="event-input" readonly />
+                <input
+                  type="text"
+                  id="firstname"
+                  class="event-input"
+                  readonly
+                />
               </div>
               <div class="form-group">
                 <label class="event-label">Middle Name</label>
-                <input type="text" class="event-input" readonly />
+                <input
+                  type="text"
+                  id="middlename"
+                  class="event-input"
+                  readonly
+                />
               </div>
             </div>
             <div class="form-col">
               <div class="form-group">
                 <label class="event-label">Last Name</label>
-                <input type="text" class="event-input" readonly />
+                <input type="text" id="lastname" class="event-input" readonly />
               </div>
               <div class="form-group">
                 <label class="event-label">Username</label>
-                <input type="text" class="event-input" readonly />
+                <input type="text" id="username" class="event-input" readonly />
               </div>
             </div>
           </div>
@@ -81,17 +91,17 @@
             <div class="form-col">
               <div class="form-group">
                 <label class="event-label">Email</label>
-                <input type="email" class="event-input" readonly />
+                <input type="email" id="email" class="event-input" readonly />
               </div>
               <div class="form-group">
                 <label class="event-label">Contact Number</label>
-                <input type="tel" class="event-input" readonly />
+                <input type="tel" id="contact" class="event-input" readonly />
               </div>
             </div>
             <div class="form-col">
               <div class="form-group">
                 <label class="event-label">Address</label>
-                <input type="text" class="event-input" readonly />
+                <input type="text" id="address" class="event-input" readonly />
               </div>
             </div>
           </div>
@@ -104,21 +114,30 @@
             <div class="form-col">
               <div class="form-group">
                 <label class="event-label">Ministry</label>
-                <input type="text" class="event-input" readonly />
+                <input type="text" id="ministry" class="event-input" readonly />
               </div>
               <div class="form-group">
                 <label class="event-label">Position</label>
-                <input type="text" class="event-input" readonly />
+                <input type="text" id="position" class="event-input" readonly />
               </div>
             </div>
             <div class="form-col">
               <div class="form-group">
                 <label class="event-label">Zone</label>
-                <input type="text" class="event-input" readonly />
+                <input type="text" id="zone" class="event-input" readonly />
               </div>
               <div class="form-group">
                 <label class="event-label">Chapel</label>
-                <input type="text" class="event-input" readonly />
+                <input type="text" id="chapel" class="event-input" readonly />
+              </div>
+              <div class="form-group">
+                <label class="event-label">Transparochial</label>
+                <input
+                  type="text"
+                  id="transparochial"
+                  class="event-input"
+                  readonly
+                />
               </div>
             </div>
           </div>
@@ -164,26 +183,33 @@
             if (snapshot.exists()) {
               const data = snapshot.val();
 
-              // Populate inputs
-              document.getElementById(
-                "name"
-              ).value = `${data.FirstName} ${data.MiddleName} ${data.LastName}`;
+              // Personal Information
+              document.getElementById("firstname").value = data.FirstName;
+              document.getElementById("middlename").value = data.MiddleName;
+              document.getElementById("lastname").value = data.LastName;
               document.getElementById("username").value = data.Username;
-              document.getElementById("address").value = data.HomeAddress;
+
+              // Contact Information
               document.getElementById("email").value = data.Email;
               document.getElementById("contact").value = data.ContactNumber;
+              document.getElementById("address").value = data.HomeAddress;
+
+              // Church Information
               document.getElementById("ministry").value = data.Ministry;
+              document.getElementById("position").value = data.Position;
+              document.getElementById("zone").value = data.Zone;
+              document.getElementById("chapel").value = data.Chapel;
               document.getElementById("transparochial").value =
                 data.Transparochial;
-              document.getElementById("position").value = data.Position;
-              document.getElementById("chapel").value = data.Chapel;
-              document.getElementById("zone").value = data.Zone;
 
               // Generate QR Code
               new QRCode(qrContainer, {
                 text: uid,
-                width: 180,
-                height: 180,
+                width: 340, // Adjusted size
+                height: 340, // Adjusted size
+                colorDark: "#000000",
+                colorLight: "#ffffff",
+                correctLevel: QRCode.CorrectLevel.H, // Highest error correction level
               });
             } else {
               alert("User not found in database.");
