@@ -60,12 +60,31 @@ body {
 
 /* Form Card */
 .form-card {
-  background-color: white;
-  padding: 1rem 40px; /* top-bottom: 1rem, left-right: 40px */
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 400px;
+  max-width: 800px; /* Increased from default */
+  width: 90%;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Section Spacing */
+.form-section {
+    margin-bottom: 1.5rem; /* Reduced from 2.5rem */
+    padding: 1.2rem; /* Reduced from 1.5rem */
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+/* Section Title */
+.section-title {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 1.2rem; /* Reduced from 1.5rem */
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(157, 98, 245, 0.2);
 }
 
 .form-card h1 {
@@ -78,7 +97,8 @@ body {
 
 /* Form Group */
 .form-group {
-  margin-bottom: 1rem;
+    margin-bottom: 1rem; /* Reduced from 1.2rem */
+    width: 100%;
 }
 
 form {
@@ -88,30 +108,29 @@ form {
 
 
 label {
-  display: block;
-  font-size: 0.875rem;
-  font-weight: 700; /* Inter Bold */
-  margin-bottom: 0.25rem;
-  color: #4b5563;
-  font-family: 'Inter', sans-serif;
+    display: block;
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    color: #444;
 }
 
+/* Input Fields */
 input,
 select {
-  width: 100%;
-  height: 40px;
-  padding: 0 0.75rem;
-  line-height: 1;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
-  font-size: 1rem;
-  font-family: 'Inter', sans-serif;
-  appearance: none;
-  box-sizing: border-box;
-  outline: none;
-  transition: border 0.2s ease-in-out;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.7rem 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: all 0.2s ease;
+}
 
-  color: #222222;
+input:focus,
+select:focus {
+    border-color: #9D62F5;
+    box-shadow: 0 0 0 3px rgba(157, 98, 245, 0.1);
+    outline: none;
 }
 
 /* Dropdown arrow styling for select */
@@ -139,40 +158,100 @@ select:focus::placeholder {
   opacity: 0; /* fade out on focus */
 }
 
-input:focus,
-select:focus {
-  border-color: #9D62F5;
-  box-shadow: 0 0 0 2px rgba(167, 139, 250, 0.5);
-}
-
 /* Submit Button */
 .submit-btn {
-  width: 100%;
-  height: 48px;
-  background-color: #222222;
-  color: white;
-  padding: 0.5rem 1rem;
-  margin-top: 1.5rem;
-  margin-bottom: 2rem; /* Extra space below button */
-  border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  font-family: 'Inter', sans-serif;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    background: #9D62F5;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .submit-btn:hover {
-  background-color: #374151;
+    background: #8445f0;
+    transform: translateY(-1px);
 }
 
 /* Info Text */
 .info-text {
-  max-width: 400px;
-  margin-top: 2rem;
-  text-align: center;
-  font-size: 1rem;
-  color: #222222;
+    max-width: 800px;
+    margin: 1.5rem auto;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* Form Section Styles */
+.form-section {
+    margin-bottom: 1.5rem; /* Reduced from 2.5rem */
+    padding: 1.2rem; /* Reduced from 1.5rem */
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.section-title {
+    font-size: 1.1rem;
+    color: #333;
+    margin-bottom: 1.2rem; /* Reduced from 1.5rem */
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid rgba(157, 98, 245, 0.2);
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+.form-col {
+    flex: 1;
+    min-width: 0; /* Prevents flex items from overflowing */
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-section {
+        padding: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .form-card {
+        width: 95%;
+        padding: 1.5rem;
+        margin: 1rem auto;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .form-col {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-card {
+        width: 100%;
+        padding: 1rem;
+        border-radius: 0;
+    }
 }
 
 /* Fade-in animation keyframes */
