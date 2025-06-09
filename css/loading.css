@@ -18,9 +18,9 @@ body {
     justify-content: center;
     background: linear-gradient(
         45deg,
-        #2d4f63 0%,
-        #ffe100 50%,
-        #b8b8ff 100%
+        #F0E68C 0%,     /* Khaki */
+        #D2B48C 50%,    /* Khaki Tan Brown */
+        #C9A037 100%    /* Tan Brown Yellow */
     );
     transition: opacity 1s ease;
 }
@@ -30,6 +30,7 @@ body {
 }
 
 .welcome-screen {
+    position: relative;
     text-align: center;
     color: white;
     padding: 2rem;
@@ -40,27 +41,28 @@ body {
 }
 
 .hello-text {
+    font-family: 'Times New Roman', Times, serif;
+    font-weight: bold;
     font-size: 4rem;
-    font-weight: 300;
-    letter-spacing: -0.02em;
-    opacity: 0;
-    animation: slideUp 1s ease-out forwards;
-}
-
-.welcome-message {
-    font-size: 1.5rem;
-    font-weight: 400;
-    opacity: 0;
-    animation: fadeIn 0.8s ease-out forwards;
-    animation-delay: 1s;
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid white;
+    width: 0;
+    animation: typing 2.5s steps(5, end) forwards, blink 0.7s step-end infinite;
     margin-bottom: 1rem;
+    color: white;
 }
 
 .start-message {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
     font-size: 1rem;
+    color: white;
     opacity: 0;
     animation: fadeInPulse 0.8s ease-out forwards;
-    animation-delay: 1.8s;
+    animation-delay: 3.5s;
 }
 
 @keyframes slideUp {
@@ -74,6 +76,7 @@ body {
     }
 }
 
+/* Fade-in animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -86,15 +89,15 @@ body {
 @keyframes fadeInPulse {
     0% {
         opacity: 0;
-        transform: scale(0.95);
+        transform: scale(0.95) translateX(-50%);
     }
     50% {
         opacity: 1;
-        transform: scale(1.05);
+        transform: scale(1.05) translateX(-50%);
     }
     100% {
         opacity: 1;
-        transform: scale(1);
+        transform: scale(1) translateX(-50%);
     }
 }
 
@@ -115,5 +118,25 @@ body {
     
     .welcome-message {
         font-size: 1.125rem;
+    }
+}
+
+/* Typing animation for 'hello' (5 letters) */
+@keyframes typing {
+    from {
+        width: 0;
+    }
+    to {
+        width: 5ch;
+    }
+}
+
+/* Blinking cursor effect */
+@keyframes blink {
+    0%, 100% {
+        border-color: transparent;
+    }
+    50% {
+        border-color: white;
     }
 }

@@ -3,6 +3,8 @@ body {
     font-family: 'Inter', sans-serif;
     background: #fff;
     color: #222;
+    opacity: 0;
+    animation: fadeInBody 2s ease forwards;
 }
 
 .hero-section {
@@ -459,4 +461,10 @@ footer span {
     font-size: 0.95rem;
     letter-spacing: 0.3px;
     opacity: 0.9;
+}
+
+@keyframes fadeInBody {
+  to {
+    opacity: 1;
+  }
 }
