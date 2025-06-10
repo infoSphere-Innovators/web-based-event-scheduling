@@ -13,10 +13,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <link rel="stylesheet" href="/css/user-dashboard.css" />
-<<<<<<< HEAD
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-=======
     <style>
       /* Shared button styles */
       .btn {
@@ -42,8 +40,63 @@
         opacity: 0.9;
       }
 
+      /* Modal styles */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+        max-width: 600px;
+        border-radius: 8px;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .modal-info p {
+        margin: 8px 0;
+        font-size: 16px;
+      }
+
+      .modal-description {
+        margin-top: 20px;
+      }
+
+      .modal-description h3 {
+        margin-bottom: 10px;
+        font-size: 18px;
+      }
+
+      .modal-description p {
+        font-size: 16px;
+        line-height: 1.5;
+      }
     </style>
->>>>>>> 5eec8265e17fc8f11f02b5b203d08141c15a2f38
   </head>
   <body>
     <div class="app">
@@ -76,7 +129,7 @@
               <button id="signup" class="btn">Signup</button>
 
               <!-- Shown only if logged in -->
-              <button class="avatar" id="userBtn" style="display: none;">
+              <button class="avatar" id="userBtn" style="display: none">
                 <i class="fas fa-user"></i>
               </button>
             </div>
@@ -116,15 +169,39 @@
       </main>
     </div>
 
+    <!-- Modal structure -->
+    <div id="eventModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modal-title"></h2>
+        <div class="modal-info">
+          <p>
+            <i class="fas fa-calendar-alt"></i> <span id="modal-date"></span>
+          </p>
+          <p><i class="fas fa-clock"></i> <span id="modal-time"></span></p>
+          <p>
+            <i class="fas fa-location-dot"></i> <span id="modal-venue"></span>
+          </p>
+          <p><i class="fas fa-tag"></i> <span id="modal-type"></span></p>
+        </div>
+        <div class="modal-description">
+          <h3><i class="fas fa-align-left"></i> Event Description</h3>
+          <p id="modal-description"></p>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="/js/user-dashboard.js"></script>
-=======
     <script src="/js/user-dashboard.js"></script>
     <script>
       // Toggle the notification dropdown
-      document.getElementById("notifBtn").addEventListener("click", function () {
-        const dropdown = document.getElementById("notifDropdown");
-        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-      });
+      document
+        .getElementById("notifBtn")
+        .addEventListener("click", function () {
+          const dropdown = document.getElementById("notifDropdown");
+          dropdown.style.display =
+            dropdown.style.display === "block" ? "none" : "block";
+        });
 
       // Optional: hide dropdown if clicked outside
       window.addEventListener("click", function (event) {
@@ -175,7 +252,7 @@
       const eventCards = document.querySelectorAll(".event-card");
 
       function clearActive() {
-        buttons.forEach(btn => btn.classList.remove("active"));
+        buttons.forEach((btn) => btn.classList.remove("active"));
       }
 
       function parseDateFromText(text) {
@@ -187,7 +264,7 @@
       function filterEvents(type) {
         const now = new Date();
 
-        eventCards.forEach(card => {
+        eventCards.forEach((card) => {
           const timeDiv = card.querySelector(".time");
           const eventDate = parseDateFromText(timeDiv.textContent.trim());
 
@@ -231,7 +308,7 @@
 
         let anyVisible = false;
 
-        eventCards.forEach(card => {
+        eventCards.forEach((card) => {
           const timeDiv = card.querySelector(".event-date");
           const eventDate = parseDateFromText(timeDiv.textContent.trim());
 
@@ -252,6 +329,8 @@
         noEventsMsg.style.display = anyVisible ? "none" : "block";
       }
 
+      // In createEventCard function, update the button HTML:
+      // <button class="checkin" onclick="viewEventDescription('${event.id}')">View Description</button>
     </script>
   </body>
 </html>

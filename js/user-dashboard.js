@@ -92,25 +92,37 @@ document.addEventListener("DOMContentLoaded", () => {
         buttons.forEach((btn) => btn.classList.remove("active"));
     }
 
-    function parseDateFromText(text) {
-        const currentYear = new Date().getFullYear();
-        const fullText = `${text} ${currentYear}`;
-        return new Date(fullText);
-    }
-
     function filterEvents(type) {
         const now = new Date();
+        const noEventsMsg = document.getElementById("no-events-message");
+        const eventCards = document.querySelectorAll(".event-card");
+        
         let anyVisible = false;
 
         eventCards.forEach((card) => {
-            const timeDiv = card.querySelector(".event-date");
-            const eventDate = parseDateFromText(timeDiv.textContent.trim());
-
+            const dateText = card.querySelector(".event-date").textContent;
+            const timeText = card.querySelector(".event-time").textContent;
+            
+            // Parse date properly
+            const [day, month] = dateText.split(" ");
+            const currentYear = new Date().getFullYear();
+            
+            // Create date object with time
+            const [hours, minutes] = timeText.match(/(\d+):(\d+)/).slice(1);
+            const period = timeText.includes('PM') ? 'PM' : 'AM';
+            
+            // Convert to 24-hour format
+            let hour24 = parseInt(hours);
+            if (period === 'PM' && hour24 !== 12) hour24 += 12;
+            if (period === 'AM' && hour24 === 12) hour24 = 0;
+            
+            const eventDate = new Date(`${month} ${day}, ${currentYear} ${hour24}:${minutes}:00`);
+            
             let show = false;
             if (type === "all") {
                 show = true;
             } else if (type === "upcoming") {
-                show = eventDate > now;
+                show = eventDate >= now;
             } else if (type === "past") {
                 show = eventDate < now;
             }
@@ -119,7 +131,10 @@ document.addEventListener("DOMContentLoaded", () => {
             if (show) anyVisible = true;
         });
 
-        noEventsMsg.style.display = anyVisible ? "none" : "block";
+        // Update no events message visibility
+        if (noEventsMsg) {
+            noEventsMsg.style.display = anyVisible ? "none" : "block";
+        }
     }
 
     // Event Filter Button Listeners
@@ -145,6 +160,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function fetchEvents() {
         const eventsRef = db.ref('events');
         const eventsContainer = document.querySelector('.events');
+        
+        // Get current active filter
+        const activeFilterBtn = document.querySelector('.toggle button.active');
+        const currentFilter = activeFilterBtn ? activeFilterBtn.id.replace('-btn', '') : 'upcoming';
 
         // Add loading state
         eventsContainer.innerHTML = '<p style="text-align: center; color: rgba(255, 255, 255, 0.6)">Loading events...</p>';
@@ -152,15 +171,15 @@ document.addEventListener("DOMContentLoaded", () => {
         eventsRef.on('value', (snapshot) => {
             eventsContainer.innerHTML = '';
             const events = snapshot.val();
-            console.log('Fetched events:', events); // Debug log
-
+            
             if (events) {
                 Object.entries(events).forEach(([id, event]) => {
-                    event.id = id; // Add ID to event object
+                    event.id = id;
                     const eventCard = createEventCard(event);
                     eventsContainer.appendChild(eventCard);
                 });
-                noEventsMsg.style.display = "none";
+                // Apply current filter after loading events
+                filterEvents(currentFilter);
             } else {
                 noEventsMsg.style.display = "block";
             }
@@ -211,6 +230,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Global function for event description
 function viewEventDescription(eventId) {
-    console.log(`Viewing event: ${eventId}`);
-    // Implement modal or redirect logic here
+    const eventsRef = db.ref('events');
+    const modal = document.getElementById('eventModal');
+    const span = document.getElementsByClassName('close')[0];
+
+    eventsRef.child(eventId).once('value', (snapshot) => {
+        const event = snapshot.val();
+        if (event) {
+            // Format date
+            const eventDate = new Date(event.EventDate);
+            const formattedDate = `${eventDate.getDate()} ${eventDate.toLocaleString('default', { month: 'long' })} ${eventDate.getFullYear()}`;
+
+            // Update modal content
+            document.getElementById('modal-title').textContent = event.EventName;
+            document.getElementById('modal-date').textContent = formattedDate;
+            document.getElementById('modal-time').textContent = event.EventTime;
+            document.getElementById('modal-venue').textContent = event.EventVenue;
+            document.getElementById('modal-type').textContent = event.EventType;
+            document.getElementById('modal-description').textContent = event.EventDescription || 'No description available';
+
+            // Show modal with animation
+            modal.style.display = "block";
+            // Trigger reflow
+            modal.offsetHeight;
+            modal.classList.add('show');
+        }
+    });
+
+    function closeModal() {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 300); // Match the transition duration
+    }
+
+    // Close button functionality
+    span.onclick = closeModal;
+
+    // Click outside modal to close
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            closeModal();
+        }
+    }
+
+    // ESC key to close
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    });
 }
