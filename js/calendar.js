@@ -1,4 +1,4 @@
-  const months = [
+const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
@@ -80,6 +80,41 @@
     }
     }
 
+    function createDayCell(dayNumber, events = []) {
+        const td = document.createElement('td');
+        if (dayNumber === new Date().getDate()) td.classList.add('today');
+    
+        const daySpan = document.createElement('span');
+        daySpan.className = 'day-number';
+        daySpan.textContent = dayNumber;
+        td.appendChild(daySpan);
+    
+        if (events.length > 0) {
+            const eventIndicator = document.createElement('div');
+            eventIndicator.className = 'event-indicator';
+            
+            events.forEach(event => {
+                const eventDot = document.createElement('div');
+                eventDot.className = `event-dot ${event.type}`;
+                eventDot.textContent = event.title;
+    
+                const preview = document.createElement('div');
+                preview.className = 'event-preview';
+                preview.innerHTML = `
+                    <strong>${event.title}</strong><br>
+                    Time: ${event.time}<br>
+                    Location: ${event.location}
+                `;
+    
+                eventDot.appendChild(preview);
+                eventIndicator.appendChild(eventDot);
+            });
+    
+            td.appendChild(eventIndicator);
+        }
+    
+        return td;
+    }
 
   document.getElementById('prev-month').addEventListener('click', () => {
     currentDate.setMonth(currentDate.getMonth() - 1);
@@ -90,5 +125,105 @@
     currentDate.setMonth(currentDate.getMonth() + 1);
     renderCalendar();
   });
+
+  function generateCalendar(year, month) {
+    const firstDay = new Date(year, month, 1);
+    const lastDay = new Date(year, month + 1, 0);
+    const startingDay = firstDay.getDay();
+    const totalDays = lastDay.getDate();
+    
+    const calendarBody = document.getElementById('calendar-body');
+    calendarBody.innerHTML = '';
+    
+    let date = 1;
+    for (let i = 0; i < 6; i++) {
+        // Only create a new row if there are still days to display
+        if (date > totalDays) break;
+        
+        const row = document.createElement('tr');
+        
+        for (let j = 0; j < 7; j++) {
+            const cell = document.createElement('td');
+            
+            if (i === 0 && j < startingDay) {
+                // Add inactive class to previous month's days
+                cell.classList.add('inactive');
+                const prevMonthDays = new Date(year, month, 0).getDate();
+                const prevDay = prevMonthDays - (startingDay - j - 1);
+                cell.innerHTML = `<span class="day-number">${prevDay}</span>`;
+            } else if (date > totalDays) {
+                // Add inactive class to next month's days
+                cell.classList.add('inactive');
+                const nextDay = date - totalDays;
+                cell.innerHTML = `<span class="day-number">${nextDay}</span>`;
+                date++;
+            } else {
+                cell.innerHTML = `<span class="day-number">${date}</span>`;
+                
+                // Add today class if it's today
+                if (date === new Date().getDate() && 
+                    month === new Date().getMonth() && 
+                    year === new Date().getFullYear()) {
+                    cell.classList.add('today');
+                }
+                
+                date++;
+            }
+            
+            row.appendChild(cell);
+        }
+        
+        calendarBody.appendChild(row);
+    }
+}
+
+  // Add navigation event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    const eventsBtn = document.getElementById('events-btn');
+    const calendarBtn = document.getElementById('calendar-btn');
+    
+    // Navigation Event Listeners
+    eventsBtn.addEventListener('click', () => {
+        setActiveTab(eventsBtn);
+        window.location.href = '/html/user-dashboard.html';
+    });
+
+    calendarBtn.addEventListener('click', () => {
+        setActiveTab(calendarBtn);
+        // Already on calendar page, just highlight the tab
+    });
+
+    // Helper function to set active tab
+    function setActiveTab(button) {
+        document.querySelectorAll('.nav-left button').forEach(btn => {
+            btn.classList.remove('active-tab');
+        });
+        button.classList.add('active-tab');
+    }
+
+    // Set calendar button as active on load
+    setActiveTab(calendarBtn);
+
+    updateTime();
+    renderCalendar();
+});
+
+  function updateTime() {
+    const timeElement = document.getElementById('current-time');
+    const options = {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+        timeZoneName: 'short'
+    };
+    
+    function setTime() {
+        const time = new Date().toLocaleString('en-US', options);
+        timeElement.textContent = time;
+    }
+
+    setTime();
+    setInterval(setTime, 60000); // Update every minute
+}
 
   renderCalendar();
