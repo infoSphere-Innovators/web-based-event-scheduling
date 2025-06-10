@@ -1,3 +1,10 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+}
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
@@ -5,106 +12,102 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
+    min-height: 100vh;
+    padding: 20px;
 }
-.navbar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: #2A0047;
-    padding: 5px 24px;
-    height: 60px;
-}
-.navbar .logo {
-    height: 48px;
-    width: 48px;
-    border-radius: 50%;
-    background: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    margin-right: 3rem; /* Increased from 32px to 48px for more spacing */
-}
-.navbar .nav-center {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    flex: 1;
-    margin-right: 4rem; /* Added margin to increase gap between .logo/.nav-center and .nav-right */
-    justify-content: center; /* Center nav-center contents horizontally */
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.navbar .nav-link {
-    color: #cfc3e6;
-    text-decoration: none;
-    font-size: 14px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 500;
-    transition: color 0.2s;
+.nav-left,
+.nav-right,
+.icons {
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
-.navbar .nav-link:hover {
-    color: #fff;
+
+nav button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
 }
-.navbar .nav-right {
-    display: flex;
-    align-items: center;
-    gap: 18px;
-    color: #cfc3e6; /* Match nav-center color */
+
+nav button:hover {
+  color: rgba(255, 255, 255, 0.9);
 }
-.navbar .nav-right a,
-.navbar .nav-right .icon-btn,
-.navbar .nav-right .create-event {
-    color: #cfc3e6;
-    transition: color 0.2s;
+nav button.active-tab {
+  border-bottom: 2px solid #fff;
+  color: #fff;
 }
-.navbar .nav-right a:hover,
-.navbar .nav-right .icon-btn:hover,
-.navbar .nav-right .create-event:hover {
-    color: #fff;
+
+.nav-left .inactive {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
-.navbar .time {
-    color: #fff;
-    font-size: 15px;
-    font-weight: 500;
-    margin-right: 8px;
+
+.icon-btn, .avatar {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
 }
-.navbar .create-event {
-    color: #fff;
-    font-weight: 500;
-    font-size: 15px;
-    margin-right: 8px;
-    text-decoration: none;
-    transition: color 0.2s;
+
+.icon-btn i, .avatar i {
+  color: white;
 }
-.navbar .create-event:hover {
-    color: #cfc3e6;
+
+.avatar i {
+  font-size: 16px;
 }
-.navbar .icon-btn {
-    color: #cfc3e6;
-    background: none;
-    border: none;
-    font-size: 18px;
-    cursor: pointer;
-    margin: 0 2px;
-    transition: color 0.2s;
+
+.notification-wrapper {
+  position: relative;
+  display: inline-block;
 }
-.navbar .icon-btn:hover {
-    color: #fff;
+
+.notif-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background-color: white;
+  color: black;
+  min-width: 220px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  z-index: 1000;
 }
-.navbar .avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #cfc3e6;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #2d0850;
-    font-size: 18px;
-    margin-left: 6px;
+
+.notif-dropdown p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
 }
+
+.avatar:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+#current-time {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
+}
+
 
 /* Form Container */
 .event-container {

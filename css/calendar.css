@@ -1,10 +1,17 @@
 /* Change to */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
+}
+
 body {
-background: linear-gradient(to bottom, #0a0b1e, #161a3a);
-color: white;
-min-height: 100vh;
-padding: 20px;
-font-family: 'Inter', sans-serif;
+  background: linear-gradient(to bottom, #0a0b1e, #464f97);
+  color: white;
+  min-height: 100vh;
+  padding: 20px;
 }
 .calendar-container {
     max-width: 1200px; /* Increased from 960px */
@@ -215,82 +222,151 @@ td:hover .day-number {
     padding: 0.5rem 0;
 }
 
-/* Navigation Styles */
+.notif-dropdown p {
+  font-weight: 400; /* Regular Inter */
+  font-family: 'Inter', sans-serif;
+}
+
+.icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+/* General button styling */
+.icon-btn, .avatar {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* White icons */
+.icon-btn i, .avatar i {
+  color: white;
+}
+
+/* Smaller user icon */
+.avatar i {
+  font-size: 16px;
+}
+
+/* Notification dropdown */
+.notification-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.notif-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background-color: white;
+  color: black;
+  min-width: 220px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.notif-dropdown p {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
 .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .nav-left,
 .nav-right,
 .icons {
-    display: flex;
-    gap: 20px;
-    align-items: center;
+  display: flex;
+  gap: 20px;
+  align-items: center;
 }
 
 nav button {
-    background: none;
-    border: none;
-    font-size: 16px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    color: rgba(255, 255, 255, 0.6);
-    border-bottom: 2px solid transparent;
-    transition: all 0.3s ease;
+  background: none;
+  border: none;
+  font-size: 16px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
 }
 
 nav button:hover {
-    color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.9);
 }
-
 nav button.active-tab {
-    border-bottom: 2px solid #fff;
-    color: #fff;
+  border-bottom: 2px solid #fff;
+  color: #fff;
 }
 
 .nav-left .inactive {
-    opacity: 0.6;
-    cursor: not-allowed;
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-.icons button {
-    background: transparent;
-    border: none;
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.8);
-    cursor: pointer;
-    transition: color 0.3s ease;
+.icon-btn, .avatar {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
 }
 
-.icons button:hover {
-    color: #fff;
+.icon-btn i, .avatar i {
+  color: white;
 }
 
-.avatar {
-    background: #9D62F5;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 32px;
-    font-size: 14px;
-    color: white;
-    transition: transform 0.3s ease;
+.avatar i {
+  font-size: 16px;
+}
+
+.notification-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.notif-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background-color: white;
+  color: black;
+  min-width: 220px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.notif-dropdown p {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
 }
 
 .avatar:hover {
-    transform: scale(1.05);
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
 }
 
 #current-time {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
 }
 
 /* Responsive Navigation */

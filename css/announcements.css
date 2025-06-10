@@ -1,14 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
-body {
-background: linear-gradient(to bottom, #0a0b1e, #161a3a);
-color: white;
-min-height: 100vh;
-padding: 20px;
-font-family: 'Inter', sans-serif;
-margin: 0;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+  font-weight: 700;
 }
 
-/* Navigation Base */
+body {
+  background: linear-gradient(to bottom, #0a0b1e, #464f97);
+  color: white;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+
+/* Header and Navigation Styles */
 .header {
     display: flex;
     justify-content: space-between;
@@ -47,30 +53,72 @@ nav button.active-tab {
     color: #fff;
 }
 
-.icons button {
-    background: transparent;
-    border: none;
-    font-size: 18px;
-    color: rgba(255, 255, 255, 0.8);
-    cursor: pointer;
-    transition: color 0.3s ease;
+.nav-left .inactive {
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
-.icons button:hover {
-    color: #fff;
+.notif-dropdown p {
+  font-weight: 400; /* Regular Inter */
+  font-family: 'Inter', sans-serif;
 }
 
-.avatar {
-    background: #9D62F5;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    text-align: center;
-    line-height: 32px;
-    font-size: 14px;
-    color: white;
-    transition: transform 0.3s ease;
+.icons {
+  display: flex;
+  gap: 15px;
+  align-items: center;
 }
+
+/* General button styling */
+.icon-btn, .avatar {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+}
+
+/* White icons */
+.icon-btn i, .avatar i {
+  color: white;
+}
+
+/* Smaller user icon */
+.avatar i {
+  font-size: 16px;
+}
+
+/* Notification dropdown */
+.notification-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.notif-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 40px;
+  background-color: white;
+  color: black;
+  min-width: 220px;
+  padding: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  z-index: 1000;
+}
+
+.notif-dropdown p {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+/* Hover effect for avatar (optional) */
+.avatar:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
+}
+
+
 
 .avatar:hover {
     transform: scale(1.05);
@@ -80,6 +128,7 @@ nav button.active-tab {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
 }
+
 
 /* Update Container Styling */
 .calendar-container {
@@ -250,6 +299,8 @@ gap: 1rem;
 border-top: 1px solid rgba(255,255,255,0.2);
 padding-top: 1rem;
 }
+
+
 
 /* Responsive Navigation */
 @media screen and (max-width: 768px) {

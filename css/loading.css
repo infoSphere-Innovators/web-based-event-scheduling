@@ -1,3 +1,6 @@
+/* Load Inter Bold font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+
 * {
     margin: 0;
     padding: 0;
@@ -5,7 +8,8 @@
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
     min-height: 100vh;
     overflow: hidden;
     cursor: pointer;
@@ -18,9 +22,9 @@ body {
     justify-content: center;
     background: linear-gradient(
         45deg,
-        #F0E68C 0%,     /* Khaki */
-        #D2B48C 50%,    /* Khaki Tan Brown */
-        #C9A037 100%    /* Tan Brown Yellow */
+        #F0E68C 0%,     
+        #c0b390 50%,    
+        #E8A900 100%    
     );
     transition: opacity 1s ease;
 }
@@ -41,16 +45,32 @@ body {
 }
 
 .hello-text {
-    font-family: 'Times New Roman', Times, serif;
-    font-weight: bold;
+    display: flex;
+    gap: 0.2rem;
+    justify-content: center;
     font-size: 4rem;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 2px solid white;
-    width: 0;
-    animation: typing 2.5s steps(5, end) forwards, blink 0.7s step-end infinite;
-    margin-bottom: 1rem;
     color: white;
+}
+
+/* Letter fade-in animation */
+.letter {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: letterFadeIn 1s forwards;
+}
+
+/* Staggered delays for each letter */
+.letter:nth-child(1) { animation-delay: 0s; }
+.letter:nth-child(2) { animation-delay: 0.2s; }
+.letter:nth-child(3) { animation-delay: 0.4s; }
+.letter:nth-child(4) { animation-delay: 0.6s; }
+.letter:nth-child(5) { animation-delay: 0.8s; }
+
+@keyframes letterFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .start-message {
@@ -65,27 +85,7 @@ body {
     animation-delay: 3.5s;
 }
 
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Fade-in animations */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
-}
-
+/* Pulse animation for the start message */
 @keyframes fadeInPulse {
     0% {
         opacity: 0;
@@ -105,7 +105,7 @@ body {
     .hello-text {
         font-size: 3rem;
     }
-    
+
     .welcome-message {
         font-size: 1.25rem;
     }
@@ -115,28 +115,8 @@ body {
     .hello-text {
         font-size: 2.5rem;
     }
-    
+
     .welcome-message {
         font-size: 1.125rem;
-    }
-}
-
-/* Typing animation for 'hello' (5 letters) */
-@keyframes typing {
-    from {
-        width: 0;
-    }
-    to {
-        width: 5ch;
-    }
-}
-
-/* Blinking cursor effect */
-@keyframes blink {
-    0%, 100% {
-        border-color: transparent;
-    }
-    50% {
-        border-color: white;
     }
 }

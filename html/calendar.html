@@ -8,23 +8,38 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="/css/calendar.css" />
   </head>
   <body>
     <header class="header">
-      <nav class="nav-left">
-        <button id="events-btn">Events</button>
-        <button id="calendar-btn" class="active-tab">Calendar</button>
-        <button id="announcement-btn">Announcements</button>
-      </nav>
-      <div class="nav-right">
-        <span id="current-time">10:08 PM GMT+8</span>
-        <div class="icons">
-          <button>🔔</button>
-          <button class="avatar">G</button>
+        <nav class="nav-left">
+          <button id="events-btn" class="active-tab">Events</button>
+          <button id="calendar-btn">Calendar</button>
+          <button id="announcement-btn">Announcements</button>
+        </nav>
+        <div class="nav-right">
+          <span id="current-time">10:08 PM GMT+8</span>
+          <div class="icons">
+            <div class="notification-wrapper">
+              <button id="notifBtn" class="icon-btn">
+                <i class="fas fa-bell"></i>
+              </button>
+              <div class="notif-dropdown" id="notifDropdown">
+                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
+              </div>
+            </div>
+
+            <button class="avatar" id="userBtn">
+              <i class="fas fa-user"></i>
+            </button>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
 
     <div class="calendar-container">
       <div class="calendar-header">
@@ -71,5 +86,25 @@
     </div>
 
     <script type="module" src="/js/calendar.js"></script>
+    <script>
+      // Toggle the notification dropdown
+      document.getElementById("notifBtn").addEventListener("click", function () {
+        const dropdown = document.getElementById("notifDropdown");
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+      });
+
+      // Redirect to another page on avatar click
+      document.getElementById("userBtn").addEventListener("click", function () {
+        window.location.href = "profile-details.html";
+      });
+
+      // Optional: hide dropdown if clicked outside
+      window.addEventListener("click", function (event) {
+        const dropdown = document.getElementById("notifDropdown");
+        if (!event.target.closest(".notification-wrapper")) {
+          dropdown.style.display = "none";
+        }
+      });
+    </script>
   </body>
 </html>

@@ -16,29 +16,44 @@
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
   </head>
   <body>
-    <nav class="navbar">
-      <div class="logo">
-        <img src="/assets/logo.png" alt="Logo" style="height: 100%" />
-      </div>
-      <div class="nav-center">
-        <a href="#" class="nav-link"><i class="fa fa-key"></i> Events</a>
-        <a href="#" class="nav-link"><i class="fa fa-calendar"></i> Calendar</a>
-      </div>
-      <div class="nav-right">
-        <span class="time" id="currentTime">1:37 AM</span>
-        <a href="#" class="create-event">Create Event</a>
-        <button class="icon-btn"><i class="fa fa-search"></i></button>
-        <button class="icon-btn"><i class="fa fa-home"></i></button>
-        <div class="avatar"><i class="fa fa-user"></i></div>
-      </div>
-    </nav>
+    <header class="header">
+        <nav class="nav-left">
+          <button id="back-btn">
+            <i class="fas fa-arrow-left"></i> <!-- Back icon -->
+          </button>
+          <button id="events-btn" class="active-tab">Profile Details</button>
+          <button id="calendar-btn">Performance</button>
+        </nav>
+        <div class="nav-right">
+          <span id="current-time">10:08 PM GMT+8</span>
+          <div class="icons">
+            <div class="notification-wrapper">
+              <button id="notifBtn" class="icon-btn">
+                <i class="fas fa-bell"></i>
+              </button>
+              <div class="notif-dropdown" id="notifDropdown">
+                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
+              </div>
+            </div>
+
+            <button class="avatar" id="userBtn">
+              <i class="fas fa-user"></i>
+            </button>
+          </div>
+        </div>
+      </header>
     <div class="event-container">
       <!-- Left Section - QR Code -->
       <div class="event-left">
+        <div class="event-image-label">QR Image</div>
         <div class="event-image-upload">
           <div id="qrcode"></div>
         </div>
-        <div class="event-image-label">QR Image</div>
+        
         <button class="qr-download-btn" id="downloadQR">
           <i class="fa fa-download"></i> Download QR
         </button>
@@ -147,6 +162,31 @@
     </div>
 
     <script src="/js/profile-details.js"></script>
+    <script>
+      document.getElementById('back-btn').addEventListener('click', function() {
+        window.location.href = 'user-dashboard.html';
+      });
+    </script>
+    <script>
+      // Toggle the notification dropdown
+      document.getElementById("notifBtn").addEventListener("click", function () {
+        const dropdown = document.getElementById("notifDropdown");
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+      });
+
+      // Redirect to another page on avatar click
+      document.getElementById("userBtn").addEventListener("click", function () {
+        window.location.href = "profile-details.html";
+      });
+
+      // Optional: hide dropdown if clicked outside
+      window.addEventListener("click", function (event) {
+        const dropdown = document.getElementById("notifDropdown");
+        if (!event.target.closest(".notification-wrapper")) {
+          dropdown.style.display = "none";
+        }
+      });
+    </script>
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
       import {
