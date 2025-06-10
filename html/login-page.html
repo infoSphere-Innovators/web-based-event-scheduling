@@ -34,5 +34,51 @@
         <p>© InfoSphere Innovators, 2025</p>
     </footer>
     <script src="/js/login-page.js"></script>
+    <script>
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+
+        // Firebase configuration
+        const firebaseConfig = {
+        apiKey: "AIzaSyC4YDw8dhp1qsJ7BhlNUSNHq3BxYzg6GDI",
+        authDomain: "web-based-event-scheduling.firebaseapp.com",
+        projectId: "web-based-event-scheduling",
+        storageBucket: "web-based-event-scheduling.appspot.com",
+        messagingSenderId: "925435406930",
+        appId: "1:925435406930:web:48c759977c266a2cedcd8b"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Handle form submission
+        document.getElementById("signInForm").addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const email = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value;
+
+        if (!email || !password) {
+            alert("Please enter both email and password.");
+            return;
+        }
+
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+            // Login successful
+            const user = userCredential.user;
+            console.log("Logged in as:", user.email);
+
+            // Redirect to profile.html
+            window.location.href = "/html/profile.html";
+            })
+            .catch((error) => {
+            console.error("Login failed:", error.code, error.message);
+            alert("Login failed: " + error.message);
+            });
+        });
+    </script>
 </body>
 </html>
