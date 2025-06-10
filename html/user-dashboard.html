@@ -13,6 +13,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <link rel="stylesheet" href="/css/user-dashboard.css" />
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
   </head>
   <body>
     <div class="app">
@@ -31,11 +33,11 @@
                 <i class="fas fa-bell"></i>
               </button>
               <div class="notif-dropdown" id="notifDropdown">
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
               </div>
             </div>
 
@@ -62,284 +64,22 @@
         <div class="content">
           <!-- Events List -->
           <div class="events">
-            <!-- Repeatable Card -->
-            <div class="event-card">
-              <div class="event-info">
-                <div class="event-left">
-                  <div class="event-date">20 June</div>
-                  <div class="event-time">6:00 PM</div>
-                </div>
-                <div class="divider"></div>
-                <div class="event-right">
-                  <h3>Parish Open Lenten Recollection</h3>
-                  <div class="meta">
-                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
-                    <div><i class="fas fa-eye"></i> 1,291</div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-image">
-                <div class="buttons">
-                  <button class="checkin">View Description</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Repeatable Card -->
-            <div class="event-card">
-              <div class="event-info">
-                <div class="event-left">
-                  <div class="event-date">20 June</div>
-                  <div class="event-time">6:00 PM</div>
-                </div>
-                <div class="divider"></div>
-                <div class="event-right">
-                  <h3>Parish Open Lenten Recollection</h3>
-                  <div class="meta">
-                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
-                    <div><i class="fas fa-eye"></i> 1,291</div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-image">
-                <div class="buttons">
-                  <button class="checkin">View Description</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Repeatable Card -->
-            <div class="event-card">
-              <div class="event-info">
-                <div class="event-left">
-                  <div class="event-date">20 June</div>
-                  <div class="event-time">6:00 PM</div>
-                </div>
-                <div class="divider"></div>
-                <div class="event-right">
-                  <h3>Parish Open Lenten Recollection</h3>
-                  <div class="meta">
-                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
-                    <div><i class="fas fa-eye"></i> 1,291</div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-image">
-                <div class="buttons">
-                  <button class="checkin">View Description</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Repeatable Card -->
-            <div class="event-card">
-              <div class="event-info">
-                <div class="event-left">
-                  <div class="event-date">20 June</div>
-                  <div class="event-time">6:00 PM</div>
-                </div>
-                <div class="divider"></div>
-                <div class="event-right">
-                  <h3>Parish Open Lenten Recollection</h3>
-                  <div class="meta">
-                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
-                    <div><i class="fas fa-eye"></i> 1,291</div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-image">
-                <div class="buttons">
-                  <button class="checkin">View Description</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Repeatable Card -->
-            <div class="event-card">
-              <div class="event-info">
-                <div class="event-left">
-                  <div class="event-date">20 June</div>
-                  <div class="event-time">6:00 PM</div>
-                </div>
-                <div class="divider"></div>
-                <div class="event-right">
-                  <h3>Parish Open Lenten Recollection</h3>
-                  <div class="meta">
-                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
-                    <div><i class="fas fa-eye"></i> 1,291</div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-image">
-                <div class="buttons">
-                  <button class="checkin">View Description</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Repeatable Card -->
-            <div class="event-card">
-              <div class="event-info">
-                <div class="event-left">
-                  <div class="event-date">20 June</div>
-                  <div class="event-time">6:00 PM</div>
-                </div>
-                <div class="divider"></div>
-                <div class="event-right">
-                  <h3>Parish Open Lenten Recollection</h3>
-                  <div class="meta">
-                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
-                    <div><i class="fas fa-eye"></i> 1,291</div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-image">
-                <div class="buttons">
-                  <button class="checkin">View Description</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- Repeatable Card -->
-            <div class="event-card">
-              <div class="event-info">
-                <div class="event-left">
-                  <div class="event-date">20 June</div>
-                  <div class="event-time">6:00 PM</div>
-                </div>
-                <div class="divider"></div>
-                <div class="event-right">
-                  <h3>Parish Open Lenten Recollection</h3>
-                  <div class="meta">
-                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
-                    <div><i class="fas fa-eye"></i> 1,291</div>
-                  </div>
-                </div>
-              </div>
-              <div class="card-image">
-                <div class="buttons">
-                  <button class="checkin">View Description</button>
-                </div>
-              </div>
-            </div>
-            <!-- Duplicate this block for more events -->
-            <!-- ... -->
+            <!-- Event cards will be loaded here by JS -->
           </div>
-          <p id="no-events-message" style="display: none; color: rgba(255,255,255,0.6); text-align: center;">
+          <p
+            id="no-events-message"
+            style="
+              display: none;
+              color: rgba(255, 255, 255, 0.6);
+              text-align: center;
+            "
+          >
             There are no events to display.
           </p>
         </div>
       </main>
     </div>
 
-    <script src="/js/user-dashboard.js"></script>
-    <script>
-      // Toggle the notification dropdown
-      document.getElementById("notifBtn").addEventListener("click", function () {
-        const dropdown = document.getElementById("notifDropdown");
-        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-      });
-
-      // Redirect to another page on avatar click
-      document.getElementById("userBtn").addEventListener("click", function () {
-        window.location.href = "profile-details.html";
-      });
-
-      // Optional: hide dropdown if clicked outside
-      window.addEventListener("click", function (event) {
-        const dropdown = document.getElementById("notifDropdown");
-        if (!event.target.closest(".notification-wrapper")) {
-          dropdown.style.display = "none";
-        }
-      });
-    </script>
-    <script>
-      const allBtn = document.getElementById("all-btn");
-      const upcomingBtn = document.getElementById("upcoming-btn");
-      const pastBtn = document.getElementById("past-btn");
-      const buttons = [allBtn, upcomingBtn, pastBtn];
-      const eventCards = document.querySelectorAll(".event-card");
-
-      function clearActive() {
-        buttons.forEach(btn => btn.classList.remove("active"));
-      }
-
-      function parseDateFromText(text) {
-        const currentYear = new Date().getFullYear();
-        const fullText = `${text} ${currentYear}`;
-        return new Date(fullText);
-      }
-
-      function filterEvents(type) {
-        const now = new Date();
-
-        eventCards.forEach(card => {
-          const timeDiv = card.querySelector(".time");
-          const eventDate = parseDateFromText(timeDiv.textContent.trim());
-
-          let show = false;
-          if (type === "all") {
-            show = true;
-          } else if (type === "upcoming") {
-            show = eventDate > now;
-          } else if (type === "past") {
-            show = eventDate < now;
-          }
-
-          card.style.display = show ? "grid" : "none";
-        });
-      }
-
-      allBtn.addEventListener("click", () => {
-        clearActive();
-        allBtn.classList.add("active");
-        filterEvents("all");
-      });
-
-      upcomingBtn.addEventListener("click", () => {
-        clearActive();
-        upcomingBtn.classList.add("active");
-        filterEvents("upcoming");
-      });
-
-      pastBtn.addEventListener("click", () => {
-        clearActive();
-        pastBtn.classList.add("active");
-        filterEvents("past");
-      });
-
-      // Set default filter to Upcoming
-      filterEvents("upcoming");
-
-      function filterEvents(type) {
-        const now = new Date();
-        const noEventsMsg = document.getElementById("no-events-message");
-
-        let anyVisible = false;
-
-        eventCards.forEach(card => {
-          const timeDiv = card.querySelector(".event-date");
-          const eventDate = parseDateFromText(timeDiv.textContent.trim());
-
-          let show = false;
-          if (type === "all") {
-            show = true;
-          } else if (type === "upcoming") {
-            show = eventDate > now;
-          } else if (type === "past") {
-            show = eventDate < now;
-          }
-
-          card.style.display = show ? "flex" : "none";
-          if (show) anyVisible = true;
-        });
-
-        // Show or hide the "no events" message
-        noEventsMsg.style.display = anyVisible ? "none" : "block";
-      }
-
-    </script>
-
-
+    <script type="module" src="/js/user-dashboard.js"></script>
   </body>
 </html>
