@@ -177,4 +177,53 @@ const months = [
     }
 }
 
+  // Add navigation event listeners
+document.addEventListener('DOMContentLoaded', () => {
+    const eventsBtn = document.getElementById('events-btn');
+    const calendarBtn = document.getElementById('calendar-btn');
+    
+    // Navigation Event Listeners
+    eventsBtn.addEventListener('click', () => {
+        setActiveTab(eventsBtn);
+        window.location.href = '/html/user-dashboard.html';
+    });
+
+    calendarBtn.addEventListener('click', () => {
+        setActiveTab(calendarBtn);
+        // Already on calendar page, just highlight the tab
+    });
+
+    // Helper function to set active tab
+    function setActiveTab(button) {
+        document.querySelectorAll('.nav-left button').forEach(btn => {
+            btn.classList.remove('active-tab');
+        });
+        button.classList.add('active-tab');
+    }
+
+    // Set calendar button as active on load
+    setActiveTab(calendarBtn);
+
+    updateTime();
+    renderCalendar();
+});
+
+  function updateTime() {
+    const timeElement = document.getElementById('current-time');
+    const options = {
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+        timeZoneName: 'short'
+    };
+    
+    function setTime() {
+        const time = new Date().toLocaleString('en-US', options);
+        timeElement.textContent = time;
+    }
+
+    setTime();
+    setInterval(setTime, 60000); // Update every minute
+}
+
   renderCalendar();

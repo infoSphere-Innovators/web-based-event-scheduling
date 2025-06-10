@@ -11,6 +11,21 @@
     <link rel="stylesheet" href="/css/calendar.css" />
   </head>
   <body>
+    <header class="header">
+      <nav class="nav-left">
+        <button id="events-btn">Events</button>
+        <button id="calendar-btn" class="active-tab">Calendar</button>
+        <button class="inactive">Announcements</button>
+      </nav>
+      <div class="nav-right">
+        <span id="current-time">10:08 PM GMT+8</span>
+        <div class="icons">
+          <button>🔔</button>
+          <button class="avatar">G</button>
+        </div>
+      </div>
+    </header>
+
     <div class="calendar-container">
       <div class="calendar-header">
         <h2 id="month-year"></h2>
