@@ -1,28 +1,63 @@
-document.getElementById('signInForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
-    
-    // Here you would typically handle the sign-in logic
-    // For demonstration purposes, we'll just log the values
-    console.log('Username:', username);
-    console.log('Password:', password);
-    
-    // Clear the form
-    this.reset();
-});
+// Import Firebase modules
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 
-// Add focus effects to input fields
-const inputs = document.querySelectorAll('input');
-inputs.forEach(input => {
-    input.addEventListener('focus', function() {
-        this.parentElement.style.transform = 'translateY(-2px)';
-        this.style.boxShadow = '0 2px 4px rgba(0,0,0,0.1)';
-    });
-    
-    input.addEventListener('blur', function() {
-        this.parentElement.style.transform = 'translateY(0)';
-        this.style.boxShadow = 'none';
-    });
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyC4YDw8dhp1qsJ7BhlNUSNHq3BxYzg6GDI",
+    authDomain: "web-based-event-scheduling.firebaseapp.com",
+    projectId: "web-based-event-scheduling",
+    storageBucket: "web-based-event-scheduling.appspot.com",
+    messagingSenderId: "925435406930",
+    appId: "1:925435406930:web:48c759977c266a2cedcd8b"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Handle form submission
+document.getElementById("signInForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value;
+
+    if (!email || !password) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Missing Fields',
+            text: 'Please enter both email and password.'
+        });
+        return;
+    }
+
+    signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            // Login successful
+            Swal.fire({
+                icon: 'success',
+                title: 'Login Successful!',
+                text: 'Redirecting to your dashboard...',
+                showConfirmButton: false,
+                timer: 2000
+            }).then(() => {
+                window.location.href = "/html/user-dashboard.html";
+            });
+        })
+        .catch((error) => {
+            let errorMessage = "Login failed. Please try again.";
+
+            if (error.code === "auth/user-not-found" || error.code === "auth/wrong-password") {
+                errorMessage = "Error: Wrong email or password. This user may not be registered.";
+            } else if (error.code === "auth/invalid-email") {
+                errorMessage = "Invalid email format.";
+            }
+
+            Swal.fire({
+                icon: 'error',
+                title: 'Login Failed',
+                text: errorMessage
+            });
+        });
 });

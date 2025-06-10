@@ -6,8 +6,77 @@
     <title>Login Page</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/css/login-page.css">
+    <style>
+        .signup-text {
+        margin-top: 10px;
+        font-size: 14px;
+        text-align: center;
+        }
+
+        .signup-text a {
+        color: #007bff;
+        text-decoration: none;
+        }
+
+        .signup-text a:hover {
+        text-decoration: underline;
+        }
+
+    </style>
+    <style>
+        /* Use Inter font */
+        body {
+        font-family: 'Inter', sans-serif;
+        }
+
+        /* Transparent Header */
+        .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background-color: transparent;
+        position: relative;
+        z-index: 1000;
+        }
+
+        /* Logo sizing */
+        .logo img {
+        height: 40px;
+        }
+
+        /* Home Button */
+        .home-btn {
+        background-color: #000;
+        border: none;
+        padding: 0.5rem 1.2rem;
+        border-radius: 4px;
+        }
+
+        .home-btn a {
+        color: white;
+        text-decoration: none;
+        font-family: 'Inter', sans-serif;
+        font-weight: 700; /* Bold */
+        }
+
+        .home-btn:hover {
+        background-color: #222;
+        }
+
+
+    </style>
 </head>
 <body>
+    <!-- Header -->
+    <header class="header">
+    <div class="logo">
+        <img src="/assets/logo.png" alt="Logo" />
+    </div>
+    <button class="home-btn">
+        <a href="user-dashboard.html">Home</a>
+    </button>
+    </header>
     <div class="container">
         <div class="left-section">
             <h1>Enter Credentials</h1>
@@ -25,6 +94,11 @@
                         <label for="password">Password</label>
                         <input type="password" id="password" placeholder="Enter Password">
                     </div>
+                    <!-- Sign up link -->
+                    <p class="signup-text">
+                        Don’t have an account?
+                        <a href="/signup-page/index.html">Create one now.</a>
+                    </p>
                     <button type="submit" class="sign-up-btn">Login</button>
                 </form>
             </div>
@@ -33,52 +107,8 @@
     <footer>
         <p>© InfoSphere Innovators, 2025</p>
     </footer>
-    <script src="/js/login-page.js"></script>
-    <script>
-        // Import Firebase modules
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+    <script type="module" src="/js/login-page.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-        // Firebase configuration
-        const firebaseConfig = {
-        apiKey: "AIzaSyC4YDw8dhp1qsJ7BhlNUSNHq3BxYzg6GDI",
-        authDomain: "web-based-event-scheduling.firebaseapp.com",
-        projectId: "web-based-event-scheduling",
-        storageBucket: "web-based-event-scheduling.appspot.com",
-        messagingSenderId: "925435406930",
-        appId: "1:925435406930:web:48c759977c266a2cedcd8b"
-        };
-
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-
-        // Handle form submission
-        document.getElementById("signInForm").addEventListener("submit", function (e) {
-        e.preventDefault();
-
-        const email = document.getElementById("username").value.trim();
-        const password = document.getElementById("password").value;
-
-        if (!email || !password) {
-            alert("Please enter both email and password.");
-            return;
-        }
-
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-            // Login successful
-            const user = userCredential.user;
-            console.log("Logged in as:", user.email);
-
-            // Redirect to profile.html
-            window.location.href = "/html/profile.html";
-            })
-            .catch((error) => {
-            console.error("Login failed:", error.code, error.message);
-            alert("Login failed: " + error.message);
-            });
-        });
-    </script>
 </body>
 </html>

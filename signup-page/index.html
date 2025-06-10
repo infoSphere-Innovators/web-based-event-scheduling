@@ -9,6 +9,23 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
+    <style>
+      .login-redirect {
+        text-align: center;
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+      }
+
+      .login-redirect a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 600;
+      }
+
+      .login-redirect a:hover {
+        text-decoration: underline;
+      }
+    </style>
   </head>
   <body>
     <div class="container">
@@ -254,6 +271,11 @@
                 />
               </div>
             </div>
+            <p class="login-redirect">
+              Already have an account?
+              <a href="/html/login-page.html">Login</a>
+            </p>
+
 
             <button type="submit" id="submit" class="submit-btn">
               Sign Up
