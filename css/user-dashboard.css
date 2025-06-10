@@ -23,16 +23,24 @@ body {
     margin: 0 auto;
 }
 
+.nav-left,
+.nav-right,
+.icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
 nav button {
-  background: none;
-  border: none;
-  font-size: 16px;
-  padding: 8px 12px;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-  color: rgba(255, 255, 255, 0.6);
-  border-bottom: 2px solid transparent;
-  transition: all 0.3s ease;
+    background: none;
+    border: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    color: rgba(255, 255, 255, 0.6);
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s ease;
 }
 
 nav button:hover {
@@ -40,46 +48,22 @@ nav button:hover {
 }
 
 nav button.active-tab {
-  border-bottom: 2px solid #fff; 
-  color: #fff;
-}
-
-.nav-left,
-.nav-right,
-.icons {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
-
-.nav-left button,
-.nav-right button,
-.toggle button {
-  background: transparent;
-  border: none;
-  color: gray;
-  cursor: pointer;
+    border-bottom: 2px solid #fff;
+    color: #fff;
 }
 
 .nav-left .inactive {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.create-btn {
-  background: white;
-  color: black;
-  padding: 6px 14px;
-  border-radius: 8px;
+    opacity: 0.6;
+    cursor: not-allowed;
 }
 
 .icons button {
-  background: transparent;
-  border: none;
-  font-size: 18px;
-  color: rgba(255, 255, 255, 0.8);
-  cursor: pointer;
-  transition: color 0.3s ease;
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .icons button:hover {
@@ -87,15 +71,15 @@ nav button.active-tab {
 }
 
 .avatar {
-  background: #9D62F5;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 32px;
-  font-size: 14px;
-  color: white;
-  transition: transform 0.3s ease;
+    background: #9D62F5;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 32px;
+    font-size: 14px;
+    color: white;
+    transition: transform 0.3s ease;
 }
 
 .avatar:hover {
@@ -105,6 +89,49 @@ nav button.active-tab {
 #current-time {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
+}
+
+/* Responsive Navigation */
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 15px;
+    }
+
+    nav button {
+        font-size: 14px;
+        padding: 6px 8px;
+    }
+
+    .nav-left,
+    .nav-right,
+    .icons {
+        gap: 12px;
+    }
+
+    #current-time {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .nav-left {
+        position: relative;
+    }
+
+    .nav-left button:not(.active-tab) {
+        display: none;
+    }
+
+    .icons {
+        gap: 8px;
+    }
+
+    .avatar {
+        width: 28px;
+        height: 28px;
+        line-height: 28px;
+        font-size: 12px;
+    }
 }
 
 .main {
@@ -242,32 +269,4 @@ nav button.active-tab {
   height: 64px;
   object-fit: cover;
   border-radius: 12px;
-}
-
-/* Responsive Navigation */
-@media screen and (max-width: 768px) {
-    .header {
-        padding: 15px;
-    }
-
-    nav button {
-        font-size: 14px;
-        padding: 6px 8px;
-    }
-
-    .nav-left,
-    .nav-right,
-    .icons {
-        gap: 12px;
-    }
-
-    #current-time {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .nav-left button:not(.active-tab) {
-        display: none;
-    }
 }

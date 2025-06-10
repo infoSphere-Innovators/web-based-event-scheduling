@@ -181,7 +181,8 @@ const months = [
 document.addEventListener('DOMContentLoaded', () => {
     const eventsBtn = document.getElementById('events-btn');
     const calendarBtn = document.getElementById('calendar-btn');
-    
+    const announcementBtn = document.getElementById('announcement-btn'); // Updated ID to match HTML
+
     // Navigation Event Listeners
     eventsBtn.addEventListener('click', () => {
         setActiveTab(eventsBtn);
@@ -190,7 +191,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     calendarBtn.addEventListener('click', () => {
         setActiveTab(calendarBtn);
-        // Already on calendar page, just highlight the tab
+        // Already on calendar page
+    });
+
+    announcementBtn.addEventListener('click', () => {  // Updated variable name
+        setActiveTab(announcementBtn);
+        window.location.href = '/html/announcements.html';
     });
 
     // Helper function to set active tab

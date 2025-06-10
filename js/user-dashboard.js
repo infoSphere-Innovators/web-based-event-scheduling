@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const eventsBtn = document.getElementById("events-btn");
     const calendarBtn = document.getElementById("calendar-btn");
+    const announcementBtn = document.getElementById("announcement-btn");
 
     function setActiveTab(button) {
         document.querySelectorAll(".nav-left button").forEach((btn) => {
@@ -18,6 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
     calendarBtn.addEventListener("click", () => {
         setActiveTab(calendarBtn);
         window.location.href = "calendar.html";
+    });
+
+    announcementBtn.addEventListener("click", () => {
+        setActiveTab(announcementBtn);
+        window.location.href = "/html/announcements.html";
     });
 
     // Update current time
