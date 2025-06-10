@@ -65,8 +65,16 @@
               </div>
             </div>
 
-            <button id="login" class="btn active">Login</button>
-            <button id="signup" class="btn">Signup</button>
+            <div class="auth-buttons">
+              <!-- Shown only if NOT logged in -->
+              <button id="login" class="btn active">Login</button>
+              <button id="signup" class="btn">Signup</button>
+
+              <!-- Shown only if logged in -->
+              <button class="avatar" id="userBtn" style="display: none;">
+                <i class="fas fa-user"></i>
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -265,11 +273,6 @@
         dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
       });
 
-      // Redirect to another page on avatar click
-      document.getElementById("userBtn").addEventListener("click", function () {
-        window.location.href = "profile-details.html";
-      });
-
       // Optional: hide dropdown if clicked outside
       window.addEventListener("click", function (event) {
         const dropdown = document.getElementById("notifDropdown");
@@ -278,6 +281,39 @@
         }
       });
     </script>
+    <script>
+      const isLoggedIn = false; // Change this dynamically in production
+
+      const loginBtn = document.getElementById("login");
+      const signupBtn = document.getElementById("signup");
+      const userBtn = document.getElementById("userBtn");
+
+      if (isLoggedIn) {
+        loginBtn.style.display = "none";
+        signupBtn.style.display = "none";
+        userBtn.style.display = "inline-block";
+      } else {
+        loginBtn.style.display = "inline-block";
+        signupBtn.style.display = "inline-block";
+        userBtn.style.display = "none";
+      }
+
+      // Redirect to login page
+      loginBtn.addEventListener("click", function () {
+        window.location.href = "login-page.html";
+      });
+
+      // Redirect to signup page
+      signupBtn.addEventListener("click", function () {
+        window.location.href = "/signup-page/index.html";
+      });
+
+      // Redirect to profile page when avatar is clicked
+      userBtn.addEventListener("click", function () {
+        window.location.href = "profile-details.html";
+      });
+    </script>
+
     <script>
       const allBtn = document.getElementById("all-btn");
       const upcomingBtn = document.getElementById("upcoming-btn");
