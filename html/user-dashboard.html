@@ -52,8 +52,9 @@
         <div class="main-header" id="main-header">
           <h1>Events</h1>
           <div class="toggle">
-            <button class="active">Upcoming</button>
-            <button>Past</button>
+            <button id="upcoming-btn" class="active">Upcoming</button>
+            <button id="past-btn">Past</button>
+            <button id="all-btn">All</button>
           </div>
         </div>
 
@@ -63,95 +64,170 @@
           <div class="events">
             <!-- Repeatable Card -->
             <div class="event-card">
-              <div class="card-left">
-                <div class="time">10:30 PM</div>
-                <h3>hello</h3>
-                <div class="meta">
-                  <div><span>📍</span> Location Missing</div>
-                  <div><span>👥</span> No guests</div>
+              <div class="event-info">
+                <div class="event-left">
+                  <div class="event-date">20 June</div>
+                  <div class="event-time">6:00 PM</div>
                 </div>
-                <div class="buttons">
-                  <button class="checkin">Check in</button>
-                  <button class="manage">Manage</button>
+                <div class="divider"></div>
+                <div class="event-right">
+                  <h3>Parish Open Lenten Recollection</h3>
+                  <div class="meta">
+                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
+                    <div><i class="fas fa-eye"></i> 1,291</div>
+                  </div>
                 </div>
               </div>
               <div class="card-image">
-                <img
-                  src="https://uploadthingy.s3.us-west-1.amazonaws.com/hxkaFur85qJKk1REwjKJNp/image.png"
-                  alt="event"
-                />
+                <div class="buttons">
+                  <button class="checkin">View Description</button>
+                </div>
               </div>
             </div>
 
             <!-- Repeatable Card -->
             <div class="event-card">
-              <div class="card-left">
-                <div class="time">10:30 PM</div>
-                <h3>hello</h3>
-                <div class="meta">
-                  <div><span>📍</span> Location Missing</div>
-                  <div><span>👥</span> No guests</div>
+              <div class="event-info">
+                <div class="event-left">
+                  <div class="event-date">20 June</div>
+                  <div class="event-time">6:00 PM</div>
                 </div>
-                <div class="buttons">
-                  <button class="checkin">Check in</button>
-                  <button class="manage">Manage</button>
+                <div class="divider"></div>
+                <div class="event-right">
+                  <h3>Parish Open Lenten Recollection</h3>
+                  <div class="meta">
+                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
+                    <div><i class="fas fa-eye"></i> 1,291</div>
+                  </div>
                 </div>
               </div>
               <div class="card-image">
-                <img
-                  src="https://uploadthingy.s3.us-west-1.amazonaws.com/hxkaFur85qJKk1REwjKJNp/image.png"
-                  alt="event"
-                />
+                <div class="buttons">
+                  <button class="checkin">View Description</button>
+                </div>
               </div>
             </div>
 
             <!-- Repeatable Card -->
             <div class="event-card">
-              <div class="card-left">
-                <div class="time">10:30 PM</div>
-                <h3>hello</h3>
-                <div class="meta">
-                  <div><span>📍</span> Location Missing</div>
-                  <div><span>👥</span> No guests</div>
+              <div class="event-info">
+                <div class="event-left">
+                  <div class="event-date">20 June</div>
+                  <div class="event-time">6:00 PM</div>
                 </div>
-                <div class="buttons">
-                  <button class="checkin">Check in</button>
-                  <button class="manage">Manage</button>
+                <div class="divider"></div>
+                <div class="event-right">
+                  <h3>Parish Open Lenten Recollection</h3>
+                  <div class="meta">
+                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
+                    <div><i class="fas fa-eye"></i> 1,291</div>
+                  </div>
                 </div>
               </div>
               <div class="card-image">
-                <img
-                  src="https://uploadthingy.s3.us-west-1.amazonaws.com/hxkaFur85qJKk1REwjKJNp/image.png"
-                  alt="event"
-                />
+                <div class="buttons">
+                  <button class="checkin">View Description</button>
+                </div>
               </div>
             </div>
 
             <!-- Repeatable Card -->
             <div class="event-card">
-              <div class="card-left">
-                <div class="time">10:30 PM</div>
-                <h3>hello</h3>
-                <div class="meta">
-                  <div><span>📍</span> Location Missing</div>
-                  <div><span>👥</span> No guests</div>
+              <div class="event-info">
+                <div class="event-left">
+                  <div class="event-date">20 June</div>
+                  <div class="event-time">6:00 PM</div>
                 </div>
-                <div class="buttons">
-                  <button class="checkin">Check in</button>
-                  <button class="manage">Manage</button>
+                <div class="divider"></div>
+                <div class="event-right">
+                  <h3>Parish Open Lenten Recollection</h3>
+                  <div class="meta">
+                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
+                    <div><i class="fas fa-eye"></i> 1,291</div>
+                  </div>
                 </div>
               </div>
               <div class="card-image">
-                <img
-                  src="https://uploadthingy.s3.us-west-1.amazonaws.com/hxkaFur85qJKk1REwjKJNp/image.png"
-                  alt="event"
-                />
+                <div class="buttons">
+                  <button class="checkin">View Description</button>
+                </div>
               </div>
             </div>
 
+            <!-- Repeatable Card -->
+            <div class="event-card">
+              <div class="event-info">
+                <div class="event-left">
+                  <div class="event-date">20 June</div>
+                  <div class="event-time">6:00 PM</div>
+                </div>
+                <div class="divider"></div>
+                <div class="event-right">
+                  <h3>Parish Open Lenten Recollection</h3>
+                  <div class="meta">
+                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
+                    <div><i class="fas fa-eye"></i> 1,291</div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-image">
+                <div class="buttons">
+                  <button class="checkin">View Description</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Repeatable Card -->
+            <div class="event-card">
+              <div class="event-info">
+                <div class="event-left">
+                  <div class="event-date">20 June</div>
+                  <div class="event-time">6:00 PM</div>
+                </div>
+                <div class="divider"></div>
+                <div class="event-right">
+                  <h3>Parish Open Lenten Recollection</h3>
+                  <div class="meta">
+                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
+                    <div><i class="fas fa-eye"></i> 1,291</div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-image">
+                <div class="buttons">
+                  <button class="checkin">View Description</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Repeatable Card -->
+            <div class="event-card">
+              <div class="event-info">
+                <div class="event-left">
+                  <div class="event-date">20 June</div>
+                  <div class="event-time">6:00 PM</div>
+                </div>
+                <div class="divider"></div>
+                <div class="event-right">
+                  <h3>Parish Open Lenten Recollection</h3>
+                  <div class="meta">
+                    <div><i class="fas fa-location-dot"></i> Side Chapel</div>
+                    <div><i class="fas fa-eye"></i> 1,291</div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-image">
+                <div class="buttons">
+                  <button class="checkin">View Description</button>
+                </div>
+              </div>
+            </div>
             <!-- Duplicate this block for more events -->
             <!-- ... -->
           </div>
+          <p id="no-events-message" style="display: none; color: rgba(255,255,255,0.6); text-align: center;">
+            There are no events to display.
+          </p>
         </div>
       </main>
     </div>
@@ -177,6 +253,93 @@
         }
       });
     </script>
+    <script>
+      const allBtn = document.getElementById("all-btn");
+      const upcomingBtn = document.getElementById("upcoming-btn");
+      const pastBtn = document.getElementById("past-btn");
+      const buttons = [allBtn, upcomingBtn, pastBtn];
+      const eventCards = document.querySelectorAll(".event-card");
+
+      function clearActive() {
+        buttons.forEach(btn => btn.classList.remove("active"));
+      }
+
+      function parseDateFromText(text) {
+        const currentYear = new Date().getFullYear();
+        const fullText = `${text} ${currentYear}`;
+        return new Date(fullText);
+      }
+
+      function filterEvents(type) {
+        const now = new Date();
+
+        eventCards.forEach(card => {
+          const timeDiv = card.querySelector(".time");
+          const eventDate = parseDateFromText(timeDiv.textContent.trim());
+
+          let show = false;
+          if (type === "all") {
+            show = true;
+          } else if (type === "upcoming") {
+            show = eventDate > now;
+          } else if (type === "past") {
+            show = eventDate < now;
+          }
+
+          card.style.display = show ? "grid" : "none";
+        });
+      }
+
+      allBtn.addEventListener("click", () => {
+        clearActive();
+        allBtn.classList.add("active");
+        filterEvents("all");
+      });
+
+      upcomingBtn.addEventListener("click", () => {
+        clearActive();
+        upcomingBtn.classList.add("active");
+        filterEvents("upcoming");
+      });
+
+      pastBtn.addEventListener("click", () => {
+        clearActive();
+        pastBtn.classList.add("active");
+        filterEvents("past");
+      });
+
+      // Set default filter to Upcoming
+      filterEvents("upcoming");
+
+      function filterEvents(type) {
+        const now = new Date();
+        const noEventsMsg = document.getElementById("no-events-message");
+
+        let anyVisible = false;
+
+        eventCards.forEach(card => {
+          const timeDiv = card.querySelector(".event-date");
+          const eventDate = parseDateFromText(timeDiv.textContent.trim());
+
+          let show = false;
+          if (type === "all") {
+            show = true;
+          } else if (type === "upcoming") {
+            show = eventDate > now;
+          } else if (type === "past") {
+            show = eventDate < now;
+          }
+
+          card.style.display = show ? "flex" : "none";
+          if (show) anyVisible = true;
+        });
+
+        // Show or hide the "no events" message
+        noEventsMsg.style.display = anyVisible ? "none" : "block";
+      }
+
+    </script>
+
 
   </body>
 </html>

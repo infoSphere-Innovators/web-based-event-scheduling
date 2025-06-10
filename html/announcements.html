@@ -7,6 +7,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     <link rel="stylesheet" href="/css/announcements.css" />
     <title>Announcement Page</title>
   </head>
@@ -59,15 +60,9 @@
         aria-labelledby="modal-title"
       >
         <div class="modal-header">
-          <button
-            class="close-button"
-            aria-label="Close modal"
-            id="modal-close"
-          >
-            &times;
-          </button>
-          <h2 id="modal-title"></h2>
-          
+
+
+          <h2 id="modal-title" ></h2>  
         </div>
         <div class="modal-section" id="modal-description"></div>
         <div class="modal-section">
@@ -79,12 +74,31 @@
           <p id="modal-notes"></p>
         </div>
         <div class="modal-footer">
-          <button class="action-button" id="modal-close-footer">Close</button>
-          <button class="action-button">Update</button>
+          <button class="action-button" id="modal-close-footer">Done</button>
         </div>
       </div>
     </div>
 
     <script src="/js/announcements.js"></script>
+    <script>
+      // Toggle the notification dropdown
+      document.getElementById("notifBtn").addEventListener("click", function () {
+        const dropdown = document.getElementById("notifDropdown");
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+      });
+
+      // Redirect to another page on avatar click
+      document.getElementById("userBtn").addEventListener("click", function () {
+        window.location.href = "profile-details.html";
+      });
+
+      // Optional: hide dropdown if clicked outside
+      window.addEventListener("click", function (event) {
+        const dropdown = document.getElementById("notifDropdown");
+        if (!event.target.closest(".notification-wrapper")) {
+          dropdown.style.display = "none";
+        }
+      });
+    </script>
   </body>
 </html>

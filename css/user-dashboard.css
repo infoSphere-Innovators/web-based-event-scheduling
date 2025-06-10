@@ -13,62 +13,49 @@ body {
   padding: 20px;
 }
 
-/* Header and Navigation Styles */
 .header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .nav-left,
 .nav-right,
 .icons {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-}
-
-nav button {
-    background: none;
-    border: none;
-    font-size: 16px;
-    padding: 8px 12px;
-    cursor: pointer;
-    font-family: 'Inter', sans-serif;
-    color: rgba(255, 255, 255, 0.6);
-    border-bottom: 2px solid transparent;
-    transition: all 0.3s ease;
-}
-
-nav button:hover {
-    color: rgba(255, 255, 255, 0.9);
-}
-
-nav button.active-tab {
-    border-bottom: 2px solid #fff;
-    color: #fff;
-}
-
-.nav-left .inactive {
-    opacity: 0.6;
-    cursor: not-allowed;
-}
-
-.notif-dropdown p {
-  font-weight: 400; /* Regular Inter */
-  font-family: 'Inter', sans-serif;
-}
-
-.icons {
   display: flex;
-  gap: 15px;
+  gap: 20px;
   align-items: center;
 }
 
-/* General button styling */
+nav button {
+  background: none;
+  border: none;
+  font-size: 16px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+}
+
+nav button:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+nav button.active-tab {
+  border-bottom: 2px solid #fff;
+  color: #fff;
+}
+
+.notif-dropdown p {
+  font-weight: 400;
+  font-family: 'Inter', sans-serif;
+}
+
 .icon-btn, .avatar {
   background: transparent;
   border: none;
@@ -76,17 +63,14 @@ nav button.active-tab {
   padding: 5px;
 }
 
-/* White icons */
 .icon-btn i, .avatar i {
   color: white;
 }
 
-/* Smaller user icon */
 .avatar i {
   font-size: 16px;
 }
 
-/* Notification dropdown */
 .notification-wrapper {
   position: relative;
   display: inline-block;
@@ -101,7 +85,7 @@ nav button.active-tab {
   color: black;
   min-width: 220px;
   padding: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   z-index: 1000;
 }
@@ -111,64 +95,52 @@ nav button.active-tab {
   font-size: 14px;
 }
 
-/* Hover effect for avatar (optional) */
 .avatar:hover {
   transform: scale(1.05);
   transition: transform 0.2s ease;
 }
 
-
-
-.avatar:hover {
-    transform: scale(1.05);
-}
-
 #current-time {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 0.9rem;
 }
 
-/* Responsive Navigation */
 @media screen and (max-width: 768px) {
-    .header {
-        padding: 15px;
-    }
+  .header {
+    padding: 15px;
+  }
 
-    nav button {
-        font-size: 14px;
-        padding: 6px 8px;
-    }
+  nav button {
+    font-size: 14px;
+    padding: 6px 8px;
+  }
 
-    .nav-left,
-    .nav-right,
-    .icons {
-        gap: 12px;
-    }
+  .nav-left,
+  .nav-right,
+  .icons {
+    gap: 12px;
+  }
 
-    #current-time {
-        display: none;
-    }
+  #current-time {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 480px) {
-    .nav-left {
-        position: relative;
-    }
+  .nav-left button:not(.active-tab) {
+    display: none;
+  }
 
-    .nav-left button:not(.active-tab) {
-        display: none;
-    }
+  .icons {
+    gap: 8px;
+  }
 
-    .icons {
-        gap: 8px;
-    }
-
-    .avatar {
-        width: 28px;
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
-    }
+  .avatar {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    font-size: 12px;
+  }
 }
 
 .main {
@@ -208,38 +180,7 @@ nav button.active-tab {
 .content {
   display: flex;
   gap: 32px;
-}
-
-.timeline {
-  display: flex;
   flex-direction: column;
-  align-items: center;
-  color: rgba(255, 255, 255, 0.6);
-  width: 80px;
-}
-
-.timeline .date,
-.timeline .day {
-  font-size: 14px;
-}
-
-.line {
-  height: 100px;
-  width: 2px;
-  background: rgba(255, 255, 255, 0.2);
-  margin-top: 10px;
-  position: relative;
-}
-
-.dot {
-  width: 8px;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.6);
-  border-radius: 50%;
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
 }
 
 .events {
@@ -296,14 +237,57 @@ nav button.active-tab {
   color: black;
 }
 
-.manage {
-  background: rgba(255, 255, 255, 0.1);
+.card-image {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 140px;
+}
+
+.card-image .buttons {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.event-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  flex: 1;
+}
+
+.event-left {
+  min-width: 80px;
+  text-align: left;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 14px;
+}
+
+.event-date {
+  margin-bottom: 4px;
+}
+
+.divider {
+  width: 1px;
+  background: rgba(255, 255, 255, 0.3);
+  height: 100%;
+}
+
+.event-right {
+  flex: 1;
+}
+
+.event-right h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
   color: white;
 }
 
-.card-image img {
-  width: 64px;
-  height: 64px;
-  object-fit: cover;
-  border-radius: 12px;
+.event-right .meta {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
 }
