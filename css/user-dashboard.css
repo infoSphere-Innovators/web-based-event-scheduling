@@ -291,3 +291,27 @@ nav button.active-tab {
   font-size: 13px;
   color: rgba(255, 255, 255, 0.6);
 }
+
+/* Shared button styles */
+.btn {
+  padding: 8px 16px;
+  border: 1px solid white;
+  background: transparent;
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 10px;
+}
+
+/* Active button (Login) */
+.btn.active {
+  background-color: white;
+  color: #222; /* Dark text for contrast */
+}
+
+/* Optional hover effects */
+.btn:hover {
+  opacity: 0.9;
+}

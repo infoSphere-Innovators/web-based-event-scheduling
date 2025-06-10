@@ -13,8 +13,37 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <link rel="stylesheet" href="/css/user-dashboard.css" />
+<<<<<<< HEAD
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+=======
+    <style>
+      /* Shared button styles */
+      .btn {
+        padding: 8px 16px;
+        border: 1px solid white;
+        background: transparent;
+        color: white;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-left: 10px;
+      }
+
+      /* Active button (Login) */
+      .btn.active {
+        background-color: white;
+        color: #222; /* Dark text for contrast */
+      }
+
+      /* Optional hover effects */
+      .btn:hover {
+        opacity: 0.9;
+      }
+
+    </style>
+>>>>>>> 5eec8265e17fc8f11f02b5b203d08141c15a2f38
   </head>
   <body>
     <div class="app">
@@ -41,9 +70,16 @@
               </div>
             </div>
 
-            <button class="avatar" id="userBtn">
-              <i class="fas fa-user"></i>
-            </button>
+            <div class="auth-buttons">
+              <!-- Shown only if NOT logged in -->
+              <button id="login" class="btn active">Login</button>
+              <button id="signup" class="btn">Signup</button>
+
+              <!-- Shown only if logged in -->
+              <button class="avatar" id="userBtn" style="display: none;">
+                <i class="fas fa-user"></i>
+              </button>
+            </div>
           </div>
         </div>
       </header>
@@ -80,6 +116,146 @@
       </main>
     </div>
 
+<<<<<<< HEAD
     <script type="module" src="/js/user-dashboard.js"></script>
+=======
+    <script src="/js/user-dashboard.js"></script>
+    <script>
+      // Toggle the notification dropdown
+      document.getElementById("notifBtn").addEventListener("click", function () {
+        const dropdown = document.getElementById("notifDropdown");
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+      });
+
+      // Optional: hide dropdown if clicked outside
+      window.addEventListener("click", function (event) {
+        const dropdown = document.getElementById("notifDropdown");
+        if (!event.target.closest(".notification-wrapper")) {
+          dropdown.style.display = "none";
+        }
+      });
+    </script>
+    <script>
+      const isLoggedIn = false; // Change this dynamically in production
+
+      const loginBtn = document.getElementById("login");
+      const signupBtn = document.getElementById("signup");
+      const userBtn = document.getElementById("userBtn");
+
+      if (isLoggedIn) {
+        loginBtn.style.display = "none";
+        signupBtn.style.display = "none";
+        userBtn.style.display = "inline-block";
+      } else {
+        loginBtn.style.display = "inline-block";
+        signupBtn.style.display = "inline-block";
+        userBtn.style.display = "none";
+      }
+
+      // Redirect to login page
+      loginBtn.addEventListener("click", function () {
+        window.location.href = "login-page.html";
+      });
+
+      // Redirect to signup page
+      signupBtn.addEventListener("click", function () {
+        window.location.href = "/signup-page/index.html";
+      });
+
+      // Redirect to profile page when avatar is clicked
+      userBtn.addEventListener("click", function () {
+        window.location.href = "profile-details.html";
+      });
+    </script>
+
+    <script>
+      const allBtn = document.getElementById("all-btn");
+      const upcomingBtn = document.getElementById("upcoming-btn");
+      const pastBtn = document.getElementById("past-btn");
+      const buttons = [allBtn, upcomingBtn, pastBtn];
+      const eventCards = document.querySelectorAll(".event-card");
+
+      function clearActive() {
+        buttons.forEach(btn => btn.classList.remove("active"));
+      }
+
+      function parseDateFromText(text) {
+        const currentYear = new Date().getFullYear();
+        const fullText = `${text} ${currentYear}`;
+        return new Date(fullText);
+      }
+
+      function filterEvents(type) {
+        const now = new Date();
+
+        eventCards.forEach(card => {
+          const timeDiv = card.querySelector(".time");
+          const eventDate = parseDateFromText(timeDiv.textContent.trim());
+
+          let show = false;
+          if (type === "all") {
+            show = true;
+          } else if (type === "upcoming") {
+            show = eventDate > now;
+          } else if (type === "past") {
+            show = eventDate < now;
+          }
+
+          card.style.display = show ? "grid" : "none";
+        });
+      }
+
+      allBtn.addEventListener("click", () => {
+        clearActive();
+        allBtn.classList.add("active");
+        filterEvents("all");
+      });
+
+      upcomingBtn.addEventListener("click", () => {
+        clearActive();
+        upcomingBtn.classList.add("active");
+        filterEvents("upcoming");
+      });
+
+      pastBtn.addEventListener("click", () => {
+        clearActive();
+        pastBtn.classList.add("active");
+        filterEvents("past");
+      });
+
+      // Set default filter to Upcoming
+      filterEvents("upcoming");
+
+      function filterEvents(type) {
+        const now = new Date();
+        const noEventsMsg = document.getElementById("no-events-message");
+
+        let anyVisible = false;
+
+        eventCards.forEach(card => {
+          const timeDiv = card.querySelector(".event-date");
+          const eventDate = parseDateFromText(timeDiv.textContent.trim());
+
+          let show = false;
+          if (type === "all") {
+            show = true;
+          } else if (type === "upcoming") {
+            show = eventDate > now;
+          } else if (type === "past") {
+            show = eventDate < now;
+          }
+
+          card.style.display = show ? "flex" : "none";
+          if (show) anyVisible = true;
+        });
+
+        // Show or hide the "no events" message
+        noEventsMsg.style.display = anyVisible ? "none" : "block";
+      }
+
+    </script>
+
+
+>>>>>>> 5eec8265e17fc8f11f02b5b203d08141c15a2f38
   </body>
 </html>
