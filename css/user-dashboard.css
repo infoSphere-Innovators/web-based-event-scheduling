@@ -13,7 +13,6 @@ body {
     padding: 20px;
 }
 
-<<<<<<< HEAD
 /* Header Styles */
 .header {
     display: flex;
@@ -24,27 +23,6 @@ body {
     margin: 0 auto;
     position: relative;
     width: 100%;
-=======
-<<<<<<< HEAD
-.header {
-  display: flex;
-  justify-content: space-between;
-  padding: 20px;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-=======
-/* Header Styles */
-.header {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
->>>>>>> 59913e71ac1172dad5a2f089fcaaca7e76ae7c54
->>>>>>> c960dfe9ccdc05f17963446034bcac7ee0fed2b0
 }
 
 /* Navigation Styles */
@@ -158,7 +136,6 @@ nav button.active-tab {
     font-size: 0.9rem;
 }
 
-<<<<<<< HEAD
 /* Auth Buttons */
 .btn {
     padding: 8px 16px;
@@ -183,9 +160,6 @@ nav button.active-tab {
 }
 
 /* Responsive Styles */
-=======
-<<<<<<< HEAD
->>>>>>> c960dfe9ccdc05f17963446034bcac7ee0fed2b0
 @media screen and (max-width: 768px) {
     .header {
         padding: 15px;
@@ -209,68 +183,6 @@ nav button.active-tab {
         border-radius: 0 0 8px 8px;
     }
 
-<<<<<<< HEAD
-=======
-  #current-time {
-    display: none;
-=======
-/* Hamburger Menu - Place this before media queries */
-.hamburger-menu {
-    display: none; /* Hidden by default on desktop */
-    flex-direction: column;
-    cursor: pointer;
-    z-index: 1001;
-    padding: 8px;
-    margin-right: 15px;
-}
-
-.bar {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    margin: 2px 0;
-    transition: 0.4s;
-}
-
-.hamburger-menu.active .bar:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
-}
-
-.hamburger-menu.active .bar:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger-menu.active .bar:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
-}
-
-/* Remove all other media queries and keep only these */
-@media screen and (max-width: 768px) {
-    .header {
-        padding: 15px;
-        position: relative;
-    }
-
-    .hamburger-menu {
-        display: flex; /* Show on mobile */
-    }
-
-    .nav-left {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        width: 100%;
-        flex-direction: column;
-        background: linear-gradient(to bottom, #0a0b1e, #464f97);
-        padding: 0;
-        gap: 0;
-        display: none;
-        z-index: 1000;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        border-radius: 0 0 8px 8px;
-    }
-
->>>>>>> c960dfe9ccdc05f17963446034bcac7ee0fed2b0
     .nav-left.show {
         display: flex;
     }
@@ -293,7 +205,6 @@ nav button.active-tab {
     #current-time {
         display: none;
     }
-<<<<<<< HEAD
 
     .auth-buttons {
         display: flex;
@@ -311,127 +222,11 @@ nav button.active-tab {
     .header {
         padding: 10px;
     }
-=======
-}
-
-@media screen and (max-width: 480px) {
-    .header {
-        padding: 10px;
-    }
-
-    .icons {
-        gap: 12px;
-    }
-
-    .auth-buttons {
-        gap: 8px;
-    }
-
-    .auth-buttons .btn {
-        padding: 5px 10px;
-        font-size: 13px;
-    }
-}
-
-/* Responsive Styles */
-@media screen and (max-width: 768px) {
-  .header {
-    padding: 15px;
-    position: relative;
-  }
-
-  .hamburger-menu {
-    display: flex;
-  }
-
-  .nav-left {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background: linear-gradient(to bottom, #0a0b1e, #464f97);
-    flex-direction: column;
-    padding: 0;
-    gap: 0;
-    transform: translateY(-100%);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease-in-out;
-    z-index: 999;
-  }
-
-  .nav-left.active {
-    transform: translateY(0);
-    opacity: 1;
-    visibility: visible;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-
-  .nav-left button {
-    width: 100%;
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  .nav-left button:last-child {
-    border-bottom: none;
-  }
-
-  .nav-right {
-    margin-left: auto;
-  }
-
-  .main-header {
-    flex-direction: column;
-    align-items: stretch;
-    gap: 15px;
-  }
-
-  .toggle {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .toggle button {
-    flex: 1;
-  }
-
-  .event-card {
-    flex-direction: column;
-  }
-
-  .event-info {
-    flex-direction: row;
-  }
-
-  .card-image {
-    width: 100%;
-  }
-
-  .buttons {
-    justify-content: flex-start;
-  }
-
-  .modal-content {
-    width: 95%;
-    margin: 5% auto;
->>>>>>> 59913e71ac1172dad5a2f089fcaaca7e76ae7c54
-  }
-}
-
-@media screen and (max-width: 480px) {
-<<<<<<< HEAD
-  .nav-left button:not(.active-tab) {
-    display: none;
-  }
->>>>>>> c960dfe9ccdc05f17963446034bcac7ee0fed2b0
 
     .icons {
         gap: 10px;
     }
 
-<<<<<<< HEAD
     .auth-buttons {
         gap: 5px;
     }
@@ -450,181 +245,6 @@ nav button.active-tab {
         font-size: 14px;
         padding: 12px 15px;
     }
-=======
-  .avatar {
-    width: 28px;
-    height: 28px;
-    line-height: 28px;
-    font-size: 12px;
-  }
-=======
-  .main {
-    padding: 12px;
-  }
-
-  .main-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .main-header h1 {
-    font-size: 24px;
-  }
-
-  .toggle {
-    width: 100%;
-  }
-
-  .toggle button {
-    flex: 1;
-    white-space: nowrap;
-    padding: 8px 12px;
-    font-size: 13px;
-  }
-
-  .event-card {
-    padding: 12px;
-  }
-
-  .card-left h3 {
-    font-size: 16px;
-  }
-
-  .meta {
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .buttons button {
-    min-width: calc(50% - 4px);
-    padding: 8px;
-    font-size: 13px;
-  }
-
-  .event-date {
-    font-size: 13px;
-  }
-
-  .event-right h3 {
-    font-size: 15px;
-  }
-
-  .event-right .meta {
-    font-size: 12px;
-  }
-
-  /* Modal mobile adjustments */
-  .modal-content {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 0;
-    overflow-y: auto;
-  }
-
-  .modal-info p {
-    font-size: 13px;
-  }
-
-  .close {
-    right: 12px;
-    top: 12px;
-  }
-
-  .modal-description p {
-    font-size: 13px;
-  }
-
-  .event-info {
-    flex-direction: column;
-  }
-
-  .event-left {
-    margin-bottom: 10px;
-  }
-
-  .divider {
-    display: none;
-  }
-
-  .meta {
-    flex-direction: column;
-    gap: 5px;
-  }
-
-  .buttons button {
-    width: 100%;
-    margin: 5px 0;
-  }
-
-  .notif-dropdown {
-    right: -50px;
-    min-width: 280px;
-  }
-
-  .modal-content {
-    padding: 15px;
-  }
-
-  #modal-title {
-    font-size: 20px;
-  }
-
-  .modal-info p {
-    font-size: 14px;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .main-header h1 {
-    font-size: 20px;
-  }
-
-  .toggle button {
-    padding: 6px 8px;
-    font-size: 12px;
-  }
-
-  .buttons button {
-    min-width: 100%;
-  }
-
-  .time {
-    font-size: 12px;
-  }
-
-  .card-left h3 {
-    font-size: 15px;
-  }
-
-  .meta {
-    font-size: 12px;
-  }
-
-  /* Adjust modal content for very small screens */
-  .modal-content {
-    padding: 16px;
-  }
-
-  #modal-title {
-    font-size: 18px;
-  }
-
-  .modal-info {
-    padding: 12px;
-  }
-}
-
-/* Handle landscape orientation */
-@media screen and (max-height: 600px) {
-  .modal-content {
-    margin: 0;
-    max-height: 100vh;
-    overflow-y: auto;
-  }
->>>>>>> 59913e71ac1172dad5a2f089fcaaca7e76ae7c54
->>>>>>> c960dfe9ccdc05f17963446034bcac7ee0fed2b0
 }
 
 /* Main Content Styles */
@@ -771,45 +391,10 @@ nav button.active-tab {
 }
 
 .event-right .meta {
-<<<<<<< HEAD
     display: flex;
     gap: 16px;
     font-size: 13px;
     color: rgba(255, 255, 255, 0.6);
-=======
-  display: flex;
-  gap: 16px;
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.6);
-}
-
-<<<<<<< HEAD
-=======
-<<<<<<< Updated upstream:html/css/user-dashboard.css
->>>>>>> 59913e71ac1172dad5a2f089fcaaca7e76ae7c54
-/* Shared button styles */
-.btn {
-  padding: 8px 16px;
-  border: 1px solid white;
-  background: transparent;
-  color: white;
-  border-radius: 6px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  margin-left: 10px;
-}
-
-/* Active button (Login) */
-.btn.active {
-  background-color: white;
-  color: #222; /* Dark text for contrast */
-}
-
-/* Optional hover effects */
-.btn:hover {
-  opacity: 0.9;
->>>>>>> c960dfe9ccdc05f17963446034bcac7ee0fed2b0
 }
 
 /* Modal Styles */
@@ -926,7 +511,6 @@ nav button.active-tab {
     line-height: 1.6;
     font-weight: normal;
 }
-<<<<<<< HEAD
 
 /* Handle landscape orientation */
 @media screen and (max-height: 600px) {
@@ -936,42 +520,3 @@ nav button.active-tab {
     overflow-y: auto;
   }
 }
-=======
-<<<<<<< HEAD
-=======
-<<<<<<<< HEAD:html/css/user-dashboard.css
-=======
->>>>>>> Stashed changes:css/user-dashboard.css
-========
-
-/* Hamburger Menu */
-.hamburger-menu {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    z-index: 1001;
-    padding: 8px;
-}
-
-.bar {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    margin: 2px 0;
-    transition: 0.4s;
-}
-
-.hamburger-menu.active .bar:nth-child(1) {
-    transform: rotate(-45deg) translate(-5px, 6px);
-}
-
-.hamburger-menu.active .bar:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger-menu.active .bar:nth-child(3) {
-    transform: rotate(45deg) translate(-5px, -6px);
-}
->>>>>>>> 59913e71ac1172dad5a2f089fcaaca7e76ae7c54:css/user-dashboard.css
->>>>>>> 59913e71ac1172dad5a2f089fcaaca7e76ae7c54
->>>>>>> c960dfe9ccdc05f17963446034bcac7ee0fed2b0
