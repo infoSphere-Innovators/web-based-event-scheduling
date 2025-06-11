@@ -134,36 +134,61 @@
         }
       });
     </script>
-    <script>
-      const isLoggedIn = false; // Change this dynamically in production
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+        signInWithEmailAndPassword
+      } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 
+      const firebaseConfig = {
+        apiKey: "AIzaSyC4YDw8dhp1qsJ7BhlNUSNHq3BxYzg6GDI",
+        authDomain: "web-based-event-scheduling.firebaseapp.com",
+        projectId: "web-based-event-scheduling",
+        storageBucket: "web-based-event-scheduling.appspot.com",
+        messagingSenderId: "925435406930",
+        appId: "1:925435406930:web:48c759977c266a2cedcd8b"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+
+      // Button elements
       const loginBtn = document.getElementById("login");
       const signupBtn = document.getElementById("signup");
       const userBtn = document.getElementById("userBtn");
 
-      if (isLoggedIn) {
-        loginBtn.style.display = "none";
-        signupBtn.style.display = "none";
-        userBtn.style.display = "inline-block";
-      } else {
-        loginBtn.style.display = "inline-block";
-        signupBtn.style.display = "inline-block";
-        userBtn.style.display = "none";
-      }
+      // Watch auth state
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          // Logged in
+          loginBtn.style.display = "none";
+          signupBtn.style.display = "none";
+          userBtn.style.display = "inline-block";
+          userBtn.dataset.uid = user.uid;
+        } else {
+          // Logged out
+          loginBtn.style.display = "inline-block";
+          signupBtn.style.display = "inline-block";
+          userBtn.style.display = "none";
+        }
+      });
 
-      // Redirect to login page
-      loginBtn.addEventListener("click", function () {
+      // Redirects
+      loginBtn.addEventListener("click", () => {
         window.location.href = "login-page.html";
       });
 
-      // Redirect to signup page
-      signupBtn.addEventListener("click", function () {
+      signupBtn.addEventListener("click", () => {
         window.location.href = "/html/signup-page/signup-page.html";
       });
 
-      // Redirect to profile page when avatar is clicked
-      userBtn.addEventListener("click", function () {
-        window.location.href = "profile-details.html";
+      userBtn.addEventListener("click", () => {
+        const uid = userBtn.dataset.uid;
+        // Redirect to profile page with user UID
+        window.location.href = `profile-details.html?uid=${uid}`;
       });
     </script>
 
