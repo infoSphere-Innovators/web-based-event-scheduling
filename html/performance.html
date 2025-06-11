@@ -2,148 +2,88 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>School Dashboard</title>
-  <link rel="stylesheet" href="/css/performance.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="/css/announcements.css" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="container">
-    
-    <!-- Clock -->
-    <div class="clock">
-      <svg xmlns="http://www.w3.org/2000/svg" class="icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-      </svg>
-      <span id="clock">--:-- --</span>
+    <!-- Top Stats -->
+    <div class="top-stats">
+      <div class="clock">
+        <span>🕒</span>
+        <span id="current-time">--:--</span>
+      </div>
     </div>
 
     <!-- Stat Cards -->
-    <div class="stats">
-      <div class="card">
-        <div class="card-icon">👩‍🎓</div>
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="icon">👥</div>
         <p class="label">Total Students</p>
-        <p class="value">550</p>
+        <p class="number">550</p>
       </div>
-      <div class="card">
-        <div class="card-icon">👨‍🏫</div>
+      <div class="stat-card">
+        <div class="icon">👨‍🏫</div>
         <p class="label">Total Teachers</p>
-        <p class="value">20</p>
+        <p class="number">20</p>
       </div>
     </div>
 
-    <!-- Attendance Chart -->
-    <div class="section">
-      <h2>Attendance Overview</h2>
-      <canvas id="attendanceChart" height="200"></canvas>
-    </div>
-
-    <!-- Calendar -->
-    <div class="section">
-      <h2>Calendar</h2>
-      <div class="calendar-header" id="calendarTitle"></div>
-      <div class="calendar-grid calendar-weekdays">
-        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
+    <div class="main-grid">
+      <!-- Attendance Chart -->
+      <div class="attendance-card">
+        <h2>Attendance Overview</h2>
+        <div class="chart-header">
+          <select id="time-range">
+            <option>Last 6 months</option>
+            <option>Last year</option>
+            <option>Last 3 months</option>
+          </select>
+          <div class="average">
+            <span class="dot"></span>
+            <span id="average-value">370.5</span>
+          </div>
+        </div>
+        <canvas id="attendanceChart"></canvas>
       </div>
-      <div class="calendar-grid" id="calendarDays"></div>
-    </div>
 
-    <!-- Notices -->
-    <div class="section">
-      <h2>Notice</h2>
-      <div class="notices">
-        <div class="notice-item">
-          <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=1000&q=80" alt="Notice" />
-          <div>
-            <h3>Upcoming Examination</h3>
-            <p>25 Sep 2021</p>
-          </div>
-        </div>
-        <div class="notice-item">
-          <img src="https://images.unsplash.com/photo-1546410531-bb4caa6b424d?auto=format&fit=crop&w=1000&q=80" alt="Notice" />
-          <div>
-            <h3>Off Day</h3>
-            <p>30 Sep 2021</p>
-          </div>
-        </div>
-        <div class="notice-item">
-          <img src="https://images.unsplash.com/photo-1546519638-68e109498ffc?auto=format&fit=crop&w=1000&q=80" alt="Notice" />
-          <div>
-            <h3>Basketball Match</h3>
-            <p>25 Sep 2021</p>
-          </div>
+      <!-- Gallery -->
+      <div class="gallery-card">
+        <h2>Gallery</h2>
+        <div class="gallery-grid">
+          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=400" /></div>
+          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=400" /></div>
+          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=400" /></div>
+          <div class="gallery-item"><img src="https://images.unsplash.com/photo-1569429593410-b498b3fb3387?w=400" /></div>
         </div>
       </div>
-    </div>
 
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Calendar -->
+        <div class="calendar-card">
+          <h2>Calendar</h2>
+          <div class="calendar-header">
+            <button id="prev-btn">&lt;</button>
+            <h3 id="month-label">September 2021</h3>
+            <button id="next-btn">&gt;</button>
+          </div>
+          <div class="day-labels"></div>
+          <div class="date-grid"></div>
+          <div id="event-display"></div>
+        </div>
+
+        <!-- Notices -->
+        <div class="notice-card">
+          <h2>Notice</h2>
+          <div id="notice-container"></div>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <script>
-    // Clock
-    function updateClock() {
-      const now = new Date();
-      const hrs = now.getHours();
-      const mins = now.getMinutes().toString().padStart(2, '0');
-      const ampm = hrs >= 12 ? 'PM' : 'AM';
-      const h = ((hrs + 11) % 12 + 1);
-      document.getElementById('clock').textContent = `${h}:${mins} ${ampm}`;
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    // Chart
-    const ctx = document.getElementById('attendanceChart').getContext('2d');
-    new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-        datasets: [{
-          label: 'Attendance',
-          data: [250, 450, 380, 420, 350, 370],
-          fill: true,
-          backgroundColor: 'rgba(136, 132, 216, 0.2)',
-          borderColor: '#8884d8',
-          tension: 0.4,
-          pointRadius: 5,
-          borderWidth: 3
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false }, tooltip: { mode: 'index', intersect: false } },
-        scales: {
-          x: { grid: { display: false } },
-          y: { min: 0, max: 550 }
-        }
-      }
-    });
-
-    // Calendar
-    function generateCalendar() {
-      const calendarTitle = document.getElementById("calendarTitle");
-      const calendarDays = document.getElementById("calendarDays");
-
-      const now = new Date();
-      const year = now.getFullYear();
-      const month = now.getMonth();
-      const monthName = now.toLocaleString("default", { month: "long" });
-
-      calendarTitle.textContent = `${monthName} ${year}`;
-      const firstDay = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-      calendarDays.innerHTML = "";
-      for (let i = 0; i < firstDay; i++) {
-        calendarDays.innerHTML += "<div></div>";
-      }
-      for (let i = 1; i <= daysInMonth; i++) {
-        const day = document.createElement("div");
-        day.textContent = i;
-        day.className = "calendar-day";
-        calendarDays.appendChild(day);
-      }
-    }
-    generateCalendar();
-  </script>
+  <script src="/js/announcements.js"></script>
 </body>
 </html>
