@@ -261,6 +261,35 @@ document.addEventListener("DOMContentLoaded", () => {
             navLeft.classList.remove('show');
         }
     });
+
+    // Add this inside your DOMContentLoaded event listener
+    function updateAuthUI(isLoggedIn) {
+        const loginBtn = document.getElementById('login');
+        const signupBtn = document.getElementById('signup');
+        const userBtn = document.getElementById('userBtn');
+        const authButtons = document.querySelector('.auth-buttons');
+
+        if (isLoggedIn) {
+            // Hide login/signup buttons
+            loginBtn.style.display = 'none';
+            signupBtn.style.display = 'none';
+            // Show avatar
+            userBtn.style.display = 'flex';
+            authButtons.classList.add('logged-in');
+        } else {
+            // Show login/signup buttons
+            loginBtn.style.display = 'inline-block';
+            signupBtn.style.display = 'inline-block';
+            // Hide avatar
+            userBtn.style.display = 'none';
+            authButtons.classList.remove('logged-in');
+        }
+    }
+
+    // Add this to check login state when page loads
+    firebase.auth().onAuthStateChanged((user) => {
+        updateAuthUI(!!user);
+    });
 });
 
 // Global function for event description
