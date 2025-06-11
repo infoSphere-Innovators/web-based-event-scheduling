@@ -315,3 +315,118 @@ nav button.active-tab {
 .btn:hover {
   opacity: 0.9;
 }
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.modal.show {
+    opacity: 1;
+}
+
+.modal-content {
+    background: linear-gradient(145deg, #1a1b3f, #2a2f6a);
+    margin: 10% auto;
+    padding: 30px;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 28px;  /* Increased from 22px */
+    position: relative;
+    color: white;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4); /* Enhanced shadow for depth */
+    transform: translateY(-20px);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+}
+
+.modal.show .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.close:hover {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    transform: rotate(90deg);
+}
+
+#modal-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: white;
+    padding-right: 40px;
+}
+
+.modal-info {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;  /* Increased from 12px */
+    padding: 20px;
+    margin: 20px 0;
+}
+
+.modal-info p {
+    margin: 12px 0;
+    color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.modal-info i {
+    width: 20px;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.modal-description {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-description h3 {
+    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.modal-description h3 i {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.modal-description p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    font-weight: normal;
+}
