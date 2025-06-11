@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    min-height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(
+        45deg,
+        #F0E68C 0%,
+        #c0b390 50%,
+        #E8A900 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.container {
+    text-align: center;
+    padding: 2rem;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    position: relative;
+}
+
+.thank-you-screen {
+    animation: fadeIn 1s ease-in-out forwards;
+    opacity: 0;
+}
+
+.thank-you-title {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    animation: popIn 0.6s ease-out forwards;
+}
+
+/* Delay for text below the title */
+.thank-you-message,
+.small-note {
+    opacity: 0;
+    animation: fadeTextIn 1s ease-out forwards;
+}
+
+.thank-you-message {
+    animation-delay: 0.8s;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.small-note {
+    animation-delay: 1.6s;
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.go-button {
+    background-color: white;
+    color: #333;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+.bottom-content {
+    position: absolute;
+    bottom: 50px; /* 50px from bottom */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    padding: 0 1rem;
+}
+
+/* Shared fade-in animation with 3s delay */
+.bottom-content .small-note,
+.bottom-content .go-button {
+    opacity: 0;
+    animation: fadeTextIn 1s ease-out forwards;
+    animation-delay: 3s;
+}
+
+.small-note {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 1rem;
+}
+
+.go-button {
+    background-color: white;
+    color: #333;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 2rem;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.3s ease;
+}
+
+.go-button:hover {
+    background-color: #f0f0f0;
+}
+
+/* Fade-in animation for the screen container */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Pop-in animation for the title */
+@keyframes popIn {
+    0% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Fade-in for text blocks */
+@keyframes fadeTextIn {
+    to {
+        opacity: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .thank-you-title {
+        font-size: 2rem;
+    }
+    .thank-you-message {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .thank-you-title {
+        font-size: 1.75rem;
+    }
+
+    .thank-you-message,
+    .small-note {
+        font-size: 0.9rem;
+    }
+
+    .go-button {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
