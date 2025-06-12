@@ -545,3 +545,35 @@ nav button.active-tab {
         font-size: 1.1rem;
     }
 }
+
+/* Fade-in animation for the whole page */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Fade-in-up animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply to body */
+body {
+  animation: fadeIn 1s ease-in forwards;
+}
+
+/* Apply to calendar container */
+.calendar-container {
+  animation: fadeInUp 1.2s ease forwards;
+}

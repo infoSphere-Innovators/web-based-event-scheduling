@@ -484,3 +484,51 @@ padding-top: 1rem;
         font-size: 0.9rem;
     }
 }
+
+.announcement-item {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.announcement-item:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.announcement-item:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.announcement-item:nth-child(3) {
+  animation-delay: 0.6s;
+}
+/* and so on if more */
+
+/* Fade-in animation for body */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+body {
+  animation: fadeIn 1s ease-in forwards;
+}
+
+/* Fade-in-up animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply fade-in-up to announcement container */
+.calendar-container {
+  animation: fadeInUp 1.5s ease forwards;
+}

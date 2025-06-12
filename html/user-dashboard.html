@@ -13,6 +13,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <link rel="stylesheet" href="/css/user-dashboard.css" />
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <!-- All styles moved to user-dashboard.css -->
@@ -293,5 +294,25 @@
       // In createEventCard function, update the button HTML:
       // <button class="checkin" onclick="viewEventDescription('${event.id}')">View Description</button>
     </script>
+    <script>
+      function applyStaggeredFadeIn() {
+        const cards = document.querySelectorAll('.event-card');
+        cards.forEach((card, index) => {
+          card.style.animation = `fadeInUp 0.6s ease forwards`;
+          card.style.animationDelay = `${index * 0.1}s`;
+        });
+      }
+
+      // Call this after filtering events
+      const originalFilterEvents = filterEvents;
+      filterEvents = function(type) {
+        originalFilterEvents(type);
+        applyStaggeredFadeIn();
+      };
+
+      // Initial call to apply animation
+      applyStaggeredFadeIn();
+    </script>
+
   </body>
 </html>

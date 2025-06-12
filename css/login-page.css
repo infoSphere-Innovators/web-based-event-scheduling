@@ -10,6 +10,7 @@ body {
     background: linear-gradient(180deg, #006400 0%, #2F4F4F 100%);
     display: flex;
     flex-direction: column;
+    justify-content: center;
 }
 
 .container {
@@ -48,9 +49,10 @@ body {
     padding: 3rem 4.5rem;
     border-radius: 20px;
     width: 100%;
-    max-width: 600px; /* Increased from 500px */
+    max-width: 480px; /* Adjusted for better mobile scaling */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
+    margin: 0 auto;
 }
 
 .sign-in-card h2 {
@@ -75,11 +77,11 @@ body {
 }
 
 .form-group input {
-    width: 350px;
-    padding: 1.2rem 1.5rem; /* Increased horizontal padding */
+    width: 100%; /* Full width inside container */
+    padding: 1.2rem 1.5rem;
     border: 2px solid #eee;
     border-radius: 12px;
-    font-size: 14px;
+    font-size: 1rem;
     background: rgba(255, 255, 255, 0.9);
     transition: all 0.3s ease;
 }
@@ -114,7 +116,7 @@ body {
     box-shadow: 0 5px 15px rgba(0, 100, 0, 0.2);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
     .container {
         gap: 4rem;
         padding: 2rem;

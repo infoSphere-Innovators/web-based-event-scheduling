@@ -7,7 +7,7 @@
 }
 
 body {
-    background: linear-gradient(to bottom, #957b39 10%, #58422b 150%);
+    background: linear-gradient(to bottom, #957b39, #58422b);
     color: white;
     min-height: 100vh;
     padding: 20px;
@@ -560,4 +560,35 @@ nav button.active-tab {
     max-height: 100vh;
     overflow-y: auto;
   }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+body {
+  animation: fadeIn 1s ease-in forwards;
+}
+
+.header,
+.main-header,
+.toggle,
+.events .event-card {
+  animation: fadeInUp 1s ease forwards;
 }
