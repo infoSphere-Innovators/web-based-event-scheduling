@@ -19,7 +19,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
 
-// Auto-set zone & chapel based on transparochial
+// Handle transparochial toggle
 document.getElementById("trasparochial").addEventListener("change", function () {
   const transparochial = this.value;
   const zone = document.getElementById("zone");
@@ -34,10 +34,82 @@ document.getElementById("trasparochial").addEventListener("change", function () 
     zone.disabled = false;
     chapel.disabled = false;
     zone.value = "";
-    chapel.value = "";
+    chapel.innerHTML = '<option value="" disabled selected>Select...</option>';
   }
 });
 
+// Zone-to-Chapel map
+const zoneChapelMap = {
+  "Zone 1": [
+    "St. Peter Chapel",
+    "St. Anne Chapel",
+    "Sistine Chapel",
+    "Holy Spirit Chapel",
+    "Our Lady of Sorrows Chapel"
+  ],
+  "Zone 2": [
+    "San Lorenzo Chapel",
+    "St. Jude Chapel",
+    "Divine Mercy Chapel",
+    "Immaculate Conception Chapel",
+    "St. Benedict Chapel"
+  ],
+  "Zone 3": [
+    "Sta. Maria Chapel",
+    "St. Joseph Chapel",
+    "Christ the King Chapel",
+    "San Sebastian Chapel",
+    "Our Lady of Mt. Carmel Chapel"
+  ],
+  "Zone 4": [
+    "St. Michael Chapel",
+    "St. Augustine Chapel",
+    "Mother of Perpetual Help Chapel",
+    "Sacred Heart Chapel",
+    "San Antonio Chapel"
+  ],
+  "Zone 5": [
+    "Holy Cross Chapel",
+    "St. Therese Chapel",
+    "St. John the Baptist Chapel",
+    "San Roque Chapel",
+    "Our Lady of Guadalupe Chapel"
+  ],
+  "Zone 6": [
+    "St. Dominic Chapel",
+    "St. Paul Chapel",
+    "St. Clare Chapel",
+    "Our Lady of Fatima Chapel",
+    "St. Ignatius Chapel"
+  ],
+  "Zone 7": [
+    "St. Francis Chapel",
+    "St. Andrew Chapel",
+    "St. Cecilia Chapel",
+    "St. Martin Chapel",
+    "St. Matthew Chapel"
+  ]
+};
+
+// Update chapel options when zone changes
+const zoneSelect = document.getElementById("zone");
+const chapelSelect = document.getElementById("chapel");
+
+zoneSelect.addEventListener("change", function () {
+  const selectedZone = this.value;
+  const chapels = zoneChapelMap[selectedZone] || [];
+
+  chapelSelect.innerHTML = '<option value="" disabled selected>Select...</option>';
+
+  chapels.forEach(chapel => {
+    const option = document.createElement("option");
+    option.value = chapel;
+    option.textContent = chapel;
+    chapelSelect.appendChild(option);
+  });
+});
+
+// Handle form submission
 document.getElementById("submit").addEventListener('click', async function (e) {
   e.preventDefault();
 
@@ -94,12 +166,10 @@ document.getElementById("submit").addEventListener('click', async function (e) {
     const paddedNumber = String(newNumber).padStart(3, '0');
     const memberID = `${currentYear}-${paddedNumber}`;
 
-    // Create Firebase Auth User
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
     await sendEmailVerification(user);
 
-    // Wait until user is authenticated (important for database write permission)
     await new Promise((resolve) => {
       const unsubscribe = auth.onAuthStateChanged((u) => {
         if (u) {
