@@ -7,7 +7,7 @@
 }
 
 body {
-    background: linear-gradient(to bottom, #332115, #d5b871, #d5b871);
+    background: linear-gradient(to bottom, #957b39 10%, #58422b 150%);
     color: white;
     min-height: 100vh;
     padding: 20px;
