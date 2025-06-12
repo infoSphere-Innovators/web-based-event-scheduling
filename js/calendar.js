@@ -233,3 +233,41 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
   renderCalendar();
+
+// Add to each page's JavaScript file
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navLeft = document.querySelector('.nav-left');
+
+    // Toggle navigation
+    hamburgerMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hamburgerMenu.classList.toggle('active');
+        navLeft.classList.toggle('show');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('.nav-left') && 
+            !event.target.closest('.hamburger-menu')) {
+            hamburgerMenu.classList.remove('active');
+            navLeft.classList.remove('show');
+        }
+    });
+
+    // Close menu when a nav item is clicked
+    navLeft.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+            hamburgerMenu.classList.remove('active');
+            navLeft.classList.remove('show');
+        });
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            hamburgerMenu.classList.remove('active');
+            navLeft.classList.remove('show');
+        }
+    });
+});

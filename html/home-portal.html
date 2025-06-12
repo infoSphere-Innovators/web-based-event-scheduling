@@ -10,6 +10,8 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
   </head>
   <body>
     <div class="hero-section">
@@ -28,65 +30,20 @@
       <div class="container">
         <div class="tab-section">
           <div class="tab-header">
-            <button class="tab-btn active" data-tab="news">NEWS</button>
+            <button class="tab-btn active" data-tab="events">Events</button>
             <button class="tab-btn" data-tab="announcements">
-              ANNOUNCEMENTS
+              Announcements
             </button>
           </div>
 
-          <div class="tab-content active" id="news-tab">
-            <div class="news-list">
-              <div class="news-item">
-                <div class="news-date">06-10</div>
-                <div class="news-content">
-                  <h3>Sunday Mass Schedule Update</h3>
-                  <p>
-                    Starting next Sunday, additional evening mass will be
-                    available at 6:00 PM.
-                  </p>
-                </div>
-              </div>
-              <div class="news-item">
-                <div class="news-date">06-09</div>
-                <div class="news-content">
-                  <h3>Youth Ministry Meeting</h3>
-                  <p>
-                    Monthly youth gathering this Saturday at 2:00 PM in the
-                    Parish Hall.
-                  </p>
-                </div>
-              </div>
-              <div class="news-item">
-                <div class="news-date">06-08</div>
-                <div class="news-content">
-                  <h3>Community Prayer Service</h3>
-                  <p>
-                    Join us for community prayer service every Wednesday at 5:00
-                    PM.
-                  </p>
-                </div>
-              </div>
+          <div class="tab-content active" id="events-tab">
+            <div class="news-items">
+              <!-- Events will be populated here -->
             </div>
           </div>
-
           <div class="tab-content" id="announcements-tab">
             <div class="announcement-list">
-              <div class="announcement-item">
-                <div class="announcement-date">JUNE 2025</div>
-                <div class="announcement-content">
-                  <h3>First Friday Mass</h3>
-                  <p>
-                    Special mass celebration for the First Friday of the month.
-                  </p>
-                </div>
-              </div>
-              <div class="announcement-item">
-                <div class="announcement-date">JUNE 2025</div>
-                <div class="announcement-content">
-                  <h3>Parish Council Meeting</h3>
-                  <p>Monthly meeting for all parish council members.</p>
-                </div>
-              </div>
+              <!-- Announcements will be populated here -->
             </div>
           </div>
         </div>
@@ -124,12 +81,53 @@
             various church activities.
           </div>
         </div>
+        <div class="faq-box">
+          <div class="faq-question">How do I sign up for an account?</div>
+          <div class="faq-answer">
+            Click on the "Get Started" button and fill out the registration form
+            with your personal information. Once submitted, your account will be
+            created and you can start using our services.
+          </div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-question">How can I register for church events?</div>
+          <div class="faq-answer">
+            After logging in, navigate to the Events section in your dashboard.
+            Find the event you're interested in and click "Register" or "Join
+            Event". Follow the prompts to complete your registration.
+          </div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-question">
+            Can I track my event attendance history?
+          </div>
+          <div class="faq-answer">
+            Yes! In your dashboard, you can view your complete attendance
+            history, including past events and upcoming registered events. This
+            helps you stay organized and manage your church activities.
+          </div>
+        </div>
+
+        <div class="faq-box">
+          <div class="faq-question">
+            How do I receive notifications about new events?
+          </div>
+          <div class="faq-answer">
+            Once logged in, you'll automatically receive notifications about new
+            events. You can manage your notification preferences in your account
+            settings to customize what updates you receive.
+          </div>
+        </div>
         <!-- Add more FAQ items as needed -->
       </div>
     </div>
     <div class="register-section">
       <h2>Register your account now.</h2>
-      <a href="/html/signup-page/signup-page.html" class="main-btn">Get Started</a>
+      <a href="/html/signup-page/signup-page.html" class="main-btn"
+        >Get Started</a
+      >
     </div>
 
     <footer>

@@ -8,7 +8,10 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <link rel="icon" type="image/png" href="/assets/logo.png" />
     <link rel="stylesheet" href="/css/calendar.css" />
     <style>
@@ -35,45 +38,50 @@
       .btn:hover {
         opacity: 0.9;
       }
-
     </style>
   </head>
   <body>
     <header class="header">
-        <nav class="nav-left">
-          <button id="events-btn" class="active-tab">Events</button>
-          <button id="calendar-btn">Calendar</button>
-          <button id="announcement-btn">Announcements</button>
-        </nav>
-        <div class="nav-right">
-          <span id="current-time">10:08 PM GMT+8</span>
-          <div class="icons">
-            <div class="notification-wrapper">
-              <button id="notifBtn" class="icon-btn">
-                <i class="fas fa-bell"></i>
-              </button>
-              <div class="notif-dropdown" id="notifDropdown">
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-              </div>
-            </div>
+      <div class="hamburger-menu">
+        <div class="bar"></div>
+        <div class="bar"></div>
+        <div class="bar"></div>
+      </div>
 
-            <div class="auth-buttons">
-              <!-- Shown only if NOT logged in -->
-              <button id="login" class="btn active">Login</button>
-              <button id="signup" class="btn">Signup</button>
-
-              <!-- Shown only if logged in -->
-              <button class="avatar" id="userBtn" style="display: none;">
-                <i class="fas fa-user"></i>
-              </button>
+      <nav class="nav-left">
+        <button id="events-btn" class="active-tab">Events</button>
+        <button id="calendar-btn">Calendar</button>
+        <button id="announcement-btn">Announcements</button>
+      </nav>
+      <div class="nav-right">
+        <span id="current-time">10:08 PM GMT+8</span>
+        <div class="icons">
+          <div class="notification-wrapper">
+            <button id="notifBtn" class="icon-btn">
+              <i class="fas fa-bell"></i>
+            </button>
+            <div class="notif-dropdown" id="notifDropdown">
+              <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
+              <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
+              <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
+              <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
+              <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
             </div>
           </div>
+
+          <div class="auth-buttons">
+            <!-- Shown only if NOT logged in -->
+            <button id="login" class="btn active">Login</button>
+            <button id="signup" class="btn">Signup</button>
+
+            <!-- Shown only if logged in -->
+            <button class="avatar" id="userBtn" style="display: none">
+              <i class="fas fa-user"></i>
+            </button>
+          </div>
         </div>
-      </header>
+      </div>
+    </header>
 
     <div class="calendar-container">
       <div class="calendar-header">
@@ -122,10 +130,13 @@
     <script type="module" src="/js/calendar.js"></script>
     <script>
       // Toggle the notification dropdown
-      document.getElementById("notifBtn").addEventListener("click", function () {
-        const dropdown = document.getElementById("notifDropdown");
-        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-      });
+      document
+        .getElementById("notifBtn")
+        .addEventListener("click", function () {
+          const dropdown = document.getElementById("notifDropdown");
+          dropdown.style.display =
+            dropdown.style.display === "block" ? "none" : "block";
+        });
 
       // Optional: hide dropdown if clicked outside
       window.addEventListener("click", function (event) {
@@ -153,7 +164,7 @@
         projectId: "web-based-event-scheduling",
         storageBucket: "web-based-event-scheduling.appspot.com",
         messagingSenderId: "925435406930",
-        appId: "1:925435406930:web:48c759977c266a2cedcd8b"
+        appId: "1:925435406930:web:48c759977c266a2cedcd8b",
       };
 
       const app = initializeApp(firebaseConfig);
@@ -194,7 +205,6 @@
           } catch (error) {
             console.error("Failed to check user approval:", error);
           }
-
         } else {
           // Not logged in
           loginBtn.style.display = "inline-block";
@@ -216,7 +226,5 @@
         window.location.href = `profile-details.html?uid=${uid}`;
       });
     </script>
-
-
   </body>
 </html>

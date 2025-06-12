@@ -226,41 +226,6 @@ document.addEventListener("DOMContentLoaded", () => {
     updateTime();
     fetchEvents();
     filterEvents("upcoming"); // Set default filter    // Hamburger Menu
-    const hamburgerMenu = document.querySelector('.hamburger-menu');
-    const navLeft = document.querySelector('.nav-left');
-    const navRight = document.querySelector('.nav-right');
-
-    // Toggle navigation
-    hamburgerMenu.addEventListener('click', (e) => {
-        e.stopPropagation();
-        hamburgerMenu.classList.toggle('active');
-        navLeft.classList.toggle('show');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (event) => {
-        if (!event.target.closest('.hamburger-menu') && 
-            !event.target.closest('.nav-left')) {
-            hamburgerMenu.classList.remove('active');
-            navLeft.classList.remove('show');
-        }
-    });
-
-    // Close menu when a nav item is clicked
-    navLeft.querySelectorAll('button').forEach(button => {
-        button.addEventListener('click', () => {
-            hamburgerMenu.classList.remove('active');
-            navLeft.classList.remove('show');
-        });
-    });
-
-    // Handle window resize
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            hamburgerMenu.classList.remove('active');
-            navLeft.classList.remove('show');
-        }
-    });
 
     // Add this inside your DOMContentLoaded event listener
     function updateAuthUI(isLoggedIn) {
@@ -289,6 +254,42 @@ document.addEventListener("DOMContentLoaded", () => {
     // Add this to check login state when page loads
     firebase.auth().onAuthStateChanged((user) => {
         updateAuthUI(!!user);
+    });
+
+    // Hamburger Menu Functionality
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navLeft = document.querySelector('.nav-left');
+
+    // Toggle navigation
+    hamburgerMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hamburgerMenu.classList.toggle('active');
+        navLeft.classList.toggle('show');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('.nav-left') && 
+            !event.target.closest('.hamburger-menu')) {
+            hamburgerMenu.classList.remove('active');
+            navLeft.classList.remove('show');
+        }
+    });
+
+    // Close menu when a nav item is clicked
+    navLeft.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+            hamburgerMenu.classList.remove('active');
+            navLeft.classList.remove('show');
+        });
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            hamburgerMenu.classList.remove('active');
+            navLeft.classList.remove('show');
+        }
     });
 });
 
@@ -321,11 +322,15 @@ function viewEventDescription(eventId) {
         }
     });
 
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+
     function closeModal() {
+        const modal = document.getElementById('eventModal');
         modal.classList.remove('show');
+        document.body.style.overflow = '';
         setTimeout(() => {
             modal.style.display = "none";
-        }, 300); // Match the transition duration
+        }, 300);
     }
 
     // Close button functionality
@@ -343,5 +348,30 @@ function viewEventDescription(eventId) {
         if (event.key === 'Escape') {
             closeModal();
         }
+    });
+
+    // Touch event handling for modal
+    let touchStartY;
+    const modalContent = document.querySelector('.modal-content');
+
+    modalContent.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+    });
+
+    modalContent.addEventListener('touchmove', (e) => {
+        if (!touchStartY) return;
+        
+        const touchEndY = e.touches[0].clientY;
+        const diff = touchStartY - touchEndY;
+        
+        // If swiping down and at top of content
+        if (diff < -50 && modalContent.scrollTop === 0) {
+            closeModal();
+            touchStartY = null;
+        }
+    });
+
+    modalContent.addEventListener('touchend', () => {
+        touchStartY = null;
     });
 }

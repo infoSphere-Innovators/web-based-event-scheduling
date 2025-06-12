@@ -45,7 +45,7 @@ nav button {
 }
 
 nav button:hover {
-    color: rgba(255, 255, 255, 0.9);
+    color: rgb(255, 255, 255);
 }
 
 nav button.active-tab {
@@ -154,7 +154,7 @@ nav button.active-tab {
 .calendar-header h2 {
     font-size: 2rem;
     font-weight: 700;
-    background: linear-gradient(45deg, #fff, #9D62F5);
+    background: linear-gradient(45deg, #fff, #fff);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -184,7 +184,7 @@ nav button.active-tab {
     background: rgba(255, 255, 255, 0.05);
     transform: translateY(-2px);
     border-color: rgba(157, 98, 245, 0.3);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 20px rgba(166, 166, 166, 0.2);
 }
 
 .announcement-title {
@@ -205,7 +205,7 @@ nav button.active-tab {
 }
 
 .announcement-publish i {
-    color: #9D62F5;
+    color: #fff;
 }
 
 .announcement-status {
@@ -214,12 +214,12 @@ nav button.active-tab {
 }
 
 .status-label {
-    background: linear-gradient(45deg, #9D62F5, #7231DA);
+    background-color: white;
     padding: 0.5rem 1.2rem;
     border-radius: 2rem;
     font-size: 0.85rem;
-    color: white;
-    font-weight: 500;
+    color: black;
+    font-weight: bold;
     letter-spacing: 0.5px;
     box-shadow: 0 2px 10px rgba(157, 98, 245, 0.2);
     white-space: nowrap;
@@ -258,7 +258,7 @@ z-index: 1000;
 }
 .modal-header h2 {
     font-size: 1.8rem;
-    background: linear-gradient(45deg, #fff, #9D62F5);
+    background: linear-gradient(45deg, #fff, #fff);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -281,7 +281,7 @@ color: white;
     margin-bottom: 1.5rem;
 }
 .modal-section h3 {
-    color: #9D62F5;
+    color: #fff;
     margin-bottom: 1rem;
     font-size: 1.2rem;
 }
@@ -293,7 +293,7 @@ ul {
 padding-left: 1.25rem;
 }
 button.action-button {
-    background: linear-gradient(45deg, #9D62F5, #7231DA);
+    background: linear-gradient(45deg, #fff, #fff);
     border: none;
     padding: 0.8rem 1.5rem;
     border-radius: 0.8rem;

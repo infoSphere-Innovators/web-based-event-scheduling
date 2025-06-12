@@ -581,9 +581,6 @@ Right Side
 
 }
 
-
-
-
 /* **********8
 MEDIA QUERY
 ****************/
@@ -729,7 +726,142 @@ MEDIA QUERY PHONE
 
 }
 
- /* Fade-in animation keyframes */
+/* Add these media queries after your existing media queries */
+
+@media screen and (max-width: 480px) {
+  /* Header adjustments */
+  .header {
+    padding: 10px;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .nav-left {
+    width: 100%;
+    display: flex;
+    gap: 10px;
+  }
+
+  .nav-left button {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .nav-right {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  /* Container layout */
+  .container {
+    width: 100%;
+    grid-template-columns: 1fr;
+    padding: 10px;
+    gap: 1rem;
+  }
+
+  /* Main content adjustments */
+  main {
+    margin-top: 1rem;
+    padding: 0;
+  }
+
+  main h1 {
+    font-size: 1.8rem;
+  }
+
+  /* Insights cards */
+  main .insights {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 10px;
+  }
+
+  main .insights > div {
+    padding: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  main .insights > div .middle {
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  main .insights .progress {
+    align-self: center;
+  }
+
+  /* Events table */
+  main .attended_events {
+    margin-top: 1rem;
+    overflow-x: auto;
+  }
+
+  main .attended_events table {
+    min-width: 100%;
+    font-size: 14px;
+  }
+
+  main .attended_events td,
+  main .attended_events th {
+    padding: 8px;
+  }
+
+  /* Event popup */
+  #eventPopup {
+    width: 90%;
+    max-width: 300px;
+    padding: 20px;
+  }
+
+  /* Notification dropdown */
+  .notif-dropdown {
+    right: -100px;
+    min-width: 280px;
+  }
+
+  /* Navigation buttons */
+  #back-btn,
+  #profile-btn,
+  #performance-btn {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+
+  /* Additional helper classes */
+  .hide-mobile {
+    display: none;
+  }
+  
+  .full-width-mobile {
+    width: 100%;
+  }
+}
+
+/* Additional improvements for very small screens */
+@media screen and (max-width: 320px) {
+  .header {
+    padding: 5px;
+  }
+
+  main h1 {
+    font-size: 1.5rem;
+  }
+
+  .nav-left button {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  main .attended_events table {
+    font-size: 12px;
+  }
+}
+
+/* Fade-in animation keyframes */
     @keyframes fadeIn {
       from {
         opacity: 0;

@@ -41,7 +41,7 @@ body {
 #month-year {
     font-size: 2.2rem;
     font-weight: 700;
-    background: linear-gradient(45deg, #fff, #9D62F5);
+    background: linear-gradient(45deg, #fff, #fff);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -103,7 +103,7 @@ td.today {
 }
 
 td.today .day-number {
-    background: #9D62F5;
+    background: #fff;
     color: white;
     font-weight: 700;
 }
@@ -148,7 +148,7 @@ td:hover .day-number {
 
 /* Update Navigation Buttons */
 .nav-button {
-    background: linear-gradient(135deg, #9D62F5, #7231DA);
+    background: linear-gradient(135deg, #fff426, #947600);
     border: none;
     color: white;
     width: 40px;
@@ -167,7 +167,6 @@ td:hover .day-number {
 .nav-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(157, 98, 245, 0.4);
-    background: linear-gradient(135deg, #AF7FF8, #8445F0);
 }
 
 .nav-button:active {
@@ -210,7 +209,7 @@ td:hover .day-number {
 }
 
 .event-display h3 {
-    color: #9D62F5;
+    color: #fff;
     font-size: 1.3rem;
     margin-bottom: 1rem;
 }
@@ -372,42 +371,138 @@ nav button.active-tab {
 /* Responsive Navigation */
 @media screen and (max-width: 768px) {
     .header {
-        padding: 15px;
+        padding: 12px;
+        flex-wrap: wrap;
+        position: relative;
     }
 
-    nav button {
-        font-size: 14px;
-        padding: 6px 8px;
+    /* Hamburger Menu */
+    .hamburger-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+        z-index: 1002;
+        padding: 8px;
     }
 
-    .nav-left,
-    .nav-right,
-    .icons {
+    .hamburger-menu .bar {
+        width: 24px;
+        height: 2px;
+        background-color: white;
+        transition: 0.3s;
+    }
+
+    .hamburger-menu.active .bar:nth-child(1) {
+        transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .hamburger-menu.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger-menu.active .bar:nth-child(3) {
+        transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Navigation for mobile */
+    .nav-left {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(to bottom, #332115, #d5b871);
+        padding: 8px;
+        flex-direction: column;
+        z-index: 1001;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-left.show {
+        display: flex;
+    }
+
+    .nav-left button {
+        width: 100%;
+        text-align: left;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 15px;
+    }
+
+    .nav-right {
+        margin-left: auto;
         gap: 12px;
     }
 
     #current-time {
         display: none;
     }
+
+    .auth-buttons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        font-size: 14px;
+        margin-left: 5px;
+    }
 }
 
 @media screen and (max-width: 480px) {
-    .nav-left {
-        position: relative;
+    body {
+        padding: 12px;
     }
 
-    .nav-left button:not(.active-tab) {
-        display: none;
+    .header {
+        padding: 8px;
+    }
+
+    .nav-right {
+        gap: 8px;
     }
 
     .icons {
         gap: 8px;
     }
-    
-    .avatar {
-        width: 28px;
-        height: 28px;
-        line-height: 28px;
+
+    .auth-buttons {
+        gap: 5px;
+    }
+
+    .btn {
+        padding: 5px 10px;
+        font-size: 13px;
+    }
+
+    .notif-dropdown {
+        right: -50px;
+        min-width: 280px;
+    }
+
+    .nav-left button {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+}
+
+/* iPhone SE and smaller devices */
+@media screen and (max-width: 375px) {
+    .header {
+        padding: 8px 4px;
+    }
+
+    .nav-left button {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 4px 8px;
         font-size: 12px;
     }
 }
