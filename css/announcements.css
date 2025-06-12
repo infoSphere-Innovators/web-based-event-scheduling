@@ -162,9 +162,9 @@ nav button.active-tab {
 
 /* Enhanced Announcement List */
 .announcement-list {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     gap: 1rem;
-    border-top: none;
 }
 
 .announcement-item {
@@ -172,9 +172,9 @@ nav button.active-tab {
     border-radius: 1rem;
     padding: 1.5rem;
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr;
-    gap: 1rem;
+    grid-template-columns: 2fr 1.5fr auto;
     align-items: center;
+    gap: 1.5rem;
     cursor: pointer;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -192,6 +192,7 @@ nav button.active-tab {
     color: white;
     font-size: 1.1rem;
     letter-spacing: 0.2px;
+    line-height: 1.4;
 }
 
 .announcement-publish {
@@ -200,21 +201,34 @@ nav button.active-tab {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.announcement-publish i {
+    color: #9D62F5;
 }
 
 .announcement-status {
+    display: flex;
     justify-content: flex-end;
 }
 
 .status-label {
     background: linear-gradient(45deg, #9D62F5, #7231DA);
-    padding: 0.4rem 1rem;
+    padding: 0.5rem 1.2rem;
     border-radius: 2rem;
     font-size: 0.85rem;
     color: white;
     font-weight: 500;
     letter-spacing: 0.5px;
     box-shadow: 0 2px 10px rgba(157, 98, 245, 0.2);
+    white-space: nowrap;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.announcement-item:hover .status-label {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 15px rgba(157, 98, 245, 0.3);
 }
 
 /* Modal Styles */
@@ -305,31 +319,92 @@ padding-top: 1rem;
 /* Responsive Navigation */
 @media screen and (max-width: 768px) {
     .header {
-        padding: 15px;
+        padding: 12px;
+        flex-wrap: wrap;
+        position: relative;
     }
 
-    nav button {
-        font-size: 14px;
-        padding: 6px 8px;
+    /* Hamburger Menu */
+    .hamburger-menu {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        cursor: pointer;
+        z-index: 1002;
+        padding: 8px;
     }
 
-    .nav-left,
-    .nav-right,
-    .icons {
+    .hamburger-menu .bar {
+        width: 24px;
+        height: 2px;
+        background-color: white;
+        transition: 0.3s;
+    }
+
+    /* Navigation for mobile */
+    .nav-left {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(to bottom, #332115, #d5b871);
+        padding: 8px;
+        flex-direction: column;
+        z-index: 1001;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-left.show {
+        display: flex;
+    }
+
+    .nav-left button {
+        width: 100%;
+        text-align: left;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 15px;
+    }
+
+    .nav-right {
+        margin-left: auto;
         gap: 12px;
     }
 
-    #current-time {
-        display: none;
+    /* Announcement items adjustments */
+    .announcement-item {
+        grid-template-columns: 1fr auto;
+        padding: 16px;
+        gap: 12px;
+    }
+
+    .announcement-title {
+        font-size: 1rem;
+    }
+
+    .modal-content {
+        width: 95%;
+        padding: 20px;
     }
 }
 
 @media screen and (max-width: 480px) {
-    .nav-left {
-        position: relative;
+    body {
+        padding: 12px;
     }
 
-    .nav-left button:not(.active-tab) {
+    .header {
+        padding: 8px;
+    }
+
+    /* Further nav adjustments for very small screens */
+    .nav-right {
+        gap: 8px;
+    }
+
+    #current-time {
         display: none;
     }
 
@@ -337,10 +412,75 @@ padding-top: 1rem;
         gap: 8px;
     }
 
-    .avatar {
-        width: 28px;
-        height: 28px;
-        line-height: 28px;
-        font-size: 12px;
+    /* Announcement adjustments */
+    .announcement-item {
+        padding: 12px;
+        grid-template-columns: 1fr;
+    }
+
+    .announcement-publish {
+        font-size: 0.8rem;
+    }
+
+    .status-label {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    /* Modal adjustments */
+    .modal-content {
+        padding: 16px;
+        margin: 16px;
+        max-height: 90vh;
+    }
+
+    .modal-header h2 {
+        font-size: 1.4rem;
+    }
+
+    .modal-section {
+        padding: 12px;
+    }
+}
+
+/* iPhone SE and smaller devices */
+@media screen and (max-width: 375px) {
+    .header {
+        padding: 8px 4px;
+    }
+
+    .nav-left button {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .announcement-title {
+        font-size: 0.9rem;
+    }
+
+    .announcement-publish {
+        font-size: 0.75rem;
+    }
+
+    .status-label {
+        padding: 4px 10px;
+        font-size: 0.75rem;
+    }
+
+    .modal-content {
+        padding: 12px;
+    }
+
+    .modal-header h2 {
+        font-size: 1.2rem;
+    }
+
+    .modal-section h3 {
+        font-size: 1rem;
+    }
+
+    .modal-section p, 
+    .modal-section li {
+        font-size: 0.9rem;
     }
 }

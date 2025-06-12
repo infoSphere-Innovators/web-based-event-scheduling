@@ -7,7 +7,10 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
     <link rel="stylesheet" href="/css/announcements.css" />
     <style>
       /* Shared button styles */
@@ -34,6 +37,31 @@
         opacity: 0.9;
       }
 
+      /* Hamburger menu styles */
+      .hamburger-menu {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+      }
+
+      .hamburger-menu .bar {
+        height: 3px;
+        width: 25px;
+        background-color: white;
+        margin: 4px 0;
+        transition: all 0.3s ease;
+      }
+
+      /* Media query for mobile view */
+      @media (max-width: 768px) {
+        .hamburger-menu {
+          display: flex;
+        }
+
+        .nav-left {
+          display: none;
+        }
+      }
     </style>
     <title>Announcement Page</title>
   </head>
@@ -41,6 +69,11 @@
     <div class="app">
       <!-- Navigation Header -->
       <header class="header">
+        <div class="hamburger-menu">
+          <div class="bar"></div>
+          <div class="bar"></div>
+          <div class="bar"></div>
+        </div>
         <nav class="nav-left">
           <button id="events-btn" class="active-tab">Events</button>
           <button id="calendar-btn">Calendar</button>
@@ -54,11 +87,11 @@
                 <i class="fas fa-bell"></i>
               </button>
               <div class="notif-dropdown" id="notifDropdown">
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
-                <p><strong>New Event:</strong><br>Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
+                <p><strong>New Event:</strong><br />Meeting at 10:00 AM</p>
               </div>
             </div>
 
@@ -68,7 +101,7 @@
               <button id="signup" class="btn">Signup</button>
 
               <!-- Shown only if logged in -->
-              <button class="avatar" id="userBtn" style="display: none;">
+              <button class="avatar" id="userBtn" style="display: none">
                 <i class="fas fa-user"></i>
               </button>
             </div>
@@ -93,9 +126,7 @@
         aria-labelledby="modal-title"
       >
         <div class="modal-header">
-
-
-          <h2 id="modal-title" ></h2>  
+          <h2 id="modal-title"></h2>
         </div>
         <div class="modal-section" id="modal-description"></div>
         <div class="modal-section">
@@ -112,13 +143,20 @@
       </div>
     </div>
 
+    <!-- Firebase scripts -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
     <script src="/js/announcements.js"></script>
     <script>
       // Toggle the notification dropdown
-      document.getElementById("notifBtn").addEventListener("click", function () {
-        const dropdown = document.getElementById("notifDropdown");
-        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
-      });
+      document
+        .getElementById("notifBtn")
+        .addEventListener("click", function () {
+          const dropdown = document.getElementById("notifDropdown");
+          dropdown.style.display =
+            dropdown.style.display === "block" ? "none" : "block";
+        });
 
       // Optional: hide dropdown if clicked outside
       window.addEventListener("click", function (event) {
@@ -128,42 +166,21 @@
         }
       });
     </script>
-    <script type="module">
-      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
-      import {
-        getAuth,
-        onAuthStateChanged,
-      } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
-      import {
-        getDatabase,
-        ref,
-        get,
-      } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
-
-      const firebaseConfig = {
-        apiKey: "AIzaSyC4YDw8dhp1qsJ7BhlNUSNHq3BxYzg6GDI",
-        authDomain: "web-based-event-scheduling.firebaseapp.com",
-        projectId: "web-based-event-scheduling",
-        storageBucket: "web-based-event-scheduling.appspot.com",
-        messagingSenderId: "925435406930",
-        appId: "1:925435406930:web:48c759977c266a2cedcd8b"
-      };
-
-      const app = initializeApp(firebaseConfig);
-      const auth = getAuth(app);
-      const db = getDatabase(app);
+    <script>
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
 
       const loginBtn = document.getElementById("login");
       const signupBtn = document.getElementById("signup");
       const userBtn = document.getElementById("userBtn");
 
-      onAuthStateChanged(auth, async (user) => {
+      firebase.auth().onAuthStateChanged(async (user) => {
         if (user) {
           const uid = user.uid;
-          const userRef = ref(db, `members/${uid}`);
+          const userRef = db.ref(`members/${uid}`);
 
           try {
-            const snapshot = await get(userRef);
+            const snapshot = await userRef.once("value");
 
             if (snapshot.exists()) {
               const userData = snapshot.val();
@@ -187,7 +204,6 @@
           } catch (error) {
             console.error("Failed to check user approval:", error);
           }
-
         } else {
           // Not logged in
           loginBtn.style.display = "inline-block";
@@ -209,7 +225,5 @@
         window.location.href = `profile-details.html?uid=${uid}`;
       });
     </script>
-
-    
   </body>
 </html>

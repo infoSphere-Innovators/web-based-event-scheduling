@@ -1,161 +1,299 @@
+// Firebase configuration
+const firebaseConfig = {
+    apiKey: "AIzaSyC4YDw8dhp1qsJ7BhlNUSNHq3BxYzg6GDI",
+    authDomain: "web-based-event-scheduling.firebaseapp.com",
+    projectId: "web-based-event-scheduling",
+    storageBucket: "web-based-event-scheduling.appspot.com",
+    messagingSenderId: "925435406930",
+    appId: "1:925435406930:web:48c759977c266a2cedcd8b"
+};
+
+// Initialize Firebase
+if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+}
+const auth = firebase.auth();
+const db = firebase.database();
+
 document.addEventListener('DOMContentLoaded', () => {
-  const eventsBtn = document.getElementById('events-btn');
-  const calendarBtn = document.getElementById('calendar-btn');
-  const announcementBtn = document.getElementById('announcement-btn');
+    // DOM Elements
+    const eventsBtn = document.getElementById('events-btn');
+    const calendarBtn = document.getElementById('calendar-btn');
+    const announcementBtn = document.getElementById('announcement-btn');
+    const loginBtn = document.getElementById('login');
+    const signupBtn = document.getElementById('signup');
+    const userBtn = document.getElementById('userBtn');
+    const notifBtn = document.getElementById('notifBtn');
+    const notifDropdown = document.getElementById('notifDropdown');
+    const modal = document.getElementById('modal');
+    const modalCloseBtn = document.getElementById('modal-close-footer');
 
-  // Navigation Event Listeners
-  eventsBtn.addEventListener('click', () => {
-    setActiveTab(eventsBtn);
-    window.location.href = '/html/user-dashboard.html';
-  });
-
-  calendarBtn.addEventListener('click', () => {
-    setActiveTab(calendarBtn);
-    window.location.href = '/html/calendar.html';
-  });
-
-  announcementBtn.addEventListener('click', () => {
-    setActiveTab(announcementBtn);
-    // Already on announcements page
-  });
-
-  // Helper function to set active tab
-  function setActiveTab(button) {
-    document.querySelectorAll('.nav-left button').forEach(btn => {
-      btn.classList.remove('active-tab');
+    // Navigation handlers
+    eventsBtn.addEventListener('click', () => {
+        window.location.href = '/html/user-dashboard.html';
     });
-    button.classList.add('active-tab');
-  }
 
-  // Update current time
-  function updateTime() {
+    calendarBtn.addEventListener('click', () => {
+        window.location.href = '/html/calendar.html';
+    });
+
+    // Auth button handlers
+    loginBtn?.addEventListener('click', () => {
+        window.location.href = 'login-page.html';
+    });
+
+    signupBtn?.addEventListener('click', () => {
+        window.location.href = '/html/signup-page/signup-page.html';
+    });
+
+    userBtn?.addEventListener('click', () => {
+        const uid = userBtn.dataset.uid;
+        window.location.href = `profile-details.html?uid=${uid}`;
+    });
+
+    // Notification dropdown handlers
+    notifBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        notifDropdown.style.display = notifDropdown.style.display === 'block' ? 'none' : 'block';
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('.notification-wrapper')) {
+            notifDropdown.style.display = 'none';
+        }
+    });
+
+    // Modal handlers
+    modalCloseBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // Auth state observer
+    auth.onAuthStateChanged(async (user) => {
+        if (user) {
+            const uid = user.uid;
+            try {
+                const snapshot = await db.ref(`members/${uid}`).once('value');
+                if (snapshot.exists() && snapshot.val().Approved === true) {
+                    showAuthenticatedView(uid);
+                } else {
+                    showGuestView();
+                }
+            } catch (error) {
+                console.error('Failed to check user approval:', error);
+                showGuestView();
+            }
+        } else {
+            showGuestView();
+        }
+    });
+
+    // Initialize the page
+    initializePage();
+
+    // Hamburger menu functionality
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navLeft = document.querySelector('.nav-left');
+
+    hamburgerMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+        navLeft.classList.toggle('show');
+        hamburgerMenu.classList.toggle('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('.nav-left') && 
+            !event.target.closest('.hamburger-menu')) {
+            navLeft.classList.remove('show');
+            hamburgerMenu.classList.remove('active');
+        }
+    });
+
+    // Close menu when a nav item is clicked
+    navLeft.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+            navLeft.classList.remove('show');
+            hamburgerMenu.classList.remove('active');
+        });
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            navLeft.classList.remove('show');
+            hamburgerMenu.classList.remove('active');
+        }
+    });
+});
+
+// Helper Functions
+function showAuthenticatedView(uid) {
+    const loginBtn = document.getElementById('login');
+    const signupBtn = document.getElementById('signup');
+    const userBtn = document.getElementById('userBtn');
+    
+    loginBtn.style.display = 'none';
+    signupBtn.style.display = 'none';
+    userBtn.style.display = 'inline-block';
+    userBtn.dataset.uid = uid;
+}
+
+function showGuestView() {
+    const loginBtn = document.getElementById('login');
+    const signupBtn = document.getElementById('signup');
+    const userBtn = document.getElementById('userBtn');
+    
+    loginBtn.style.display = 'inline-block';
+    signupBtn.style.display = 'inline-block';
+    userBtn.style.display = 'none';
+}
+
+function updateTime() {
     const timeElement = document.getElementById('current-time');
     const options = {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-      timeZoneName: 'short'
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true,
+        timeZoneName: 'short'
     };
 
     function setTime() {
-      const time = new Date().toLocaleString('en-US', options);
-      timeElement.innerHTML = `<strong>${time}</strong>`;
+        const time = new Date().toLocaleString('en-US', options);
+        timeElement.innerHTML = `<strong>${time}</strong>`;
     }
 
     setTime();
-    setInterval(setTime, 60000); // Update every minute
-  }
-
-  // Initialize active tab and time
-  setActiveTab(announcementBtn);
-  updateTime();
-});
-
-// --- Announcements Logic ---
-const mockAnnouncements = [
-  {
-    id: 1,
-    title: "Custom Domain Name Support",
-    publishInfo: "Custom Domain Names",
-    status: "Published",
-    description: "We're excited to announce that custom domain name support is now available for all premium users...",
-    reminders: [
-      "Domain verification process takes up to 24 hours",
-      "SSL certificates are automatically generated",
-      "DNS settings need to be updated on your domain provider"
-    ],
-    notes: "This feature is only available for premium tier users. Please contact support if you need assistance."
-  },
-  {
-    id: 2,
-    title: "Multiple Workspaces",
-    publishInfo: "Multiple Accounts Under One Login",
-    status: "Published",
-    description: "You can now create and manage multiple workspaces under a single account...",
-    reminders: [
-      "Up to 5 workspaces per account on Pro plan",
-      "Each workspace has separate billing",
-      "Team members can be invited to specific workspaces"
-    ],
-    notes: "Use different workspaces for different projects to stay organized."
-  },
-  {
-    id: 3,
-    title: "IdeaPlan API",
-    publishInfo: "",
-    status: "Published",
-    description: "Our new API allows developers to integrate IdeaPlan functionality into their own applications...",
-    reminders: [
-      "API keys can be generated in the settings panel",
-      "Rate limits apply based on your plan",
-      "Documentation is available at api.ideaplan.com"
-    ],
-    notes: "The API is currently in beta. Report issues to support."
-  },
-  // Additional announcements omitted for brevity...
-];
-
-const announcementList = document.getElementById('announcement-list');
-const modal = document.getElementById('modal');
-const modalTitle = document.getElementById('modal-title');
-const modalDescription = document.getElementById('modal-description');
-const modalReminders = document.getElementById('modal-reminders');
-const modalNotes = document.getElementById('modal-notes');
-
-// ✅ Safe modal close listener setup (avoids null errors)
-document.querySelectorAll('#modal-close, #modal-close-footer')
-  .forEach(btn => btn.addEventListener('click', closeModal));
-
-function openModal(announcement) {
-  modalTitle.textContent = announcement.title;
-  modalDescription.textContent = announcement.description;
-
-  modalReminders.innerHTML = '';
-  announcement.reminders.forEach(reminder => {
-    const li = document.createElement('li');
-    li.textContent = reminder;
-    modalReminders.appendChild(li);
-  });
-
-  modalNotes.textContent = announcement.notes;
-  modal.style.display = 'flex';
+    setInterval(setTime, 60000);
 }
 
-function closeModal() {
-  modal.style.display = 'none';
+function initializePage() {
+    document.getElementById('announcement-btn').classList.add('active-tab');
+    updateTime();
+    fetchAnnouncements(); // Add this line
 }
 
-// Clicking outside modal content closes the modal
-modal.addEventListener('click', (e) => {
-  if (e.target === modal) closeModal();
-});
+// Add this new function to fetch and display announcements
+async function fetchAnnouncements() {
+    const announcementList = document.getElementById('announcement-list');
+    
+    try {
+        const snapshot = await db.ref('announcements').once('value');
+        const announcements = snapshot.val();
+        
+        if (!announcements) {
+            announcementList.innerHTML = `
+                <div class="announcement-item">
+                    <div class="announcement-title">No announcements available</div>
+                </div>`;
+            return;
+        }
 
-function renderAnnouncements() {
-  announcementList.innerHTML = '';
-  mockAnnouncements.forEach(ann => {
-    const item = document.createElement('div');
-    item.className = 'announcement-item';
-    item.tabIndex = 0;
-    item.setAttribute('role', 'button');
-    item.setAttribute('aria-pressed', 'false');
-    item.setAttribute('aria-label', `Announcement: ${ann.title}, status: ${ann.status}`);
+        // Convert to array and sort by date (newest first)
+        const announcementArray = Object.values(announcements).sort((a, b) => {
+            const dateA = new Date(`${a.DateCreated} ${a.TimeCreated}`);
+            const dateB = new Date(`${b.DateCreated} ${b.TimeCreated}`);
+            return dateB - dateA;
+        });
 
-    item.innerHTML = `
-      <div class="announcement-title">${ann.title}</div>
-      <div class="announcement-publish">${ann.publishInfo || 'N/A'}</div>
-      <div class="announcement-status"><span class="status-label">${ann.status}</span></div>
-    `;
+        // Clear existing announcements
+        announcementList.innerHTML = '';
 
-    item.addEventListener('click', () => openModal(ann));
-    item.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        openModal(ann);
-      }
+        // Create announcement items
+        announcementArray.forEach(announcement => {
+            const date = new Date(`${announcement.DateCreated} ${announcement.TimeCreated}`);
+            const formattedDate = date.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            const formattedTime = date.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+
+            const announcementItem = document.createElement('div');
+            announcementItem.className = 'announcement-item';
+            announcementItem.innerHTML = `
+                <div class="announcement-title">${announcement.AnnouncementName}</div>
+                <div class="announcement-publish">
+                    <i class="fas fa-clock"></i> ${formattedDate} at ${formattedTime}
+                </div>
+                <div class="announcement-status">
+                    <span class="status-label">See Details</span>
+                </div>
+            `;
+
+            // Add click event to show modal
+            announcementItem.addEventListener('click', () => {
+                showAnnouncementModal(announcement);
+            });
+
+            announcementList.appendChild(announcementItem);
+        });
+    } catch (error) {
+        console.error('Error fetching announcements:', error);
+        announcementList.innerHTML = `
+            <div class="announcement-item">
+                <div class="announcement-title">Error loading announcements</div>
+            </div>`;
+    }
+}
+
+// Add this function to handle modal display
+function showAnnouncementModal(announcement) {
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDescription = document.getElementById('modal-description');
+    const modalReminders = document.getElementById('modal-reminders');
+    const modalNotes = document.getElementById('modal-notes');
+
+    // Set modal content
+    modalTitle.textContent = announcement.AnnouncementName;
+    modalDescription.textContent = announcement.Description;
+
+    // Handle reminders
+    modalReminders.innerHTML = '';
+    if (announcement.Reminders && announcement.Reminders !== 'None') {
+        const reminders = Array.isArray(announcement.Reminders) 
+            ? announcement.Reminders 
+            : [announcement.Reminders];
+        
+        reminders.forEach(reminder => {
+            const li = document.createElement('li');
+            li.textContent = reminder;
+            modalReminders.appendChild(li);
+        });
+    } else {
+        const li = document.createElement('li');
+        li.textContent = 'No reminders';
+        modalReminders.appendChild(li);
+    }
+
+    // Handle notes
+    modalNotes.textContent = announcement.Notes === 'N/A' ? 'No additional notes' : announcement.Notes;
+
+    // Show modal
+    modal.style.display = 'flex';
+}
+
+// Add real-time updates
+function setupRealtimeUpdates() {
+    db.ref('announcements').on('value', (snapshot) => {
+        fetchAnnouncements();
     });
-
-    announcementList.appendChild(item);
-  });
 }
 
-// Initialize list
-renderAnnouncements();
+// Add this to your DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', () => {
+    // ...existing code...
+    
+    // Initialize real-time updates
+    setupRealtimeUpdates();
+});
