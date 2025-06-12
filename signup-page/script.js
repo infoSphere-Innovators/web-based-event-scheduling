@@ -1,10 +1,9 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
-import { getDatabase, ref, set, get, push } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+import { getDatabase, ref, set, get } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  sendEmailVerification,
-  signInWithEmailAndPassword
+  sendEmailVerification
 } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 
 const firebaseConfig = {
@@ -19,6 +18,25 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getDatabase(app);
+
+// Auto-set zone & chapel based on transparochial
+document.getElementById("trasparochial").addEventListener("change", function () {
+  const transparochial = this.value;
+  const zone = document.getElementById("zone");
+  const chapel = document.getElementById("chapel");
+
+  if (transparochial === "Yes") {
+    zone.value = "No Zone";
+    chapel.value = "No Chapel";
+    zone.disabled = true;
+    chapel.disabled = true;
+  } else {
+    zone.disabled = false;
+    chapel.disabled = false;
+    zone.value = "";
+    chapel.value = "";
+  }
+});
 
 document.getElementById("submit").addEventListener('click', async function (e) {
   e.preventDefault();
@@ -48,18 +66,24 @@ document.getElementById("submit").addEventListener('click', async function (e) {
   }
 
   try {
-    // Get existing members to generate unique ID
     const snapshot = await get(ref(db, 'members'));
     const members = snapshot.exists() ? snapshot.val() : {};
 
-    let prefix = "MEM";
-    if (position === "Leader") prefix = "LEAD";
-    else if (position === "Assistant") prefix = "ASSIST";
+    const emailExists = Object.values(members).some(member => member.Email === email);
+    if (emailExists) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Email Already Taken',
+        text: 'This email is already registered. Please use a different one.'
+      });
+      return;
+    }
 
+    const currentYear = new Date().getFullYear();
     let maxNumber = 0;
     Object.values(members).forEach(member => {
-      if (member["MemberID"] && member["MemberID"].startsWith(prefix)) {
-        const num = parseInt(member["MemberID"].split("-")[1]);
+      if (member.MemberID && member.MemberID.startsWith(currentYear.toString())) {
+        const num = parseInt(member.MemberID.split("-")[1]);
         if (!isNaN(num) && num > maxNumber) {
           maxNumber = num;
         }
@@ -68,46 +92,24 @@ document.getElementById("submit").addEventListener('click', async function (e) {
 
     const newNumber = maxNumber + 1;
     const paddedNumber = String(newNumber).padStart(3, '0');
-    const memberID = `${prefix}-${paddedNumber}`;
+    const memberID = `${currentYear}-${paddedNumber}`;
 
-    const newRef = push(ref(db, 'members'));
-
-    // Create user in Firebase Authentication
-    let userCredential;
-    try {
-      userCredential = await createUserWithEmailAndPassword(auth, email, password);
-    } catch (error) {
-      if (error.code === 'auth/email-already-in-use') {
-        // Optionally sign in if email already exists
-        try {
-          userCredential = await signInWithEmailAndPassword(auth, email, password);
-          localStorage.setItem("currentUID", userCredential.user.uid);
-          Swal.fire({
-            icon: 'info',
-            title: 'Already Registered',
-            text: 'Signed in with existing account.',
-            showConfirmButton: false,
-            timer: 2000
-          }).then(() => {
-            window.location.href = "tryqr.html";
-          });
-          return; // Exit since data already exists
-        } catch (signInError) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Email Already Registered',
-            text: 'That email is already in use. Try a different one or log in.',
-          });
-          return;
-        }
-      } else {
-        throw error;
-      }
-    }
-
+    // Create Firebase Auth User
+    const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     const user = userCredential.user;
-    const uid = user.uid;
     await sendEmailVerification(user);
+
+    // Wait until user is authenticated (important for database write permission)
+    await new Promise((resolve) => {
+      const unsubscribe = auth.onAuthStateChanged((u) => {
+        if (u) {
+          unsubscribe();
+          resolve();
+        }
+      });
+    });
+
+    const uid = user.uid;
     const registeredAt = new Date().toISOString();
 
     const data = {
@@ -119,33 +121,29 @@ document.getElementById("submit").addEventListener('click', async function (e) {
       HomeAddress: address,
       Transparochial: transparochial,
       Position: position,
-      Zone: zone,
-      Chapel: chapel,
+      Zone: transparochial === "Yes" ? "No Zone" : zone,
+      Chapel: transparochial === "Yes" ? "No Chapel" : chapel,
       ContactNumber: contact,
       Email: email,
       Ministry: ministry,
       Approved: false,
       Role: "Member",
-      "MemberID": memberID,
+      MemberID: memberID,
       RegisteredAt: registeredAt
     };
 
-    // ✅ Save under UID-based key
-    const userRef = ref(db, 'members/' + uid);
-    await set(userRef, data);
-
+    await set(ref(db, 'members/' + uid), data);
     localStorage.setItem("currentUID", uid);
 
     Swal.fire({
       icon: 'success',
       title: 'Sign Up Successful!',
-      text: 'Redirecting to profile...',
+      text: 'Waiting for admin approval...',
       showConfirmButton: false,
       timer: 2000
     }).then(() => {
-      window.location.href = "/html/profile-details.html";
+      window.location.href = "/html/thank-you-page.html";
     });
-
 
   } catch (error) {
     console.error("Error saving:", error);

@@ -238,54 +238,66 @@
       const qrContainer = document.getElementById("qrcode");
 
       onAuthStateChanged(auth, async (user) => {
-        if (user) {
-          const uid = localStorage.getItem("currentUID") || user.uid;
-          const userRef = ref(db, "members/" + uid);
+      if (user) {
+        const uid = user.uid;
+        const userRef = ref(db, "members/" + uid);
 
-          try {
-            const snapshot = await get(userRef);
-            if (snapshot.exists()) {
-              const data = snapshot.val();
+        try {
+          const snapshot = await get(userRef);
+          if (snapshot.exists()) {
+            const data = snapshot.val();
 
-              // Personal Information
-              document.getElementById("firstname").value = data.FirstName;
-              document.getElementById("middlename").value = data.MiddleName;
-              document.getElementById("lastname").value = data.LastName;
-              document.getElementById("username").value = data.Username;
-
-              // Contact Information
-              document.getElementById("email").value = data.Email;
-              document.getElementById("contact").value = data.ContactNumber;
-              document.getElementById("address").value = data.HomeAddress;
-
-              // Church Information
-              document.getElementById("ministry").value = data.Ministry;
-              document.getElementById("position").value = data.Position;
-              document.getElementById("zone").value = data.Zone;
-              document.getElementById("chapel").value = data.Chapel;
-              document.getElementById("transparochial").value =
-                data.Transparochial;
-
-              // Generate QR Code
-              new QRCode(qrContainer, {
-                text: uid,
-                width: 340, // Adjusted size
-                height: 340, // Adjusted size
-                colorDark: "#000000",
-                colorLight: "#ffffff",
-                correctLevel: QRCode.CorrectLevel.H, // Highest error correction level
+            if (data.Approved !== true) {
+              Swal.fire("Access Denied", "Your account is not yet approved.", "warning").then(() => {
+                signOut(auth);
+                window.location.href = "login-page.html";
               });
-            } else {
-              alert("User not found in database.");
+              return;
             }
-          } catch (error) {
-            console.error(error);
-            alert("Error loading user data.");
+
+            // Save UID to localStorage only if necessary
+            localStorage.setItem("currentUID", uid);
+
+            // Personal Information
+            document.getElementById("firstname").value = data.FirstName || "";
+            document.getElementById("middlename").value = data.MiddleName || "";
+            document.getElementById("lastname").value = data.LastName || "";
+            document.getElementById("username").value = data.Username || "";
+
+            // Contact Information
+            document.getElementById("email").value = data.Email || "";
+            document.getElementById("contact").value = data.ContactNumber || "";
+            document.getElementById("address").value = data.HomeAddress || "";
+
+            // Church Information
+            document.getElementById("ministry").value = data.Ministry || "";
+            document.getElementById("position").value = data.Position || "";
+            document.getElementById("zone").value = data.Zone || "";
+            document.getElementById("chapel").value = data.Chapel || "";
+            document.getElementById("transparochial").value = data.Transparochial || "";
+
+            // QR Code
+            new QRCode(qrContainer, {
+              text: uid,
+              width: 340,
+              height: 340,
+              colorDark: "#000000",
+              colorLight: "#ffffff",
+              correctLevel: QRCode.CorrectLevel.H,
+            });
+
+          } else {
+            alert("User not found in database.");
           }
-        } else {
-          alert("You are not logged in.");
+        } catch (error) {
+          console.error(error);
+          alert("Error loading user data.");
         }
-      });
+      } else {
+        alert("You are not logged in.");
+      }
+    });
+
     </script>
     <script>
       document.getElementById('performance-btn').addEventListener('click', function () {

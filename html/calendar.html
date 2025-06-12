@@ -139,8 +139,12 @@
       import {
         getAuth,
         onAuthStateChanged,
-        signInWithEmailAndPassword
       } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+      import {
+        getDatabase,
+        ref,
+        get,
+      } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyC4YDw8dhp1qsJ7BhlNUSNHq3BxYzg6GDI",
@@ -151,46 +155,67 @@
         appId: "1:925435406930:web:48c759977c266a2cedcd8b"
       };
 
-      // Initialize Firebase
       const app = initializeApp(firebaseConfig);
       const auth = getAuth(app);
+      const db = getDatabase(app);
 
-      // Button elements
       const loginBtn = document.getElementById("login");
       const signupBtn = document.getElementById("signup");
       const userBtn = document.getElementById("userBtn");
 
-      // Watch auth state
-      onAuthStateChanged(auth, (user) => {
+      onAuthStateChanged(auth, async (user) => {
         if (user) {
-          // Logged in
-          loginBtn.style.display = "none";
-          signupBtn.style.display = "none";
-          userBtn.style.display = "inline-block";
-          userBtn.dataset.uid = user.uid;
+          const uid = user.uid;
+          const userRef = ref(db, `members/${uid}`);
+
+          try {
+            const snapshot = await get(userRef);
+
+            if (snapshot.exists()) {
+              const userData = snapshot.val();
+
+              if (userData.Approved === true) {
+                // Approved user: show avatar, hide login/signup
+                loginBtn.style.display = "none";
+                signupBtn.style.display = "none";
+                userBtn.style.display = "inline-block";
+                userBtn.dataset.uid = uid;
+              } else {
+                // Not approved: show guest view
+                loginBtn.style.display = "inline-block";
+                signupBtn.style.display = "inline-block";
+                userBtn.style.display = "none";
+                console.warn("User is not approved yet.");
+              }
+            } else {
+              console.warn("User record not found in database.");
+            }
+          } catch (error) {
+            console.error("Failed to check user approval:", error);
+          }
+
         } else {
-          // Logged out
+          // Not logged in
           loginBtn.style.display = "inline-block";
           signupBtn.style.display = "inline-block";
           userBtn.style.display = "none";
         }
       });
 
-      // Redirects
-      loginBtn.addEventListener("click", () => {
+      loginBtn?.addEventListener("click", () => {
         window.location.href = "login-page.html";
       });
 
-      signupBtn.addEventListener("click", () => {
+      signupBtn?.addEventListener("click", () => {
         window.location.href = "/html/signup-page/signup-page.html";
       });
 
-      userBtn.addEventListener("click", () => {
+      userBtn?.addEventListener("click", () => {
         const uid = userBtn.dataset.uid;
-        // Redirect to profile page with user UID
         window.location.href = `profile-details.html?uid=${uid}`;
       });
     </script>
+
 
   </body>
 </html>
