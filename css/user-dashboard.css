@@ -124,6 +124,21 @@ body {
         margin-left: auto;
         gap: 12px;
     }
+
+    #current-time {
+        display: none;
+    }
+
+    .auth-buttons {
+        display: flex;
+        gap: 8px;
+    }
+
+    .btn {
+        padding: 6px 12px;
+        font-size: 14px;
+        margin-left: 5px;
+    }
 }
 
 /* Navigation Buttons */
@@ -592,33 +607,31 @@ body {
     transform: rotate(45deg) translate(-5px, -6px);
   }
 
-  /* Mobile Navigation */
-  .nav-left {
-    position: fixed;
-    top: 60px;
-    left: -100%;
-    width: 100%;
-    height: auto;
-    background: rgba(42, 0, 71, 0.95);
-    backdrop-filter: blur(10px);
-    padding: 20px;
-    transition: 0.3s;
-    z-index: 99;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
+   .nav-left {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(to bottom, #332115, #d5b871);
+        padding: 8px;
+        flex-direction: column;
+        z-index: 1001;
+        border-radius: 0 0 12px 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
 
-  .nav-left.show {
-    left: 0;
-  }
+    .nav-left.show {
+        display: flex;
+    }
 
-  .nav-left button {
-    width: 100%;
-    padding: 12px;
-    text-align: left;
-    font-size: 16px;
-  }
+    .nav-left button {
+        width: 100%;
+        text-align: left;
+        padding: 12px 16px;
+        border-radius: 8px;
+        font-size: 15px;
+    }
 
   /* Header Right Section */
   .nav-right {
@@ -711,7 +724,7 @@ body {
 }
 
 /* Small phones */
-@media screen and (max-width: 360px) {
+@media screen and (max-width: 375px) {
   .auth-buttons button {
     padding: 6px 10px;
     font-size: 13px;
@@ -729,6 +742,20 @@ body {
   .event-card {
     padding: 12px;
   }
+
+ .header {
+        padding: 8px 4px;
+    }
+
+    .nav-left button {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .btn {
+        padding: 4px 8px;
+        font-size: 12px;
+    }
 }
 
 /* Add these responsive styles at the end of your file */
@@ -737,20 +764,20 @@ body {
     padding: 10px;
   }
 
-  .header {
-    padding: 15px;
-    margin: 0 5px;
-  }
+  .nav-button {
+        width: 36px;
+        height: 36px;
+    }
+
+  .nav-buttons {
+        gap: 0.3rem;
+    }
 
   /* Navigation adjustments */
   .nav-left {
     gap: 10px;
   }
 
-  .nav-left button {
-    font-size: 14px;
-    padding: 8px 12px;
-  }
 
   .nav-right {
     gap: 10px;
@@ -870,66 +897,7 @@ body {
 }
 
 /* Additional adjustments for very small screens */
-@media screen and (max-width: 360px) {
-  .header {
-    padding: 10px;
-  }
 
-  .nav-left button {
-    font-size: 13px;
-    padding: 6px 10px;
-  }
-
-  .main-header h1 {
-    font-size: 22px;
-  }
-
-  .toggle button {
-    font-size: 12px;
-    padding: 6px;
-  }
-
-  .event-card {
-    padding: 12px;
-  }
-
-  .event-left {
-    min-width: 50px;
-    font-size: 12px;
-  }
-
-  .event-right h3 {
-    font-size: 14px;
-  }
-
-  .meta {
-    font-size: 11px;
-  }
-
-  .buttons button {
-    padding: 8px;
-    font-size: 13px;
-  }
-
-  /* Tighter modal on small screens */
-  .modal-content {
-    margin: 5% auto;
-    padding: 15px;
-  }
-
-  #modal-title {
-    font-size: 18px;
-  }
-
-  .modal-info p {
-    font-size: 13px;
-  }
-
-  .notif-dropdown {
-    width: 250px;
-    right: -60px;
-  }
-}
 
 /* Fix for devices with notches/dynamic islands */
 @supports (padding-top: env(safe-area-inset-top)) {
