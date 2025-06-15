@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dynamic Navbar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/user-dashboard.css" />
+  <link rel="stylesheet" href="/css/calendar.css" />
+  <link rel="stylesheet" href="/css/announcements.css" />
+  <link rel="stylesheet" href="/css/profile-details.css" />
+  <style>
+    body {
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .navbar {
+      width: 100%;
+      height: 80px;
+      background: transparent;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      background-color: rgba(192, 97, 97, 0.05);
+      backdrop-filter: blur(5px);
+    }
+
+    .navbar::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 2px;
+      width: 100%;
+      background-color: rgb(110, 105, 105);
+    }
+
+    .nav-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 60px;
+      flex-wrap: nowrap;
+    }
+
+    .logo img {
+      height: 50px;
+    }
+
+    .nav-icons {
+      display: flex;
+      gap: 60px;
+      align-items: center;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+      flex-wrap: nowrap;
+    }
+
+    .nav-icons li a {
+      text-decoration: none;
+      color: white;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+
+    .nav-icons li a img {
+      width: 32px;
+      height: 32px;
+      transition: transform 0.2s, filter 0.2s;
+      filter: brightness(1);
+    }
+
+    .nav-icons li a:hover img {
+      transform: scale(1.1);
+    }
+
+    .nav-icons li a.active {
+      color: #8B4513;
+    }
+
+    .nav-icons li a.active img {
+      filter: brightness(0) sepia(1) saturate(800%) hue-rotate(355deg);
+    }
+
+    @media (max-width: 768px) {
+      .nav-content {
+        gap: 40px;
+      }
+
+      .nav-icons {
+        gap: 40px;
+      }
+
+      .logo img {
+        height: 42px;
+      }
+
+      .nav-icons li a img {
+        width: 26px;
+        height: 26px;
+      }
+
+      .nav-icons li a {
+        font-size: 10px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-content {
+        gap: 30px;
+      }
+
+      .nav-icons {
+        gap: 30px;
+      }
+
+      .logo img {
+        height: 36px;
+      }
+
+      .nav-icons li a img {
+        width: 22px;
+        height: 22px;
+      }
+
+      .nav-icons li a {
+        font-size: 9px;
+      }
+    }
+
+    #content {
+      margin-top: 100px;
+      padding: 20px;
+      width: 100%;
+      max-width: 1200px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo">
+        <img src="/assets/logo.png" alt="Logo" />
+      </div>
+      <ul class="nav-icons">
+        <li>
+          <a href="user-dashboard.html" onclick="loadPage(event, this)">
+            <img src="/icons/events.svg" alt="Events" />
+            <span>Events</span>
+          </a>
+        </li>
+        <li>
+          <a href="announcements.html" onclick="loadPage(event, this)">
+            <img src="/icons/announcement.svg" alt="Announcement" />
+            <span>Announcement</span>
+          </a>
+        </li>
+        <li>
+          <a href="calendar.html" onclick="loadPage(event, this)">
+            <img src="/icons/calendar.svg" alt="Calendar" />
+            <span>Calendar</span>
+          </a>
+        </li>
+        <li>
+          <a href="profile-details.html" onclick="loadPage(event, this)">
+            <img src="/icons/user.svg" alt="User" />
+            <span>User</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div id="content">
+    <p style="text-align: center; color: white;">Welcome!</p>
+  </div>
+
+  <script>
+  function loadPage(event, element) {
+    event.preventDefault();
+
+    // Set active state
+    document.querySelectorAll('.nav-icons a').forEach(a => a.classList.remove('active'));
+    element.classList.add('active');
+
+    const targetURL = element.getAttribute('href');
+
+    fetch(targetURL)
+      .then(response => {
+        if (!response.ok) throw new Error("Page not found");
+        return response.text();
+      })
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        
+        // Replace the #content with the new body content
+        const newContent = doc.querySelector('body')?.innerHTML || html;
+        document.getElementById('content').innerHTML = newContent;
+
+        // Load scripts from the fetched HTML
+        const scripts = doc.querySelectorAll("script");
+        scripts.forEach(oldScript => {
+          const newScript = document.createElement("script");
+          if (oldScript.src) {
+            newScript.src = oldScript.src;
+          } else {
+            newScript.textContent = oldScript.textContent;
+          }
+          document.body.appendChild(newScript);
+        });
+
+        // Optional: You can also load any new styles if needed
+        // const styles = doc.querySelectorAll("link[rel='stylesheet']");
+        // styles.forEach(link => document.head.appendChild(link.cloneNode()));
+      })
+      .catch(err => {
+        document.getElementById('content').innerHTML =
+          `<p style="color: red;">Failed to load page: ${err.message}</p>`;
+      });
+  }
+</script>
+<script>
+      // Toggle the notification dropdown
+      document
+        .getElementById("notifBtn")
+        .addEventListener("click", function () {
+          const dropdown = document.getElementById("notifDropdown");
+          dropdown.style.display =
+            dropdown.style.display === "block" ? "none" : "block";
+        });
+
+      document
+        .getElementById("notifBtn")
+        .addEventListener("click", function (e) {
+          e.stopPropagation(); // Prevent window click handler from immediately hiding
+          console.log("Bell clicked");
+          const dropdown = document.getElementById("notifDropdown");
+          dropdown.style.display =
+            dropdown.style.display === "block" ? "none" : "block";
+        });
+
+      // Optional: hide dropdown if clicked outside
+      window.addEventListener("click", function (event) {
+        const dropdown = document.getElementById("notifDropdown");
+        if (!event.target.closest(".notification-wrapper")) {
+          dropdown.style.display = "none";
+        }
+      });
+    </script>
+    <script src="/js/user-dashboard.js"></script>
+</body>
+</html>

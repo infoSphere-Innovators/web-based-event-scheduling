@@ -8,7 +8,7 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background-image: linear-gradient(to bottom, #007d28 10%, #003a11 150%);
+    background: linear-gradient(to bottom, #957b39 10%, #58422b 150%);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

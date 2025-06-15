@@ -51,7 +51,7 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background-image: linear-gradient(to bottom, #2A0047 10%, #FF91F6 150%);
+    background: linear-gradient(to bottom, #957b39 10%, #58422b 150%);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
