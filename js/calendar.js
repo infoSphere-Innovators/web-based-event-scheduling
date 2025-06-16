@@ -28,32 +28,51 @@ let currentDate = new Date();
 // Replace the mock events object with a function to fetch events
 let events = {};
 
+// Add these variables near the top after your other declarations
+let eventsData = {};
+const modal = document.getElementById("eventDetailsModal");
+const span = document.getElementsByClassName("close")[0];
+
 async function fetchEvents() {
     try {
         const eventsRef = ref(db, 'events');
         const snapshot = await get(eventsRef);
         
         if (snapshot.exists()) {
-            const eventsData = snapshot.val();
+            eventsData = snapshot.val(); // Store full event data
             events = {};
             
             Object.values(eventsData).forEach(event => {
-                // Use EventDate directly since it's already in YYYY-MM-DD format
                 const dateKey = event.EventDate;
                 
                 if (!events[dateKey]) {
                     events[dateKey] = [];
                 }
-                
-                // Use EventName as the title
-                events[dateKey].push(event.EventName);
+                events[dateKey].push({
+                    id: event.EventID,
+                    name: event.EventName
+                });
             });
         }
         
-        // After fetching events, render the calendar
         renderCalendar();
     } catch (error) {
         console.error("Error fetching events:", error);
+    }
+}
+
+// Add this new function to show event details
+function showEventDetails(eventId) {
+    const event = eventsData[eventId];
+    if (event) {
+        document.getElementById('modalEventName').textContent = event.EventName;
+        document.getElementById('modalEventDate').textContent = event.EventDate;
+        document.getElementById('modalEventTime').textContent = event.EventTime;
+        document.getElementById('modalEventVenue').textContent = event.EventVenue;
+        document.getElementById('modalEventType').textContent = event.EventType;
+        document.getElementById('modalEventDescription').textContent = event.EventDescription;
+        document.getElementById('modalEventPublisher').textContent = event.Published;
+        modal.style.display = "block";
     }
 }
 
@@ -118,7 +137,11 @@ function renderCalendar() {
                     dayEvents.forEach(event => {
                         const eventCard = document.createElement('div');
                         eventCard.classList.add('event-card-mini');
-                        eventCard.textContent = event;
+                        eventCard.textContent = event.name;
+                        eventCard.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            showEventDetails(event.id);
+                        });
                         eventsContainer.appendChild(eventCard);
                     });
                 }
@@ -354,4 +377,16 @@ document.addEventListener('DOMContentLoaded', () => {
             navLeft.classList.remove('show');
         }
     });
+
+    // Modal close button
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Click outside modal to close
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 });

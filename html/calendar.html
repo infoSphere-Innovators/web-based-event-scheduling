@@ -38,6 +38,52 @@
       .btn:hover {
         opacity: 0.9;
       }
+
+      /* Modal styles */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+        max-width: 600px;
+        border-radius: 8px;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .event-details {
+        margin-top: 10px;
+      }
+
+      .event-details p {
+        margin: 5px 0;
+      }
     </style>
   </head>
   <body>
@@ -102,6 +148,22 @@
       </div>
     </div>
 
+    <!-- Event Details Modal -->
+    <div id="eventDetailsModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalEventName"></h2>
+        <div class="event-details">
+          <p><strong>Date:</strong> <span id="modalEventDate"></span></p>
+          <p><strong>Time:</strong> <span id="modalEventTime"></span></p>
+          <p><strong>Venue:</strong> <span id="modalEventVenue"></span></p>
+          <p><strong>Type:</strong> <span id="modalEventType"></span></p>
+          <p><strong>Description:</strong> <span id="modalEventDescription"></span></p>
+          <p><strong>Published by:</strong> <span id="modalEventPublisher"></span></p>
+        </div>
+      </div>
+    </div>
+
     <script type="module" src="/js/calendar.js"></script>
     <script>
       // Toggle the notification dropdown
@@ -120,8 +182,55 @@
           dropdown.style.display = "none";
         }
       });
-    </script>
-    <script type="module">
+
+      // Get the modal
+      var modal = document.getElementById("eventDetailsModal");
+
+      // Get the <span> element that closes the modal
+      var span = document.getElementsByClassName("close")[0];
+
+      // When the user clicks on a table cell (assuming events are in the table cells)
+      document
+        .getElementById("calendar-body")
+        .addEventListener("click", function (event) {
+          if (event.target.tagName === "TD") {
+            // Get event details from data attributes (assuming they are set)
+            var eventName = event.target.dataset.eventName;
+            var eventDate = event.target.dataset.eventDate;
+            var eventTime = event.target.dataset.eventTime;
+            var eventVenue = event.target.dataset.eventVenue;
+            var eventType = event.target.dataset.eventType;
+            var eventDescription = event.target.dataset.eventDescription;
+            var eventPublisher = event.target.dataset.eventPublisher;
+
+            // Set modal content
+            document.getElementById("modalEventName").innerText = eventName;
+            document.getElementById("modalEventDate").innerText = eventDate;
+            document.getElementById("modalEventTime").innerText = eventTime;
+            document.getElementById("modalEventVenue").innerText = eventVenue;
+            document.getElementById("modalEventType").innerText = eventType;
+            document.getElementById("modalEventDescription").innerText =
+              eventDescription;
+            document.getElementById("modalEventPublisher").innerText =
+              eventPublisher;
+
+            // Display the modal
+            modal.style.display = "block";
+          }
+        });
+
+      // When the user clicks on <span> (x), close the modal
+      span.onclick = function () {
+        modal.style.display = "none";
+      };
+
+      // When the user clicks anywhere outside of the modal, close it
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      };
+
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
       import {
         getAuth,
