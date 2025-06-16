@@ -69,13 +69,14 @@ th {
 td {
     position: relative;
     height: 120px; /* Consistent height */
-    padding: 12px;
+    padding: 8px;
     vertical-align: top;
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.05));
     border-radius: 16px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
+    overflow: hidden;
 }
 
 td:hover {
@@ -671,4 +672,79 @@ body {
 /* Apply to calendar container */
 .calendar-container {
   animation: fadeInUp 1.2s ease forwards;
+}
+
+/* Day container styles */
+.day-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+/* Events container styles */
+.events-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    overflow-y: auto;
+    max-height: calc(100% - 32px); /* Subtract day number height */
+}
+
+/* Mini event card styles */
+.event-card-mini {
+    background: rgba(157, 98, 245, 0.2);
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    color: white;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.event-card-mini:hover {
+    background: rgba(157, 98, 245, 0.3);
+    transform: translateX(2px);
+}
+
+/* Update existing td styles */
+td {
+    position: relative;
+    height: 120px;
+    padding: 8px;
+    vertical-align: top;
+    background: linear-gradient(145deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.05));
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    overflow: hidden;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    td {
+        height: 100px;
+        padding: 6px;
+    }
+
+    .event-card-mini {
+        font-size: 0.65rem;
+        padding: 1px 3px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    td {
+        height: 80px;
+        padding: 4px;
+    }
+
+    .event-card-mini {
+        font-size: 0.6rem;
+        padding: 1px 2px;
+    }
 }

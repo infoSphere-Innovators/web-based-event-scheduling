@@ -24,7 +24,8 @@ const months = [
     dayNamesEl.appendChild(th);
   });
 
-  function renderCalendar() {
+  // Update the renderCalendar function
+function renderCalendar() {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
     const firstDayOfMonth = new Date(year, month, 1).getDay();
@@ -37,33 +38,55 @@ const months = [
     for (let i = 0; i < 6; i++) {
         const row = document.createElement('tr');
         for (let j = 0; j < 7; j++) {
-        const cell = document.createElement('td');
-        if (i === 0 && j < firstDayOfMonth) {
-            cell.innerHTML = '';
-        } else if (day <= daysInMonth) {
-            const span = document.createElement('span');
-            span.textContent = day;
+            const cell = document.createElement('td');
+            if (i === 0 && j < firstDayOfMonth) {
+                cell.innerHTML = '';
+            } else if (day <= daysInMonth) {
+                // Create day number container
+                const dayContainer = document.createElement('div');
+                dayContainer.classList.add('day-container');
 
-            const isToday =
-            day === today.getDate() &&
-            month === today.getMonth() &&
-            year === today.getFullYear();
-            if (isToday) span.classList.add('today');
+                const dayNumber = document.createElement('span');
+                dayNumber.classList.add('day-number');
+                dayNumber.textContent = day;
 
-            // Pass a fresh copy of year/month/day to avoid mutation issues
-            const dayCopy = day;
-            const monthCopy = month;
-            const yearCopy = year;
+                // Check if it's today
+                if (day === today.getDate() && 
+                    month === today.getMonth() && 
+                    year === today.getFullYear()) {
+                    cell.classList.add('today');
+                }
 
-            span.addEventListener('click', () => showEvent(yearCopy, monthCopy, dayCopy));
-            cell.appendChild(span);
-            day++;
-        }
-        row.appendChild(cell);
+                // Add events for this day
+                const dateKey = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const dayEvents = events[dateKey];
+
+                // Create events container
+                const eventsContainer = document.createElement('div');
+                eventsContainer.classList.add('events-container');
+
+                if (dayEvents) {
+                    dayEvents.forEach(event => {
+                        const eventCard = document.createElement('div');
+                        eventCard.classList.add('event-card-mini');
+                        eventCard.textContent = event;
+                        eventsContainer.appendChild(eventCard);
+                    });
+                }
+
+                dayContainer.appendChild(dayNumber);
+                dayContainer.appendChild(eventsContainer);
+                cell.appendChild(dayContainer);
+
+                // Add click event listener
+                cell.addEventListener('click', () => showEvent(year, month, day));
+                day++;
+            }
+            row.appendChild(cell);
         }
         calendarBody.appendChild(row);
     }
-    }
+}
 
     function showEvent(year, month, day) {
     const key = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
