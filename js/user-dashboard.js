@@ -21,11 +21,12 @@ document.addEventListener("DOMContentLoaded", () => {
     const userBtn = document.getElementById("userBtn");
     const notifDropdown = document.getElementById("notifDropdown");
     const allBtn = document.getElementById("all-btn");
+    const ongoingBtn = document.getElementById("ongoing-btn");
     const upcomingBtn = document.getElementById("upcoming-btn");
     const pastBtn = document.getElementById("past-btn");
     const eventCards = document.querySelectorAll(".event-card");
     const noEventsMsg = document.getElementById("no-events-message");
-    const buttons = [allBtn, upcomingBtn, pastBtn];
+    const buttons = [allBtn, ongoingBtn, upcomingBtn, pastBtn];
 
     // Navigation Functions
     function setActiveTab(button) {
@@ -103,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const dateText = card.querySelector(".event-date").textContent;
             const timeText = card.querySelector(".event-time").textContent;
             
-            // Parse date properly
+            // Parse date
             const [day, month] = dateText.split(" ");
             const currentYear = new Date().getFullYear();
             
@@ -118,10 +119,16 @@ document.addEventListener("DOMContentLoaded", () => {
             
             const eventDate = new Date(`${month} ${day}, ${currentYear} ${hour24}:${minutes}:00`);
             
+            // Check if the event is today
+            const isToday = eventDate.toDateString() === now.toDateString();
+            
             let show = false;
             if (type === "all") {
                 show = true;
+            } else if (type === "ongoing") {
+                show = isToday;
             } else if (type === "upcoming") {
+                // Show events that are today (after current time) or in the future
                 show = eventDate >= now;
             } else if (type === "past") {
                 show = eventDate < now;
@@ -142,6 +149,12 @@ document.addEventListener("DOMContentLoaded", () => {
         clearActive();
         allBtn.classList.add("active");
         filterEvents("all");
+    });
+
+    ongoingBtn.addEventListener("click", () => {
+        clearActive();
+        ongoingBtn.classList.add("active");
+        filterEvents("ongoing");
     });
 
     upcomingBtn.addEventListener("click", () => {
@@ -225,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initialize
     updateTime();
     fetchEvents();
-    filterEvents("upcoming"); // Set default filter    // Hamburger Menu
+    filterEvents("ongoing"); // Set default filter    // Hamburger Menu
 
     // Add this inside your DOMContentLoaded event listener
     function updateAuthUI(isLoggedIn) {
