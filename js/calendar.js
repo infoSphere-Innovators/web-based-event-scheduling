@@ -1,30 +1,78 @@
+// Import Firebase modules at the top
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+
+// Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyC4YDw8dhp1qsJ7BhlNUSNHq3BxYzg6GDI",
+  authDomain: "web-based-event-scheduling.firebaseapp.com",
+  projectId: "web-based-event-scheduling",
+  storageBucket: "web-based-event-scheduling.appspot.com",
+  messagingSenderId: "925435406930",
+  appId: "1:925435406930:web:48c759977c266a2cedcd8b",
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
+
+// Keep existing calendar variables
 const months = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
-  ];
-  const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-  const today = new Date();
-  let currentDate = new Date();
+];
+const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+const today = new Date();
+let currentDate = new Date();
 
-  const events = {
-    '2025-06-03': ['Mid-Year Tech Summit'],
-    '2025-06-10': ['Dev Conference', 'UI/UX Workshop'],
-    '2025-06-15': ['Company Picnic'],
-    '2025-06-25': ['Hackathon Demo Day']
-  };
+// Replace the mock events object with a function to fetch events
+let events = {};
 
-  const dayNamesEl = document.getElementById('day-names');
-  const calendarBody = document.getElementById('calendar-body');
-  const monthYearEl = document.getElementById('month-year');
-  const eventDisplay = document.getElementById('event-display');
+async function fetchEvents() {
+    try {
+        const eventsRef = ref(db, 'events');
+        const snapshot = await get(eventsRef);
+        
+        if (snapshot.exists()) {
+            const eventsData = snapshot.val();
+            events = {};
+            
+            Object.values(eventsData).forEach(event => {
+                // Use EventDate directly since it's already in YYYY-MM-DD format
+                const dateKey = event.EventDate;
+                
+                if (!events[dateKey]) {
+                    events[dateKey] = [];
+                }
+                
+                // Use EventName as the title
+                events[dateKey].push(event.EventName);
+            });
+        }
+        
+        // After fetching events, render the calendar
+        renderCalendar();
+    } catch (error) {
+        console.error("Error fetching events:", error);
+    }
+}
 
-  days.forEach(day => {
-    const th = document.createElement('th');
-    th.textContent = day;
-    dayNamesEl.appendChild(th);
-  });
+// Add these DOM element references at the top after Firebase initialization
+const monthYearEl = document.getElementById('month-year');
+const calendarBody = document.getElementById('calendar-body');
+const eventDisplay = document.getElementById('event-display');
+const dayNames = document.getElementById('day-names');
 
-  // Update the renderCalendar function
+// Add this to initialize the day names
+function initializeDayNames() {
+    days.forEach(day => {
+        const th = document.createElement('th');
+        th.textContent = day;
+        dayNames.appendChild(th);
+    });
+}
+
+// Update the renderCalendar function
 function renderCalendar() {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
@@ -40,6 +88,7 @@ function renderCalendar() {
         for (let j = 0; j < 7; j++) {
             const cell = document.createElement('td');
             if (i === 0 && j < firstDayOfMonth) {
+                // Empty cells before the first day
                 cell.innerHTML = '';
             } else if (day <= daysInMonth) {
                 // Create day number container
@@ -78,13 +127,13 @@ function renderCalendar() {
                 dayContainer.appendChild(eventsContainer);
                 cell.appendChild(dayContainer);
 
-                // Add click event listener
                 cell.addEventListener('click', () => showEvent(year, month, day));
                 day++;
             }
             row.appendChild(cell);
         }
         calendarBody.appendChild(row);
+        if (day > daysInMonth) break; // Stop if we've used all days
     }
 }
 
@@ -233,8 +282,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Set calendar button as active on load
     setActiveTab(calendarBtn);
 
+    initializeDayNames(); // Add this line
     updateTime();
-    renderCalendar();
+    fetchEvents(); // Instead of renderCalendar, fetch events first
+
+    // Set up the navigation buttons to refresh events when changing months
+    document.getElementById('prev-month').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        fetchEvents();
+    });
+
+    document.getElementById('next-month').addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        fetchEvents();
+    });
 });
 
   function updateTime() {
