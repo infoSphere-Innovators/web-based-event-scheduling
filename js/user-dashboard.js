@@ -17,9 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const eventsBtn = document.getElementById("events-btn");
     const calendarBtn = document.getElementById("calendar-btn");
     const announcementBtn = document.getElementById("announcement-btn");
-    const notifBtn = document.getElementById("notifBtn");
     const userBtn = document.getElementById("userBtn");
-    const notifDropdown = document.getElementById("notifDropdown");
     const allBtn = document.getElementById("all-btn");
     const ongoingBtn = document.getElementById("ongoing-btn");
     const upcomingBtn = document.getElementById("upcoming-btn");
@@ -50,18 +48,6 @@ document.addEventListener("DOMContentLoaded", () => {
     announcementBtn.addEventListener("click", () => {
         setActiveTab(announcementBtn);
         window.location.href = "announcements.html";
-    });
-
-    // Notification Dropdown
-    notifBtn.addEventListener("click", () => {
-        notifDropdown.style.display = notifDropdown.style.display === "block" ? "none" : "block";
-    });
-
-    // Close dropdown when clicking outside
-    window.addEventListener("click", (event) => {
-        if (!event.target.closest(".notification-wrapper")) {
-            notifDropdown.style.display = "none";
-        }
     });
 
     // User Profile Navigation

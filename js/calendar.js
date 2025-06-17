@@ -309,14 +309,18 @@ document.addEventListener('DOMContentLoaded', () => {
     updateTime();
     fetchEvents(); // Instead of renderCalendar, fetch events first
 
-    // Set up the navigation buttons to refresh events when changing months
+    // Set up the navigation buttons
     document.getElementById('prev-month').addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() - 1);
+        const newDate = new Date(currentDate);
+        newDate.setMonth(newDate.getMonth() - 1);
+        currentDate = newDate;
         fetchEvents();
     });
 
     document.getElementById('next-month').addEventListener('click', () => {
-        currentDate.setMonth(currentDate.getMonth() + 1);
+        const newDate = new Date(currentDate);
+        newDate.setMonth(newDate.getMonth() + 1);
+        currentDate = newDate;
         fetchEvents();
     });
 });
