@@ -17,7 +17,7 @@ body {
     flex: 1;
     display: flex;
     padding: 3rem;
-    gap: 8rem; /* Increased gap to accommodate wider form */
+    gap: 4rem; /* Increased gap to accommodate wider form */
     align-items: center;
     justify-content: center;
     max-width: 1800px;
@@ -46,13 +46,17 @@ body {
 
 .sign-in-card {
     background: rgba(255, 255, 255, 0.95);
-    padding: 3rem 4.5rem;
+    padding: 3rem 3rem;
     border-radius: 20px;
     width: 100%;
     max-width: 480px; /* Adjusted for better mobile scaling */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
     margin: 0 auto;
+}
+
+#username, #password {
+    width: 100%;
 }
 
 .sign-in-card h2 {
