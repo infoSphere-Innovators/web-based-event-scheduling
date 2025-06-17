@@ -7,3 +7,16 @@ document.getElementById('downloadQR').addEventListener('click', function() {
         link.click();
     }
 });
+
+document.getElementById('back-btn').addEventListener('click', function() {
+    window.location.href = 'user-dashboard.html';
+});
+
+// Redirect to another page on avatar click
+document.getElementById("userBtn").addEventListener("click", function () {
+    window.location.href = "profile-details.html";
+});
+
+document.getElementById('performance-btn').addEventListener('click', function () {
+    window.location.href = 'performance.html';
+});

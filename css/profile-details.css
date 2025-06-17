@@ -72,32 +72,6 @@ nav button.active-tab {
   font-size: 16px;
 }
 
-.notification-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.notif-dropdown {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 40px;
-  background-color: white;
-  color: black;
-  min-width: 220px;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  border-radius: 8px;
-  z-index: 1000;
-}
-
-.notif-dropdown p {
-  margin: 0 0 8px;
-  font-size: 14px;
-  font-weight: 400;
-  font-family: 'Inter', sans-serif;
-}
-
 .avatar:hover {
   transform: scale(1.05);
   transition: transform 0.2s ease;
@@ -322,6 +296,24 @@ nav button.active-tab {
     gap: 8px;
     box-shadow: 0 4px 15px rgba(255, 224, 102, 0.3);
 }
+
+.logout-btn {
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background-color: #e03d31;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #d32f2f;
+}
+
 
 .qr-download-btn i {
     font-size: 1.2rem;

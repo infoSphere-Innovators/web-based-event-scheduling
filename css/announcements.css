@@ -87,29 +87,28 @@ nav button.active-tab {
   font-size: 16px;
 }
 
-/* Notification dropdown */
-.notification-wrapper {
-  position: relative;
-  display: inline-block;
+/* Shared button styles */
+.btn {
+padding: 8px 16px;
+border: 1px solid white;
+background: transparent;
+color: white;
+border-radius: 6px;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s ease;
+margin-left: 10px;
 }
 
-.notif-dropdown {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 40px;
-  background-color: white;
-  color: black;
-  min-width: 220px;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  border-radius: 8px;
-  z-index: 1000;
+/* Active button (Login) */
+.btn.active {
+background-color: white;
+color: #222; /* Dark text for contrast */
 }
 
-.notif-dropdown p {
-  margin: 0 0 8px;
-  font-size: 14px;
+/* Optional hover effects */
+.btn:hover {
+opacity: 0.9;
 }
 
 /* Hover effect for avatar (optional) */
@@ -117,8 +116,6 @@ nav button.active-tab {
   transform: scale(1.05);
   transition: transform 0.2s ease;
 }
-
-
 
 .avatar:hover {
     transform: scale(1.05);
@@ -128,7 +125,6 @@ nav button.active-tab {
     color: rgba(255, 255, 255, 0.7);
     font-size: 0.9rem;
 }
-
 
 /* Update Container Styling */
 .calendar-container {

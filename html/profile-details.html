@@ -15,25 +15,6 @@
     <link rel="stylesheet" href="/css/profile-details.css" />
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
     <link rel="icon" type="image/png" href="/assets/logo.png" />
-    <style>
-      .logout-btn {
-        margin-top: 1rem;
-        padding: 0.75rem 1.5rem;
-        background-color: #e03d31;
-        color: white;
-        border: none;
-        border-radius: 0.5rem;
-        font-size: 1rem;
-        font-weight: bold;
-        cursor: pointer;
-        transition: background 0.3s ease;
-      }
-
-      .logout-btn:hover {
-        background-color: #d32f2f;
-      }
-
-    </style>
   </head>
   <body>
     <header class="header">
@@ -173,25 +154,6 @@
 
     <script src="/js/profile-details.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-      document.getElementById('back-btn').addEventListener('click', function() {
-        window.location.href = 'user-dashboard.html';
-      });
-    </script>
-    <script>
-      // Redirect to another page on avatar click
-      document.getElementById("userBtn").addEventListener("click", function () {
-        window.location.href = "profile-details.html";
-      });
-
-      // Optional: hide dropdown if clicked outside
-      window.addEventListener("click", function (event) {
-        const dropdown = document.getElementById("notifDropdown");
-        if (!event.target.closest(".notification-wrapper")) {
-          dropdown.style.display = "none";
-        }
-      });
-    </script>
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
       import {
@@ -281,11 +243,7 @@
     });
 
     </script>
-    <script>
-      document.getElementById('performance-btn').addEventListener('click', function () {
-        window.location.href = 'performance.html';
-      });
-    </script>
+    
     <script type="module">
       import { auth } from "/js/firebase-config.js";
       import { signOut } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";

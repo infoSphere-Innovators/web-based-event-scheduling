@@ -13,31 +13,6 @@
     />
     <link rel="icon" type="image/png" href="/assets/logo.png" />
     <link rel="stylesheet" href="/css/announcements.css" />
-    <style>
-      /* Shared button styles */
-      .btn {
-        padding: 8px 16px;
-        border: 1px solid white;
-        background: transparent;
-        color: white;
-        border-radius: 6px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-left: 10px;
-      }
-
-      /* Active button (Login) */
-      .btn.active {
-        background-color: white;
-        color: #222; /* Dark text for contrast */
-      }
-
-      /* Optional hover effects */
-      .btn:hover {
-        opacity: 0.9;
-      }
-    </style>
     <title>Announcement Page</title>
   </head>
   <body>
@@ -109,25 +84,8 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
-    <script src="/js/announcements.js"></script>
-    <script>
-      // Toggle the notification dropdown
-      document
-        .getElementById("notifBtn")
-        .addEventListener("click", function () {
-          const dropdown = document.getElementById("notifDropdown");
-          dropdown.style.display =
-            dropdown.style.display === "block" ? "none" : "block";
-        });
 
-      // Optional: hide dropdown if clicked outside
-      window.addEventListener("click", function (event) {
-        const dropdown = document.getElementById("notifDropdown");
-        if (!event.target.closest(".notification-wrapper")) {
-          dropdown.style.display = "none";
-        }
-      });
-    </script>
+    <script src="/js/announcements.js"></script>
     <script>
       // Initialize Firebase
       const app = firebase.initializeApp(firebaseConfig);

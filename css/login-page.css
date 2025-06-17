@@ -13,6 +13,55 @@ body {
     justify-content: center;
 }
 
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: transparent;
+    position: relative;
+    z-index: 1000;
+}
+
+/* Logo sizing */
+.logo img {
+    height: 40px;
+}
+
+/* Home Button */
+.home-btn {
+    background-color: #000;
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 4px;
+}
+
+.home-btn a {
+    color: white;
+    text-decoration: none;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700; /* Bold */
+}
+
+.home-btn:hover {
+    background-color: #222;
+}
+
+.signup-text {
+    margin-top: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.signup-text a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.signup-text a:hover {
+    color: #0054ae;
+}
+
 .container {
     flex: 1;
     display: flex;
