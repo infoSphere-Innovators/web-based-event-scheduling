@@ -7,22 +7,34 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
     />
-    <title>Personal Dashboard View</title>
+    <title>Personal Status</title>
+
+    <!-- Google Material Symbols -->
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@48,400,0,0"
     />
+
+    <!-- Google Fonts (Inter) -->
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Font Awesome -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="/assets/logo.png" />
+
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/performance.css" />
     <link rel="stylesheet" href="/css/profile-details.css" />
+
+    <!-- Inline Styles -->
     <style>
       label[type="date"],
       button.primary,
@@ -35,15 +47,14 @@
       }
     </style>
   </head>
+
   <body>
-    <!-- Update the header section -->
+    <!-- Header Section -->
     <header class="header">
       <nav class="nav-left">
-        <button id="back-btn">
-          <i class="fas fa-arrow-left"></i>
-        </button>
-        <button id="profile-btn">Profile Details</button>
-        <button id="performance-btn" class="active-tab">Performance</button>
+        <button id="back-btn"><i class="fas fa-arrow-left"></i></button>
+        <button id="profile-btn">Account</button>
+        <button id="performance-btn" class="active-tab">Personal Records</button>
       </nav>
       <div class="nav-right">
         <span id="current-time" class="hide-mobile">10:08 PM GMT+8</span>
@@ -52,37 +63,25 @@
             <button id="notifBtn" class="icon-btn">
               <i class="fas fa-bell"></i>
             </button>
-            <div class="notif-dropdown" id="notifDropdown">
-              <!-- Notification content -->
-            </div>
+            <div class="notif-dropdown" id="notifDropdown"></div>
           </div>
-          <button class="avatar" id="userBtn">
-            <i class="fas fa-user"></i>
-          </button>
+          <button class="avatar" id="userBtn"><i class="fas fa-user"></i></button>
         </div>
       </div>
     </header>
+
+    <!-- Main Container -->
     <div class="container">
       <aside></aside>
       <main>
-        <h1>Hello, Member Name</h1>
-
-        <label
-          style="
-            font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            font-weight: 500;
-            background: transparent;
-            color: white;
-          "
-        >
-          This is your personal dashboard showing your performance and
-          participation in church events.
+        <h1 id="member-name">Hello, Member</h1>
+        <label style="font-family: 'Inter'; font-size: 14px; font-weight: 500; color: white;">
+          This is your personal dashboard showing your performance and participation in church events.
         </label>
 
+        <!-- Insights Section -->
         <div class="insights">
-          <!-- start seling -->
-          <!-- Total Events -->
+          <!-- Total Events (Icon: event) -->
           <div class="sales">
             <span class="material-symbols-sharp">event</span>
             <div class="middle">
@@ -95,7 +94,7 @@
             <small>This Year</small>
           </div>
 
-          <!-- Attended Events -->
+          <!-- Attended Events (Icon: check_circle) -->
           <div class="expenses">
             <span class="material-symbols-sharp">check_circle</span>
             <div class="middle">
@@ -105,24 +104,23 @@
               </div>
               <span class="material-symbols-sharp">check_circle</span>
             </div>
-            <small>Updated Weekly</small>
+            <small>Updated Monthly</small>
           </div>
 
-          <!-- Status -->
+          <!-- Status (Icon: leaderboard) -->
           <div class="income">
             <span class="material-symbols-sharp">leaderboard</span>
             <div class="middle">
               <div class="left">
                 <h3>Status</h3>
-                <h1>Active</h1>
+                <h1 id="member-status">Loading...</h1>
               </div>
             </div>
             <small>As of Today</small>
           </div>
-
-          <!-- end seling -->
         </div>
-        <!-- end insights -->
+
+        <!-- Attended Events Table -->
         <div class="attended_events">
           <h2>Attended Church Events</h2>
           <table>
@@ -131,191 +129,159 @@
                 <th>Event Name</th>
                 <th>Event Date</th>
                 <th></th>
-                <!-- View button column -->
               </tr>
             </thead>
-            <tbody>
-              <tr>
-                <td>Sunday Worship Service</td>
-                <td>2025-06-08</td>
-                <td>
-                  <button
-                    class="primary"
-                    onclick="showEventPopup('Sunday Worship Service', '08:50 AM')"
-                  >
-                    View Event
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Men’s Fellowship Night</td>
-                <td>2025-05-30</td>
-                <td>
-                  <button
-                    class="primary"
-                    onclick="showEventPopup('Men’s Fellowship Night', '06:30 PM')"
-                  >
-                    View Event
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Youth Bible Camp</td>
-                <td>2025-05-18</td>
-                <td>
-                  <button
-                    class="primary"
-                    onclick="showEventPopup('Youth Bible Camp', '07:15 AM')"
-                  >
-                    View Event
-                  </button>
-                </td>
-              </tr>
-              <tr>
-                <td>Prayer & Healing Night</td>
-                <td>2025-04-25</td>
-                <td>
-                  <button
-                    class="primary"
-                    onclick="showEventPopup('Prayer & Healing Night', '06:00 PM')"
-                  >
-                    View Event
-                  </button>
-                </td>
-              </tr>
-            </tbody>
+            <tbody id="attended-events-body"></tbody>
           </table>
         </div>
 
-        <!-- Popup Modal -->
-        <div
-          id="eventPopup"
-          style="
-            display: none;
-            position: fixed;
-            top: 20%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: white;
-            border: 1px solid #ccc;
-            padding: 40px 30px;
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            text-align: center;
-          "
-        >
+        <div id="eventPopup" style="display: none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%); background: white; border: 1px solid #ccc; padding: 40px 30px; z-index: 1000; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); border-radius: 8px; font-family: 'Inter', sans-serif; text-align: center;">
           <p id="eventDetails" style="margin-bottom: 20px; font-size: 18px"></p>
-          <button
-            onclick="closePopup()"
-            style="
-              padding: 10px 20px;
-              font-size: 16px;
-              font-family: 'Inter', sans-serif;
-            "
-          >
-            Close
-          </button>
+          <button onclick="closePopup()" style="padding: 10px 20px; font-size: 16px;">Close</button>
         </div>
       </main>
-      <!------------------
-         end main
-        ------------------->
 
-      <!----------------
-        start right main 
-      ---------------------->
       <div class="right"></div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Scripts -->
     <script>
-      // Example data
+      // Data simulation
       const totalEvents = 12;
       const attendedEvents = 6;
       const participation = Math.round((attendedEvents / totalEvents) * 100);
 
-      function updateProgress(idPrefix, valuePercent) {
-        const circle = document.querySelector(`#${idPrefix} .progress-ring`);
-        const text = document
-          .getElementById(`${idPrefix}-percentage`)
-          .querySelector("p");
-
-        const radius = 30;
-        const circumference = 2 * Math.PI * radius;
-        const offset = circumference * (1 - valuePercent / 100);
-
-        circle.style.strokeDasharray = `${circumference}`;
-        circle.style.strokeDashoffset = offset;
-
-        text.textContent = `${valuePercent}%`;
-      }
-
       function setStats() {
         document.getElementById("total-events").textContent = totalEvents;
         document.getElementById("attended-events").textContent = attendedEvents;
-        document.getElementById(
-          "participation-rate"
-        ).textContent = `${participation}%`;
-
-        updateProgress("sales", 100); // Total Events (always 100%)
-        updateProgress("expenses", (attendedEvents / totalEvents) * 100); // Attendance
-        updateProgress("income", participation); // Participation rate
       }
 
-      // Trigger after DOM is ready
       document.addEventListener("DOMContentLoaded", setStats);
-    </script>
-    <script>
-      function showEventPopup(eventTitle, checkInTime) {
-        document.getElementById("eventDetails").textContent =
-          "Title of the event attended: " +
-          eventTitle +
-          " | Time in (QR scanned): " +
-          checkInTime;
+
+      function showEventPopup(name, timeIn) {
+        const details = `Event Name: ${name}<br>Time In: ${timeIn}`;
+        document.getElementById("eventDetails").innerHTML = details;
         document.getElementById("eventPopup").style.display = "block";
       }
+
 
       function closePopup() {
         document.getElementById("eventPopup").style.display = "none";
       }
-    </script>
-    <script>
-      document
-        .getElementById("back-btn")
-        .addEventListener("click", function () {
-          window.location.href = "user-dashboard.html";
-        });
-    </script>
-    <script>
-      // Toggle the notification dropdown
-      document
-        .getElementById("notifBtn")
-        .addEventListener("click", function () {
-          const dropdown = document.getElementById("notifDropdown");
-          dropdown.style.display =
-            dropdown.style.display === "block" ? "none" : "block";
-        });
 
-      // Redirect to another page on avatar click
-      document.getElementById("userBtn").addEventListener("click", function () {
-        window.location.href = "profile-details.html";
+      document.getElementById("back-btn").addEventListener("click", () => {
+        window.location.href = "user-dashboard.html";
       });
 
-      // Optional: hide dropdown if clicked outside
-      window.addEventListener("click", function (event) {
+      document.getElementById("notifBtn").addEventListener("click", () => {
+        const dropdown = document.getElementById("notifDropdown");
+        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+      });
+
+      window.addEventListener("click", (event) => {
         const dropdown = document.getElementById("notifDropdown");
         if (!event.target.closest(".notification-wrapper")) {
           dropdown.style.display = "none";
         }
       });
+
+      document.getElementById("userBtn").addEventListener("click", () => {
+        window.location.href = "profile-details.html";
+      });
+
+      document.getElementById("profile-btn").addEventListener("click", () => {
+        window.location.href = "profile-details.html";
+      });
     </script>
-    <script>
-      document
-        .getElementById("profile-btn")
-        .addEventListener("click", function () {
-          window.location.href = "profile-details.html";
-        });
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+      import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyC4YDw8dhp1qsJ7BhlNUSNHq3BxYzg6GDI",
+        authDomain: "web-based-event-scheduling.firebaseapp.com",
+        projectId: "web-based-event-scheduling",
+        storageBucket: "web-based-event-scheduling.appspot.com",
+        messagingSenderId: "925435406930",
+        appId: "1:925435406930:web:48c759977c266a2cedcd8b",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getDatabase(app);
+      const auth = getAuth(app);
+
+      function normalize(uid) {
+        return uid?.toLowerCase().replace(/o/g, "0");
+      }
+
+      onAuthStateChanged(auth, async (user) => {
+        if (!user) return;
+
+        const userUid = normalize(user.uid);
+
+        // Load member info
+        const memberSnapshot = await get(ref(db, "members/" + user.uid));
+        if (memberSnapshot.exists()) {
+          const member = memberSnapshot.val();
+          document.getElementById("member-name").textContent = `Hello, ${member.FirstName || "Member"}`;
+          document.getElementById("member-status").textContent = member.MemberStatus || "N/A";
+        }
+
+        // Load events count
+        const eventsSnapshot = await get(ref(db, "events"));
+        if (eventsSnapshot.exists()) {
+          document.getElementById("total-events").textContent = Object.keys(eventsSnapshot.val()).length;
+        }
+
+        // Load and display attended events
+        const attendanceSnapshot = await get(ref(db, "attendances"));
+        const tbody = document.getElementById("attended-events-body");
+        tbody.innerHTML = "";
+
+        if (attendanceSnapshot.exists()) {
+          const attendanceData = attendanceSnapshot.val();
+          const attendedEventsList = [];
+
+          for (const eventId in attendanceData) {
+            const records = attendanceData[eventId];
+            for (const recordId in records) {
+              const record = records[recordId];
+
+              if (normalize(record.MemberUid || "") === userUid && (record.Status || "").toLowerCase() === "present") {
+                const eventSnapshot = await get(ref(db, "events/" + eventId));
+                const eventData = eventSnapshot.exists() ? eventSnapshot.val() : {};
+
+                attendedEventsList.push({
+                  eventName: eventData.EventName || "Unnamed Event",
+                  eventDate: eventData.EventDate || "1970-01-01",
+                  timeIn: record.TimeIn || record["Time In"] || "N/A",
+                });
+              }
+            }
+          }
+
+          // Sort by most recent date
+          attendedEventsList.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
+
+          // Render table rows
+          attendedEventsList.forEach(({ eventName, eventDate, timeIn }) => {
+            const row = document.createElement("tr");
+            row.innerHTML = `
+              <td>${eventName}</td>
+              <td>${eventDate}</td>
+              <td>
+                <button class="primary" onclick="showEventPopup(\`${eventName}\`, \`${timeIn}\`)">
+                  View Event
+                </button>
+              </td>
+            `;
+            tbody.appendChild(row);
+          });
+
+          document.getElementById("attended-events").textContent = attendedEventsList.length;
+        }
+      });
     </script>
   </body>
 </html>
