@@ -253,6 +253,7 @@ function showAnnouncementModal(announcement) {
     const modalDescription = document.getElementById('modal-description');
     const modalReminders = document.getElementById('modal-reminders');
     const modalNotes = document.getElementById('modal-notes');
+    
 
     // Set modal content
     modalTitle.textContent = announcement.AnnouncementName;
@@ -281,6 +282,10 @@ function showAnnouncementModal(announcement) {
 
     // Show modal
     modal.style.display = 'flex';
+
+        document.getElementById('modal-close-footer').addEventListener('click', () => {
+  document.getElementById('modal').style.display = 'none';
+});
 }
 
 // Add real-time updates
@@ -297,3 +302,4 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize real-time updates
     setupRealtimeUpdates();
 });
+
