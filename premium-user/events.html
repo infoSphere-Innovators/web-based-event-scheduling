@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Events Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/css/user-dashboard.css" />
+  <link rel="icon" type="image/png" href="/assets/logo.png" />
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script> <!-- ✅ Add this line -->
+  <!-- Inline Styles -->
+    <style>
+      label[type="date"],
+      button.primary,
+      #eventPopup button {
+        font-family: "Inter", sans-serif;
+      }
+
+      .primary {
+        font-weight: bold;
+      }
+    </style>
+    <!-- Styles for Loading Bar -->
+    <style>
+      #loading-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: transparent;
+        z-index: 9999;
+      }
+
+      #loading-bar .bar {
+        height: 100%;
+        width: 0%;
+        background-color: #09e941; /* Brown */
+        animation: loading 1s ease-out forwards;
+      }
+
+      @keyframes loading {
+        0% { width: 0%; }
+        100% { width: 100%; }
+      }
+    </style>
+    <style>
+      .navbar {
+        width: 100%;
+        height: 80px;
+        background-color: rgba(192, 97, 97, 0.05);
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .navbar::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        background-color: rgb(212, 206, 206);
+      }
+
+      .nav-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 60px;
+        flex-wrap: nowrap;
+      }
+
+      .logo img {
+        height: 50px;
+      }
+
+      .nav-icons {
+        display: flex;
+        gap: 60px;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        flex-wrap: nowrap;
+      }
+
+      .nav-icons li a {
+        text-decoration: none;
+        color: white;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.2s;
+      }
+
+      .nav-icons li a img {
+        width: 32px;
+        height: 32px;
+        transition: transform 0.2s, filter 0.2s;
+        filter: brightness(1);
+      }
+
+      .nav-icons li a:hover img {
+        transform: scale(1.1);
+      }
+
+      .nav-icons li a.active {
+        color: #8B4513;
+      }
+
+      .nav-icons li a.active img {
+        filter: brightness(0) sepia(1) saturate(800%) hue-rotate(355deg);
+      }
+
+      .nav-icons li a.disabled {
+        pointer-events: none;
+        opacity: 0.4;
+      }
+
+      @media (max-width: 768px) {
+        .nav-content {
+          gap: 40px;
+        }
+
+        .nav-icons {
+          gap: 40px;
+        }
+
+        .logo img {
+          height: 42px;
+        }
+
+        .nav-icons li a img {
+          width: 26px;
+          height: 26px;
+        }
+
+        .nav-icons li a {
+          font-size: 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-content {
+          gap: 30px;
+        }
+
+        .nav-icons {
+          gap: 30px;
+        }
+
+        .logo img {
+          height: 36px;
+        }
+
+        .nav-icons li a img {
+          width: 22px;
+          height: 22px;
+        }
+
+        .nav-icons li a {
+          font-size: 9px;
+        }
+      }
+
+      #content {
+        padding: 20px;
+        width: 100%;
+        max-width: 1200px;
+      }
+
+      .event-container {
+        margin-top: 20px; /* Optional: ensures spacing after navbar */
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        max-width: 1200px;
+        width: 100%;
+      }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="navbar">
+      <div class="nav-content">
+        <div class="logo">
+          <img src="/assets/logo.png" alt="Logo" />
+        </div>
+        <ul class="nav-icons">
+          <li>
+            <a href="#" onclick="goToPerformance(event)">
+              <img src="/icons/home-status.svg" alt="Home"/>
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="goToEvents(event)" class="active" style="color: #000000;">
+              <img src="/icons/events.svg" alt="Events" />
+              <span>Events</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="goToAnnouncement(event)">
+              <img src="/icons/announcement.svg" alt="Announcement" />
+              <span>Announcement</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="goToCalendar(event)">
+              <img src="/icons/calendar.svg" alt="Calendar" />
+              <span>Calendar</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="goToProfile(event)">
+              <img src="/icons/user.svg" alt="User" />
+              <span>Me</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
+  <div class="app">
+    <!-- Main Content -->
+    <main class="main">
+      <!-- Header Section -->
+      <div class="main-header" id="main-header">
+        <h1>Events</h1>
+        <div class="toggle">
+          <button id="ongoing-btn" class="active">Ongoing</button>
+          <button id="upcoming-btn">Upcoming</button>
+          <button id="past-btn">Past</button>
+          <button id="all-btn">All</button>
+        </div>
+      </div>
+
+      <!-- Content Section -->
+      <div class="content">
+        <div class="events">
+          <!-- Event cards will be loaded here by JS -->
+        </div>
+        <p id="no-events-message" style="display: none; color: rgba(255, 255, 255, 0.6); text-align: center;">
+          There are no events to display.
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <!-- Modal structure -->
+  <div id="eventModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="modal-title"></h2>
+      <div class="modal-info">
+        <p><i class="fas fa-calendar-alt"></i> <span id="modal-date"></span></p>
+        <p><i class="fas fa-clock"></i> <span id="modal-time"></span></p>
+        <p><i class="fas fa-location-dot"></i> <span id="modal-venue"></span></p>
+        <p><i class="fas fa-tag"></i> <span id="modal-type"></span></p>
+      </div>
+      <div class="modal-description">
+        <h3><i class="fas fa-align-left"></i> Event Description</h3>
+        <p id="modal-description"></p>
+      </div>
+    </div>
+  </div>
+  <!-- Loading Progress Bar -->
+    <div id="loading-bar" style="display: none;">
+      <div class="bar"></div>
+    </div>
+
+  <script src="events.js"></script>
+  <script>
+      function goToPerformance(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = '/html/performance.html';
+        }, 1000); // Match the 1s animation duration
+      }
+
+      function goToProfile(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = '/html/profile-details.html';
+        }, 1000); // Match the same delay
+      }
+
+      function goToEvents(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = 'events.html';
+        }, 1000); // Match the same delay
+      }
+
+      function goToCalendar(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = 'calendar.html';
+        }, 1000); // Match the same delay
+      }
+
+      function goToAnnouncement(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = 'announcement.html';
+        }, 1000); // Match the same delay
+      }
+    </script>
+  <script>
+    const allBtn = document.getElementById("all-btn");
+    const upcomingBtn = document.getElementById("upcoming-btn");
+    const pastBtn = document.getElementById("past-btn");
+    const buttons = [allBtn, upcomingBtn, pastBtn];
+    const eventCards = document.querySelectorAll(".event-card");
+
+    function clearActive() {
+      buttons.forEach((btn) => btn.classList.remove("active"));
+    }
+
+    function parseDateFromText(text) {
+      const currentYear = new Date().getFullYear();
+      return new Date(`${text} ${currentYear}`);
+    }
+
+    function filterEvents(type) {
+      const now = new Date();
+      const noEventsMsg = document.getElementById("no-events-message");
+
+      let anyVisible = false;
+      eventCards.forEach((card) => {
+        const timeDiv = card.querySelector(".event-date");
+        const eventDate = parseDateFromText(timeDiv.textContent.trim());
+
+        let show = false;
+        if (type === "all") show = true;
+        else if (type === "upcoming") show = eventDate > now;
+        else if (type === "past") show = eventDate < now;
+
+        card.style.display = show ? "flex" : "none";
+        if (show) anyVisible = true;
+      });
+
+      noEventsMsg.style.display = anyVisible ? "none" : "block";
+    }
+
+    allBtn.addEventListener("click", () => {
+      clearActive();
+      allBtn.classList.add("active");
+      filterEvents("all");
+    });
+
+    upcomingBtn.addEventListener("click", () => {
+      clearActive();
+      upcomingBtn.classList.add("active");
+      filterEvents("upcoming");
+    });
+
+    pastBtn.addEventListener("click", () => {
+      clearActive();
+      pastBtn.classList.add("active");
+      filterEvents("past");
+    });
+
+    filterEvents("upcoming");
+  </script>
+  <script>
+    function applyStaggeredFadeIn() {
+      const cards = document.querySelectorAll(".event-card");
+      cards.forEach((card, index) => {
+        card.style.animation = `fadeInUp 0.6s ease forwards`;
+        card.style.animationDelay = `${index * 0.1}s`;
+      });
+    }
+
+    const originalFilterEvents = filterEvents;
+    filterEvents = function (type) {
+      originalFilterEvents(type);
+      applyStaggeredFadeIn();
+    };
+
+    applyStaggeredFadeIn();
+  </script>
+</body>
+</html>
