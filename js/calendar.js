@@ -72,7 +72,17 @@ function showEventDetails(eventId) {
         document.getElementById('modalEventType').textContent = event.EventType;
         document.getElementById('modalEventDescription').textContent = event.EventDescription;
         document.getElementById('modalEventPublisher').textContent = event.Published;
-        modal.style.display = "block";
+        
+        // Show modal with animation
+        modal.style.display = 'block';
+        const modalContent = document.querySelector('.modal-content');
+        modalContent.style.transform = 'translateY(30px)';
+        modalContent.style.opacity = '0';
+        
+        setTimeout(() => {
+            modalContent.style.transform = 'translateY(0)';
+            modalContent.style.opacity = '1';
+        }, 10);
     }
 }
 
@@ -333,8 +343,6 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(setTime, 60000); // Update every minute
 }
 
-  renderCalendar();
-
 // Add to each page's JavaScript file
 document.addEventListener('DOMContentLoaded', () => {
     const hamburgerMenu = document.querySelector('.hamburger-menu');
@@ -372,15 +380,46 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Modal close button
-    span.onclick = function() {
-        modal.style.display = "none";
+    // Enhanced modal interactions
+    const modal = document.getElementById("eventDetailsModal");
+    const closeBtn = document.getElementsByClassName("close")[0];
+    const closeModalBtn = document.getElementById("closeModalBtn");
+    
+    // Close with X button 
+    closeBtn.onclick = function() {
+        closeModalWithAnimation();
     }
-
-    // Click outside modal to close
+    
+    // Close with footer button
+    closeModalBtn.onclick = function() {
+        closeModalWithAnimation();
+    }
+    
+    // Close when clicking outside
     window.onclick = function(event) {
         if (event.target == modal) {
-            modal.style.display = "none";
+            closeModalWithAnimation();
         }
+    }
+    
+    // Close with ESC key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && modal.style.display === 'block') {
+            closeModalWithAnimation();
+        }
+    });
+    
+    // Animation for closing
+    function closeModalWithAnimation() {
+        const modalContent = document.querySelector('.modal-content');
+        modalContent.style.opacity = '0';
+        modalContent.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+            modal.style.display = 'none';
+            // Reset for next opening
+            modalContent.style.opacity = '1';
+            modalContent.style.transform = 'translateY(0)';
+        }, 300);
     }
 });

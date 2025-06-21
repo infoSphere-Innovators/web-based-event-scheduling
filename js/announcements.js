@@ -131,6 +131,14 @@ document.addEventListener('DOMContentLoaded', () => {
             hamburgerMenu.classList.remove('active');
         }
     });
+
+    if (modalCloseBtn) {
+        modalCloseBtn.addEventListener('click', function() {
+            closeAnnouncementModal();
+        });
+    } else {
+        console.error("Modal close button not found!");
+    }
 });
 
 // Helper Functions
@@ -253,11 +261,20 @@ function showAnnouncementModal(announcement) {
     const modalDescription = document.getElementById('modal-description');
     const modalReminders = document.getElementById('modal-reminders');
     const modalNotes = document.getElementById('modal-notes');
-    
+    const descriptionSection = document.getElementById('description-section');
+    const remindersSection = document.getElementById('reminders-section');
+    const notesSection = document.getElementById('notes-section');
 
     // Set modal content
     modalTitle.textContent = announcement.AnnouncementName;
-    modalDescription.textContent = announcement.Description;
+    
+    // Handle description
+    if (announcement.Description && announcement.Description.trim() !== '') {
+        modalDescription.textContent = announcement.Description;
+        descriptionSection.style.display = 'block';
+    } else {
+        descriptionSection.style.display = 'none';
+    }
 
     // Handle reminders
     modalReminders.innerHTML = '';
@@ -271,21 +288,72 @@ function showAnnouncementModal(announcement) {
             li.textContent = reminder;
             modalReminders.appendChild(li);
         });
+        remindersSection.style.display = 'block';
     } else {
         const li = document.createElement('li');
         li.textContent = 'No reminders';
         modalReminders.appendChild(li);
+        remindersSection.style.display = 'block';
     }
 
     // Handle notes
-    modalNotes.textContent = announcement.Notes === 'N/A' ? 'No additional notes' : announcement.Notes;
+    if (announcement.Notes && announcement.Notes !== 'N/A') {
+        modalNotes.textContent = announcement.Notes;
+        notesSection.style.display = 'block';
+    } else {
+        modalNotes.textContent = 'No additional notes';
+        notesSection.style.display = 'block';
+    }
 
-    // Show modal
-    modal.style.display = 'flex';
+    // Show modal with animation
+    modal.classList.add('show');
+    
+    // Trap focus inside modal for accessibility
+    trapFocus(modal);
+    
+    // Add ESC key handler
+    document.addEventListener('keydown', handleEscKey);
+}
 
-        document.getElementById('modal-close-footer').addEventListener('click', () => {
-  document.getElementById('modal').style.display = 'none';
-});
+// Function to close the modal
+function closeAnnouncementModal() {
+    const modal = document.getElementById('modal');
+    modal.classList.remove('show');
+    
+    // Remove ESC key handler
+    document.removeEventListener('keydown', handleEscKey);
+}
+
+// Handle ESC key
+function handleEscKey(event) {
+    if (event.key === 'Escape') {
+        closeAnnouncementModal();
+    }
+}
+
+// Trap focus inside modal for accessibility
+function trapFocus(element) {
+    const focusableElements = element.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+    const firstFocusableElement = focusableElements[0];
+    const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+    firstFocusableElement.focus();
+
+    element.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+            if (e.shiftKey) {
+                if (document.activeElement === firstFocusableElement) {
+                    lastFocusableElement.focus();
+                    e.preventDefault();
+                }
+            } else {
+                if (document.activeElement === lastFocusableElement) {
+                    firstFocusableElement.focus();
+                    e.preventDefault();
+                }
+            }
+        }
+    });
 }
 
 // Add real-time updates

@@ -55,7 +55,7 @@
     </div>
 
     <!-- Modal -->
-    <div id="modal" class="modal-backdrop" style="display: none">
+    <div id="modal" class="modal-backdrop">
       <div
         class="modal-content"
         role="dialog"
@@ -63,19 +63,34 @@
         aria-labelledby="modal-title"
       >
         <div class="modal-header">
-          <h2 id="modal-title"></h2>
+          <h2 id="modal-title">Announcement Title</h2>
         </div>
-        <div class="modal-section" id="modal-description"></div>
-        <div class="modal-section">
+
+        <div class="modal-section" id="description-section">
+          <h3>Description</h3>
+          <p id="modal-description">
+            Announcement description will appear here.
+          </p>
+        </div>
+
+        <div class="modal-section" id="reminders-section">
           <h3>Reminders</h3>
           <ul id="modal-reminders"></ul>
         </div>
-        <div class="modal-section">
-          <h3>Notes</h3>
-          <p id="modal-notes"></p>
+
+        <div class="modal-section" id="notes-section">
+          <h3>Additional Notes</h3>
+          <p id="modal-notes">Any additional notes will appear here.</p>
         </div>
+
         <div class="modal-footer">
-          <button class="action-button" id="modal-close-footer">Done</button>
+          <button
+            class="action-button"
+            id="modal-close-footer"
+            onclick="closeAnnouncementModal()"
+          >
+            Close
+          </button>
         </div>
       </div>
     </div>

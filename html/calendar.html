@@ -84,6 +84,33 @@
       .event-details p {
         margin: 5px 0;
       }
+
+      /* New styles for improved modal */
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 20px;
+      }
+
+      .event-info-item {
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 0;
+      }
+
+      .event-info-label {
+        font-weight: bold;
+      }
+
+      .event-info-value {
+        margin-left: 10px;
+      }
     </style>
   </head>
   <body>
@@ -102,7 +129,6 @@
       <div class="nav-right">
         <span id="current-time">10:08 PM GMT+8</span>
         <div class="icons">
-
           <div class="auth-buttons">
             <!-- Shown only if NOT logged in -->
             <button id="login" class="btn active">Login</button>
@@ -136,15 +162,47 @@
     <!-- Event Details Modal -->
     <div id="eventDetailsModal" class="modal">
       <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2 id="modalEventName"></h2>
+        <div class="modal-header">
+          <h2 id="modalEventName"></h2>
+          <span class="close">&times;</span>
+        </div>
+
         <div class="event-details">
-          <p><strong>Date:</strong> <span id="modalEventDate"></span></p>
-          <p><strong>Time:</strong> <span id="modalEventTime"></span></p>
-          <p><strong>Venue:</strong> <span id="modalEventVenue"></span></p>
-          <p><strong>Type:</strong> <span id="modalEventType"></span></p>
-          <p><strong>Description:</strong> <span id="modalEventDescription"></span></p>
-          <p><strong>Published by:</strong> <span id="modalEventPublisher"></span></p>
+          <div class="event-info-item">
+            <div class="event-info-label">Date:</div>
+            <div id="modalEventDate" class="event-info-value"></div>
+          </div>
+
+          <div class="event-info-item">
+            <div class="event-info-label">Time:</div>
+            <div id="modalEventTime" class="event-info-value"></div>
+          </div>
+
+          <div class="event-info-item">
+            <div class="event-info-label">Venue:</div>
+            <div id="modalEventVenue" class="event-info-value"></div>
+          </div>
+
+          <div class="event-info-item">
+            <div class="event-info-label">Type:</div>
+            <div id="modalEventType" class="event-info-value"></div>
+          </div>
+
+          <div class="event-info-item">
+            <div class="event-info-label">Description:</div>
+            <div id="modalEventDescription" class="event-info-value"></div>
+          </div>
+
+          <div class="event-info-item">
+            <div class="event-info-label">Published by:</div>
+            <div id="modalEventPublisher" class="event-info-value"></div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button class="modal-btn modal-btn-close" id="closeModalBtn">
+            Close
+          </button>
         </div>
       </div>
     </div>
