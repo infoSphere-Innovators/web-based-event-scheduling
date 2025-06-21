@@ -14,26 +14,214 @@
     />
     <link rel="stylesheet" href="/css/profile-details.css" />
     <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-Fx6Zye2Z0UeJKDQIdgk3gk...==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <!-- Styles for Loading Bar -->
+    <style>
+      #loading-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: transparent;
+        z-index: 9999;
+      }
+
+      #loading-bar .bar {
+        height: 100%;
+        width: 0%;
+        background-color: #09e941; /* Brown */
+        animation: loading 1s ease-out forwards;
+      }
+
+      @keyframes loading {
+        0% { width: 0%; }
+        100% { width: 100%; }
+      }
+    </style>
+    <style>
+      .navbar {
+        width: 100%;
+        height: 80px;
+        background-color: rgba(192, 97, 97, 0.05);
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .navbar::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        background-color: rgb(212, 206, 206);
+      }
+
+      .nav-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 60px;
+        flex-wrap: nowrap;
+      }
+
+      .logo img {
+        height: 50px;
+      }
+
+      .nav-icons {
+        display: flex;
+        gap: 60px;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        flex-wrap: nowrap;
+      }
+
+      .nav-icons li a {
+        text-decoration: none;
+        color: white;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.2s;
+      }
+
+      .nav-icons li a img {
+        width: 32px;
+        height: 32px;
+        transition: transform 0.2s, filter 0.2s;
+        filter: brightness(1);
+      }
+
+      .nav-icons li a:hover img {
+        transform: scale(1.1);
+      }
+
+      .nav-icons li a.active {
+        color: #8B4513;
+      }
+
+      .nav-icons li a.active img {
+        filter: brightness(0) sepia(1) saturate(800%) hue-rotate(355deg);
+      }
+
+      .nav-icons li a.disabled {
+        pointer-events: none;
+        opacity: 0.4;
+      }
+
+      @media (max-width: 768px) {
+        .nav-content {
+          gap: 40px;
+        }
+
+        .nav-icons {
+          gap: 40px;
+        }
+
+        .logo img {
+          height: 42px;
+        }
+
+        .nav-icons li a img {
+          width: 26px;
+          height: 26px;
+        }
+
+        .nav-icons li a {
+          font-size: 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-content {
+          gap: 30px;
+        }
+
+        .nav-icons {
+          gap: 30px;
+        }
+
+        .logo img {
+          height: 36px;
+        }
+
+        .nav-icons li a img {
+          width: 22px;
+          height: 22px;
+        }
+
+        .nav-icons li a {
+          font-size: 9px;
+        }
+      }
+
+      #content {
+        padding: 20px;
+        width: 100%;
+        max-width: 1200px;
+      }
+
+      .event-container {
+        margin-top: 20px; /* Optional: ensures spacing after navbar */
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        max-width: 1200px;
+        width: 100%;
+      }
+    </style>
   </head>
   <body>
-    <header class="header">
-        <nav class="nav-left">
-          <button id="back-btn">
-            <i class="fas fa-arrow-left"></i> <!-- Back icon -->
-          </button>
-          <button id="profile-btn" class="active-tab">Account</button>
-          <button id="performance-btn">Personal Records</button>
-        </nav>
-        <div class="nav-right">
-          <span id="current-time">10:08 PM GMT+8</span>
-          <div class="icons">
-            <button class="avatar" id="userBtn">
-              <i class="fas fa-user"></i>
-            </button>
-          </div>
+
+    <header class="navbar">
+      <div class="nav-content">
+        <div class="logo">
+          <img src="/assets/logo.png" alt="Logo" />
         </div>
-      </header>
+        <ul class="nav-icons">
+          <li>
+            <a href="#" onclick="goToPerformance(event)">
+              <img src="/icons/home-status.svg" alt="Home"/>
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="goToEvents(event)" >
+              <img src="/icons/events.svg" alt="Events" />
+              <span>Events</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="goToAnnouncement(event)">
+              <img src="/icons/announcement.svg" alt="Announcement" />
+              <span>Announcement</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="goToCalendar(event)" >
+              <img src="/icons/calendar.svg" alt="Calendar" />
+              <span>Calendar</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="goToProfile(event)" class="active" style="color: #000000;">
+              <img src="/icons/user.svg" alt="User" />
+              <span>Me</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
     <div class="event-container">
       <!-- Left Section - QR Code -->
       <div class="event-left">
@@ -152,7 +340,77 @@
       </div>
     </div>
 
+    <!-- Loading Progress Bar -->
+    <div id="loading-bar" style="display: none;">
+      <div class="bar"></div>
+    </div>
     <script src="/js/profile-details.js"></script>
+    <script>
+      function goToPerformance(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = '/html/performance.html';
+        }, 1000); // Match the 1s animation duration
+      }
+
+      function goToProfile(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = '/html/profile-details.html';
+        }, 1000); // Match the same delay
+      }
+
+      function goToEvents(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = '/premium-user/events.html';
+        }, 1000); // Match the same delay
+      }
+
+      function goToCalendar(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = '/premium-user/calendar.html';
+        }, 1000); // Match the same delay
+      }
+
+      function goToAnnouncement(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = '/premium-user/announcement.html';
+        }, 1000); // Match the same delay
+      }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";

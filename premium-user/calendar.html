@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendar Page</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="icon" type="image/png" href="/assets/logo.png" />
+    <link rel="stylesheet" href="/css/calendar.css" />
+    <style>
+      /* Shared button styles */
+      .btn {
+        padding: 8px 16px;
+        border: 1px solid white;
+        background: transparent;
+        color: white;
+        border-radius: 6px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-left: 10px;
+      }
+
+      /* Active button (Login) */
+      .btn.active {
+        background-color: white;
+        color: #222; /* Dark text for contrast */
+      }
+
+      /* Optional hover effects */
+      .btn:hover {
+        opacity: 0.9;
+      }
+
+      /* Modal styles */
+      .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0, 0, 0); /* Fallback color */
+        background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+      }
+
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%; /* Could be more or less, depending on screen size */
+        max-width: 600px;
+        border-radius: 8px;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+
+      .close:hover,
+      .close:focus {
+        color: black;
+        text-decoration: none;
+        cursor: pointer;
+      }
+
+      .event-details {
+        margin-top: 10px;
+      }
+
+      .event-details p {
+        margin: 5px 0;
+      }
+    </style>
+    <!-- Inline Styles -->
+    <style>
+      label[type="date"],
+      button.primary,
+      #eventPopup button {
+        font-family: "Inter", sans-serif;
+      }
+
+      .primary {
+        font-weight: bold;
+      }
+    </style>
+    <!-- Styles for Loading Bar -->
+    <style>
+      #loading-bar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: transparent;
+        z-index: 9999;
+      }
+
+      #loading-bar .bar {
+        height: 100%;
+        width: 0%;
+        background-color: #09e941; /* Brown */
+        animation: loading 1s ease-out forwards;
+      }
+
+      @keyframes loading {
+        0% { width: 0%; }
+        100% { width: 100%; }
+      }
+    </style>
+    <style>
+      .navbar {
+        width: 100%;
+        height: 80px;
+        background-color: rgba(192, 97, 97, 0.05);
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .navbar::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 2px;
+        width: 100%;
+        background-color: rgb(212, 206, 206);
+      }
+
+      .nav-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 60px;
+        flex-wrap: nowrap;
+      }
+
+      .logo img {
+        height: 50px;
+      }
+
+      .nav-icons {
+        display: flex;
+        gap: 60px;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        flex-wrap: nowrap;
+      }
+
+      .nav-icons li a {
+        text-decoration: none;
+        color: white;
+        font-size: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        transition: color 0.2s;
+      }
+
+      .nav-icons li a img {
+        width: 32px;
+        height: 32px;
+        transition: transform 0.2s, filter 0.2s;
+        filter: brightness(1);
+      }
+
+      .nav-icons li a:hover img {
+        transform: scale(1.1);
+      }
+
+      .nav-icons li a.active {
+        color: #8B4513;
+      }
+
+      .nav-icons li a.active img {
+        filter: brightness(0) sepia(1) saturate(800%) hue-rotate(355deg);
+      }
+
+      .nav-icons li a.disabled {
+        pointer-events: none;
+        opacity: 0.4;
+      }
+
+      @media (max-width: 768px) {
+        .nav-content {
+          gap: 40px;
+        }
+
+        .nav-icons {
+          gap: 40px;
+        }
+
+        .logo img {
+          height: 42px;
+        }
+
+        .nav-icons li a img {
+          width: 26px;
+          height: 26px;
+        }
+
+        .nav-icons li a {
+          font-size: 10px;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .nav-content {
+          gap: 30px;
+        }
+
+        .nav-icons {
+          gap: 30px;
+        }
+
+        .logo img {
+          height: 36px;
+        }
+
+        .nav-icons li a img {
+          width: 22px;
+          height: 22px;
+        }
+
+        .nav-icons li a {
+          font-size: 9px;
+        }
+      }
+
+      #content {
+        padding: 20px;
+        width: 100%;
+        max-width: 1200px;
+      }
+
+      .event-container {
+        margin-top: 20px; /* Optional: ensures spacing after navbar */
+        padding: 20px;
+        display: flex;
+        flex-direction: row;
+        gap: 40px;
+        max-width: 1200px;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Header Section -->
+    <header class="navbar">
+      <div class="nav-content">
+        <div class="logo">
+          <img src="/assets/logo.png" alt="Logo" />
+        </div>
+        <ul class="nav-icons">
+          <li>
+            <a href="#" onclick="goToPerformance(event)">
+              <img src="/icons/home-status.svg" alt="Home"/>
+              <span>Home</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="goToEvents(event)" >
+              <img src="/icons/events.svg" alt="Events" />
+              <span>Events</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="goToAnnouncement(event)">
+              <img src="/icons/announcement.svg" alt="Announcement" />
+              <span>Announcement</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="goToCalendar(event)" class="active" style="color: #000000;">
+              <img src="/icons/calendar.svg" alt="Calendar" />
+              <span>Calendar</span>
+            </a>
+          </li>
+          <li>
+            <a href="#" onclick="goToProfile(event)">
+              <img src="/icons/user.svg" alt="User" />
+              <span>Me</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <h2 id="month-year"></h2>
+        <div class="nav-buttons">
+        <span id="current-time">10:08 PM GMT+8</span>
+          <button class="nav-button" id="prev-month">&#x25C0;</button>
+          <button class="nav-button" id="next-month">&#x25B6;</button>
+        </div>
+      </div>
+      <table>
+        <thead>
+          <tr id="day-names"></tr>
+        </thead>
+        <tbody id="calendar-body"></tbody>
+      </table>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div id="eventDetailsModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2 id="modalEventName"></h2>
+        <div class="event-details">
+          <p><strong>Date:</strong> <span id="modalEventDate"></span></p>
+          <p><strong>Time:</strong> <span id="modalEventTime"></span></p>
+          <p><strong>Venue:</strong> <span id="modalEventVenue"></span></p>
+          <p><strong>Type:</strong> <span id="modalEventType"></span></p>
+          <p><strong>Description:</strong> <span id="modalEventDescription"></span></p>
+          <p><strong>Published by:</strong> <span id="modalEventPublisher"></span></p>
+        </div>
+      </div>
+    </div>
+    <!-- Loading Progress Bar -->
+    <div id="loading-bar" style="display: none;">
+      <div class="bar"></div>
+    </div>
+    <script type="module" src="calendar.js"></script>
+    <script>
+      function goToPerformance(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = '/html/performance.html';
+        }, 1000); // Match the 1s animation duration
+      }
+
+      function goToProfile(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = '/html/profile-details.html';
+        }, 1000); // Match the same delay
+      }
+
+      function goToEvents(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = 'events.html';
+        }, 1000); // Match the same delay
+      }
+
+      function goToCalendar(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = 'calendar.html';
+        }, 1000); // Match the same delay
+      }
+
+      function goToAnnouncement(event) {
+        event.preventDefault();
+
+        // Show the loading bar
+        const loader = document.getElementById('loading-bar');
+        loader.style.display = 'block';
+
+        // Wait for animation, then redirect
+        setTimeout(() => {
+          window.location.href = 'announcement.html';
+        }, 1000); // Match the same delay
+      }
+    </script>
+  </body>
+</html>
