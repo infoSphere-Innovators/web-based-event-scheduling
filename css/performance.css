@@ -1048,3 +1048,209 @@ MEDIA QUERY PHONE
 
 /* If you're using Font Awesome, add this HTML structure */
 /* <button class="view-event-button-alt"><i class="fas fa-eye"></i> View Event</button> */
+
+/* Enhanced navbar styling with better responsiveness */
+.navbar {
+    width: 100%;
+    height: 70px;
+    background: transparent; /* Remove the gradient background */
+    backdrop-filter: blur(8px); /* Keep the blur effect for depth */
+    -webkit-backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    border-bottom: none; /* Remove the bottom border */
+    box-shadow: none; /* Remove the shadow */
+}
+
+.nav-content {
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+/* Keep the logo and other styles unchanged */
+.logo img {
+    height: 40px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+.nav-icons {
+    display: flex;
+    gap: 40px;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    flex-wrap: nowrap;
+}
+
+.nav-icons li a {
+    text-decoration: none;
+    color: white;
+    font-size: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+    padding: 5px;
+}
+
+.nav-icons li a img {
+    width: 24px;
+    height: 24px;
+    transition: all 0.3s ease;
+    filter: brightness(1);
+}
+
+.nav-icons li a:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.nav-icons li a.active {
+    opacity: 1;
+    position: relative;
+}
+
+.nav-icons li a.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: #60f4c5;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #60f4c5;
+}
+
+.nav-icons li a.active img {
+    filter: drop-shadow(0 0 3px rgba(96, 244, 197, 0.7));
+}
+
+/* Medium screens */
+@media screen and (max-width: 768px) {
+    .navbar {
+        height: 60px;
+    }
+    
+    .nav-content {
+        padding: 0 15px;
+    }
+    
+    .logo img {
+        height: 32px;
+    }
+    
+    .nav-icons {
+        gap: 25px;
+    }
+    
+    .nav-icons li a {
+        font-size: 10px;
+    }
+    
+    .nav-icons li a img {
+        width: 20px;
+        height: 20px;
+    }
+}
+
+/* Small screens like iPhone */
+@media screen and (max-width: 480px) {
+    .navbar {
+        height: 60px;
+        position: fixed;
+        bottom: 0;
+        top: auto;
+        border-top: none; /* Remove the top border as well */
+        border-bottom: none;
+        background: rgba(47, 62, 70, 0.6); /* Slight background for readability on mobile */
+    }
+    
+    .nav-content {
+        justify-content: center;
+        padding: 0 10px;
+    }
+    
+    .logo {
+        display: none; /* Hide logo on very small screens to save space */
+    }
+    
+    .nav-icons {
+        width: 100%;
+        justify-content: space-between;
+        gap: 5px;
+        padding: 0 5px;
+    }
+    
+    .nav-icons li a {
+        font-size: 9px;
+        padding: 3px;
+    }
+    
+    .nav-icons li a img {
+        width: 18px;
+        height: 18px;
+    }
+    
+    /* Add space at the bottom of the body for the fixed navbar */
+    body {
+        padding-bottom: 70px;
+    }
+}
+
+/* Very small screens like iPhone SE */
+@media screen and (max-width: 375px) {
+    .navbar {
+        height: 55px;
+    }
+    
+    .nav-icons {
+        gap: 2px;
+    }
+    
+    .nav-icons li a {
+        font-size: 8px;
+    }
+    
+    .nav-icons li a img {
+        width: 16px;
+        height: 16px;
+    }
+}
+
+/* Add animation for active indicator */
+@keyframes pulse {
+    0% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: translateX(-50%) scale(1.2);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.7;
+    }
+}
+
+.nav-icons li a.active::after {
+    animation: pulse 2s ease infinite;
+}
