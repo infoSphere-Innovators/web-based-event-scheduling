@@ -8,7 +8,7 @@
 body {
     margin: 0;
     font-family: 'Inter', sans-serif;
-    background: linear-gradient(to bottom, #957b39 10%, #58422b 150%);
+    background: linear-gradient(to bottom, #2f3e46, #354f52, #52796f);
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -281,9 +281,9 @@ nav button.active-tab {
 .qr-download-btn {
     width: 100%;
     padding: 14px 20px;
-    background: linear-gradient(135deg, #fcff66ab 0%, #ffc3428a 100%);
     border: none;
     border-radius: 14px;
+    background: linear-gradient(135deg, #66ffff97 0%, #42ffd3b0 100%);
     color: #fff;
     font-size: 1.1rem;
     font-weight: 500;
@@ -294,7 +294,7 @@ nav button.active-tab {
     align-items: center;
     justify-content: center;
     gap: 8px;
-    box-shadow: 0 4px 15px rgba(255, 224, 102, 0.3);
+    box-shadow: 0 4px 15px rgba(102, 227, 255, 0.3);
 }
 
 .logout-btn {
@@ -321,9 +321,9 @@ nav button.active-tab {
 }
 
 .qr-download-btn:hover {
-    background: linear-gradient(135deg, #fcff6697 0%, #ffc342b0 100%);
+    background-image: linear-gradient(45deg, #8fd4ac, #44d07e);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 235, 102, 0.4);
+    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.4);
 }
 
 .qr-download-btn:hover i {

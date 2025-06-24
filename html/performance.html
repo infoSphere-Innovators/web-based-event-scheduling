@@ -66,8 +66,12 @@
       }
 
       @keyframes loading {
-        0% { width: 0%; }
-        100% { width: 100%; }
+        0% {
+          width: 0%;
+        }
+        100% {
+          width: 100%;
+        }
       }
     </style>
     <style>
@@ -136,7 +140,7 @@
       }
 
       .nav-icons li a.active {
-        color: #8B4513;
+        color: #8b4513;
       }
 
       .nav-icons li a.active img {
@@ -221,13 +225,18 @@
         </div>
         <ul class="nav-icons">
           <li>
-            <a href="#" onclick="goToPerformance(event)" class="active" style="color: #000000;">
-              <img src="/icons/home-status.svg" alt="Home"/>
+            <a
+              href="#"
+              onclick="goToPerformance(event)"
+              class="active"
+              style="color: #000000"
+            >
+              <img src="/icons/home-status.svg" alt="Home" />
               <span>Home</span>
             </a>
           </li>
           <li>
-            <a href="#" onclick="goToEvents(event)" >
+            <a href="#" onclick="goToEvents(event)">
               <img src="/icons/events.svg" alt="Events" />
               <span>Events</span>
             </a>
@@ -239,7 +248,7 @@
             </a>
           </li>
           <li>
-            <a href="#" onclick="goToCalendar(event)" >
+            <a href="#" onclick="goToCalendar(event)">
               <img src="/icons/calendar.svg" alt="Calendar" />
               <span>Calendar</span>
             </a>
@@ -259,8 +268,16 @@
       <aside></aside>
       <main>
         <h1 id="member-name">Hello, Member</h1>
-        <label style="font-family: 'Inter'; font-size: 14px; font-weight: 500; color: white;">
-          This is your personal dashboard showing your performance and participation in church events.
+        <label
+          style="
+            font-family: 'Inter';
+            font-size: 14px;
+            font-weight: 500;
+            color: white;
+          "
+        >
+          This is your personal dashboard showing your performance and
+          participation in church events.
         </label>
 
         <!-- Insights Section -->
@@ -319,16 +336,53 @@
           </table>
         </div>
 
-        <div id="eventPopup" style="display: none; position: fixed; top: 20%; left: 50%; transform: translateX(-50%); background: linear-gradient(145deg, rgba(47, 62, 70, 0.95), rgba(53, 79, 82, 0.95)); color: white; border: 1px solid rgba(255, 255, 255, 0.15); padding: 40px 30px; z-index: 1000; box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3); border-radius: 16px; font-family: 'Inter', sans-serif; text-align: center;">
+        <div
+          id="eventPopup"
+          style="
+            display: none;
+            position: fixed;
+            top: 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(
+              145deg,
+              rgba(47, 62, 70, 0.95),
+              rgba(53, 79, 82, 0.95)
+            );
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 40px 30px;
+            z-index: 1000;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            font-family: 'Inter', sans-serif;
+            text-align: center;
+          "
+        >
           <p id="eventDetails" style="margin-bottom: 20px; font-size: 18px"></p>
-          <button onclick="closePopup()" style="background: linear-gradient(135deg, #51b19e, #60f4c5); color: #222; border: none; padding: 10px 20px; font-size: 16px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;">Close</button>
+          <button
+            onclick="closePopup()"
+            style="
+              background: linear-gradient(135deg, #51b19e, #60f4c5);
+              color: #222;
+              border: none;
+              padding: 10px 20px;
+              font-size: 16px;
+              border-radius: 8px;
+              font-weight: 600;
+              cursor: pointer;
+              transition: all 0.3s ease;
+            "
+          >
+            Close
+          </button>
         </div>
       </main>
 
       <div class="right"></div>
     </div>
     <!-- Loading Progress Bar -->
-    <div id="loading-bar" style="display: none;">
+    <div id="loading-bar" style="display: none">
       <div class="bar"></div>
     </div>
     <script>
@@ -336,12 +390,12 @@
         event.preventDefault();
 
         // Show the loading bar
-        const loader = document.getElementById('loading-bar');
-        loader.style.display = 'block';
+        const loader = document.getElementById("loading-bar");
+        loader.style.display = "block";
 
         // Wait for animation, then redirect
         setTimeout(() => {
-          window.location.href = '/html/performance.html';
+          window.location.href = "/html/performance.html";
         }, 1000); // Match the 1s animation duration
       }
 
@@ -349,12 +403,12 @@
         event.preventDefault();
 
         // Show the loading bar
-        const loader = document.getElementById('loading-bar');
-        loader.style.display = 'block';
+        const loader = document.getElementById("loading-bar");
+        loader.style.display = "block";
 
         // Wait for animation, then redirect
         setTimeout(() => {
-          window.location.href = '/html/profile-details.html';
+          window.location.href = "/html/profile-details.html";
         }, 1000); // Match the same delay
       }
 
@@ -362,12 +416,12 @@
         event.preventDefault();
 
         // Show the loading bar
-        const loader = document.getElementById('loading-bar');
-        loader.style.display = 'block';
+        const loader = document.getElementById("loading-bar");
+        loader.style.display = "block";
 
         // Wait for animation, then redirect
         setTimeout(() => {
-          window.location.href = '/premium-user/events.html';
+          window.location.href = "/premium-user/events.html";
         }, 1000); // Match the same delay
       }
 
@@ -375,12 +429,12 @@
         event.preventDefault();
 
         // Show the loading bar
-        const loader = document.getElementById('loading-bar');
-        loader.style.display = 'block';
+        const loader = document.getElementById("loading-bar");
+        loader.style.display = "block";
 
         // Wait for animation, then redirect
         setTimeout(() => {
-          window.location.href = '/premium-user/calendar.html';
+          window.location.href = "/premium-user/calendar.html";
         }, 1000); // Match the same delay
       }
 
@@ -388,12 +442,12 @@
         event.preventDefault();
 
         // Show the loading bar
-        const loader = document.getElementById('loading-bar');
-        loader.style.display = 'block';
+        const loader = document.getElementById("loading-bar");
+        loader.style.display = "block";
 
         // Wait for animation, then redirect
         setTimeout(() => {
-          window.location.href = '/premium-user/announcement.html';
+          window.location.href = "/premium-user/announcement.html";
         }, 1000); // Match the same delay
       }
     </script>
@@ -417,7 +471,6 @@
         document.getElementById("eventPopup").style.display = "block";
       }
 
-
       function closePopup() {
         document.getElementById("eventPopup").style.display = "none";
       }
@@ -428,7 +481,8 @@
 
       document.getElementById("notifBtn").addEventListener("click", () => {
         const dropdown = document.getElementById("notifDropdown");
-        dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+        dropdown.style.display =
+          dropdown.style.display === "block" ? "none" : "block";
       });
 
       window.addEventListener("click", (event) => {
@@ -448,8 +502,15 @@
     </script>
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
-      import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
-      import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
+      import {
+        getDatabase,
+        ref,
+        get,
+      } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-database.js";
+      import {
+        getAuth,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js";
 
       const firebaseConfig = {
         apiKey: "AIzaSyC4YDw8dhp1qsJ7BhlNUSNHq3BxYzg6GDI",
@@ -477,14 +538,19 @@
         const memberSnapshot = await get(ref(db, "members/" + user.uid));
         if (memberSnapshot.exists()) {
           const member = memberSnapshot.val();
-          document.getElementById("member-name").textContent = `Hello, ${member.FirstName || "Member"}`;
-          document.getElementById("member-status").textContent = member.MemberStatus || "N/A";
+          document.getElementById("member-name").textContent = `Hello, ${
+            member.FirstName || "Member"
+          }`;
+          document.getElementById("member-status").textContent =
+            member.MemberStatus || "N/A";
         }
 
         // Load events count
         const eventsSnapshot = await get(ref(db, "events"));
         if (eventsSnapshot.exists()) {
-          document.getElementById("total-events").textContent = Object.keys(eventsSnapshot.val()).length;
+          document.getElementById("total-events").textContent = Object.keys(
+            eventsSnapshot.val()
+          ).length;
         }
 
         // Load and display attended events
@@ -501,9 +567,14 @@
             for (const recordId in records) {
               const record = records[recordId];
 
-              if (normalize(record.MemberUid || "") === userUid && (record.Status || "").toLowerCase() === "present") {
+              if (
+                normalize(record.MemberUid || "") === userUid &&
+                (record.Status || "").toLowerCase() === "present"
+              ) {
                 const eventSnapshot = await get(ref(db, "events/" + eventId));
-                const eventData = eventSnapshot.exists() ? eventSnapshot.val() : {};
+                const eventData = eventSnapshot.exists()
+                  ? eventSnapshot.val()
+                  : {};
 
                 attendedEventsList.push({
                   eventName: eventData.EventName || "Unnamed Event",
@@ -515,7 +586,9 @@
           }
 
           // Sort by most recent date
-          attendedEventsList.sort((a, b) => new Date(b.eventDate) - new Date(a.eventDate));
+          attendedEventsList.sort(
+            (a, b) => new Date(b.eventDate) - new Date(a.eventDate)
+          );
 
           // Render table rows
           attendedEventsList.forEach(({ eventName, eventDate, timeIn }) => {
@@ -524,7 +597,7 @@
               <td>${eventName}</td>
               <td>${eventDate}</td>
               <td>
-                <button class="primary" onclick="showEventPopup(\`${eventName}\`, \`${timeIn}\`)">
+                <button class="view-event-button" onclick="showEventPopup(\`${eventName}\`, \`${timeIn}\`)">
                   View Event
                 </button>
               </td>
@@ -532,7 +605,8 @@
             tbody.appendChild(row);
           });
 
-          document.getElementById("attended-events").textContent = attendedEventsList.length;
+          document.getElementById("attended-events").textContent =
+            attendedEventsList.length;
         }
       });
     </script>

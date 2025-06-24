@@ -124,3 +124,52 @@ notices.forEach(n => {
   div.append(img, txt);
   noticeContainer.appendChild(div);
 });
+
+// Updated function to show event popup
+function showEventPopup(eventId, buttonElement) {
+    // Get event details (your existing code)
+    const eventDetails = "Your event details here"; // Replace with your actual event data
+    
+    // Get the popup element
+    const popup = document.getElementById('eventPopup');
+    
+    // Set the content
+    document.getElementById('eventDetails').textContent = eventDetails;
+    
+    // Position the popup above the button
+    if (buttonElement) {
+        const buttonRect = buttonElement.getBoundingClientRect();
+        const popupHeight = popup.offsetHeight;
+        
+        // Calculate position
+        const top = buttonRect.top - popupHeight - 10; // 10px gap
+        const left = buttonRect.left + (buttonRect.width / 2);
+        
+        // Apply position
+        popup.style.top = `${top}px`;
+        popup.style.left = `${left}px`;
+        popup.style.transform = 'translateX(-50%)';
+    }
+    
+    // Show the popup
+    popup.style.display = 'block';
+    popup.classList.add('show');
+}
+
+// Update your existing event listeners
+document.querySelectorAll('.view-event-button').forEach(button => {
+    button.addEventListener('click', function(e) {
+        e.preventDefault();
+        const eventId = this.getAttribute('data-event-id');
+        showEventPopup(eventId, this); // Pass the button element
+    });
+});
+
+// Example of dynamically creating a button with the new class
+function createViewButton(eventId) {
+    const button = document.createElement('button');
+    button.className = 'view-event-button';
+    button.setAttribute('data-event-id', eventId);
+    button.textContent = 'View Event';
+    return button;
+}
