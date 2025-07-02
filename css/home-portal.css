@@ -146,7 +146,7 @@ body {
 }
 
 .faq-section {
-    background: linear-gradient(to bottom, #1A5C2A 0%, #0f3d1a 100%);
+    background-color: white;
     padding: 8rem 0;
     text-align: left;
     animation: fadeIn 1s ease-out 0.4s backwards;

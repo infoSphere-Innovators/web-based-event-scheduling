@@ -97,41 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize the page
     initializePage();
 
-    // Hamburger menu functionality
-    const hamburgerMenu = document.querySelector('.hamburger-menu');
-    const navLeft = document.querySelector('.nav-left');
-
-    hamburgerMenu.addEventListener('click', (e) => {
-        e.stopPropagation();
-        navLeft.classList.toggle('show');
-        hamburgerMenu.classList.toggle('active');
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (event) => {
-        if (!event.target.closest('.nav-left') && 
-            !event.target.closest('.hamburger-menu')) {
-            navLeft.classList.remove('show');
-            hamburgerMenu.classList.remove('active');
-        }
-    });
-
-    // Close menu when a nav item is clicked
-    navLeft.querySelectorAll('button').forEach(button => {
-        button.addEventListener('click', () => {
-            navLeft.classList.remove('show');
-            hamburgerMenu.classList.remove('active');
-        });
-    });
-
-    // Handle window resize
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            navLeft.classList.remove('show');
-            hamburgerMenu.classList.remove('active');
-        }
-    });
-
     if (modalCloseBtn) {
         modalCloseBtn.addEventListener('click', function() {
             closeAnnouncementModal();
@@ -139,6 +104,54 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.error("Modal close button not found!");
     }
+
+    // Hamburger menu functionality
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navLeft = document.querySelector('.nav-left');
+    const menuOverlay = document.querySelector('.menu-overlay');
+
+    // Toggle navigation
+    hamburgerMenu.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hamburgerMenu.classList.toggle('active');
+        navLeft.classList.toggle('show');
+        menuOverlay.classList.toggle('active');
+    });
+
+    // Close menu when clicking overlay
+    menuOverlay.addEventListener('click', () => {
+        hamburgerMenu.classList.remove('active');
+        navLeft.classList.remove('show');
+        menuOverlay.classList.remove('active');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (event) => {
+        if (!event.target.closest('.nav-left') && 
+            !event.target.closest('.hamburger-menu')) {
+            hamburgerMenu.classList.remove('active');
+            navLeft.classList.remove('show');
+            menuOverlay.classList.remove('active');
+        }
+    });
+
+    // Close menu when a nav item is clicked
+    navLeft.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', () => {
+            hamburgerMenu.classList.remove('active');
+            navLeft.classList.remove('show');
+            menuOverlay.classList.remove('active');
+        });
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            hamburgerMenu.classList.remove('active');
+            navLeft.classList.remove('show');
+            menuOverlay.classList.remove('active');
+        }
+    });
 });
 
 // Helper Functions
@@ -365,9 +378,72 @@ function setupRealtimeUpdates() {
 
 // Add this to your DOMContentLoaded event listener
 document.addEventListener('DOMContentLoaded', () => {
-    // ...existing code...
-    
     // Initialize real-time updates
     setupRealtimeUpdates();
+});
+
+// Add this at the end of your DOMContentLoaded event listener
+document.addEventListener('DOMContentLoaded', function() {
+    // Your existing code...
+    
+    // Make sure to get fresh references to these elements
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const navLeft = document.querySelector('.nav-left');
+    const menuOverlay = document.querySelector('.menu-overlay');
+    
+    console.log('Hamburger menu element:', hamburgerMenu); // Debug log
+    console.log('Nav left element:', navLeft); // Debug log
+    console.log('Menu overlay element:', menuOverlay); // Debug log
+    
+    if (hamburgerMenu && navLeft && menuOverlay) {
+        // Toggle navigation
+        hamburgerMenu.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Hamburger clicked'); // Debug log
+            
+            hamburgerMenu.classList.toggle('active');
+            navLeft.classList.toggle('show');
+            menuOverlay.classList.toggle('active');
+        });
+        
+        // Close menu when clicking overlay
+        menuOverlay.addEventListener('click', function() {
+            hamburgerMenu.classList.remove('active');
+            navLeft.classList.remove('show');
+            menuOverlay.classList.remove('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.nav-left') && 
+                !event.target.closest('.hamburger-menu')) {
+                hamburgerMenu.classList.remove('active');
+                navLeft.classList.remove('show');
+                menuOverlay.classList.remove('active');
+            }
+        });
+        
+        // Close menu when a nav item is clicked
+        const navButtons = navLeft.querySelectorAll('button');
+        navButtons.forEach(function(button) {
+            button.addEventListener('click', function() {
+                hamburgerMenu.classList.remove('active');
+                navLeft.classList.remove('show');
+                menuOverlay.classList.remove('active');
+            });
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                hamburgerMenu.classList.remove('active');
+                navLeft.classList.remove('show');
+                menuOverlay.classList.remove('active');
+            }
+        });
+    } else {
+        console.error('Hamburger menu elements not found');
+    }
 });
 

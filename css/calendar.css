@@ -416,7 +416,6 @@ nav button.active-tab {
         top: 100%;
         left: 0;
         width: 100%;
-        background: linear-gradient(to bottom, #332115, #d5b871);
         padding: 8px;
         flex-direction: column;
         z-index: 1001;
@@ -426,8 +425,25 @@ nav button.active-tab {
 
     .nav-left.show {
         display: flex;
+        background: linear-gradient(145deg, rgba(47, 62, 70, 0.95), rgba(53, 79, 82, 0.95));
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        animation: slideDown 0.3s ease forwards;
     }
-
+    
+    @keyframes slideDown {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
     .nav-left button {
         width: 100%;
         text-align: left;
