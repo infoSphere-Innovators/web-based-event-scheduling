@@ -55,10 +55,17 @@ async function fetchEvents() {
   }
 }
 
-// Show event details in modal
+// Update showEventDetails function
 function showEventDetails(eventId) {
   const event = eventsData[eventId];
   if (event) {
+    // Make sure the modal exists
+    const modal = document.getElementById('eventDetailsModal');
+    if (!modal) {
+      console.error("Modal element not found");
+      return;
+    }
+
     document.getElementById('modalEventName').textContent = event.EventName;
     document.getElementById('modalEventDate').textContent = event.EventDate;
     document.getElementById('modalEventTime').textContent = event.EventTime;
@@ -66,7 +73,24 @@ function showEventDetails(eventId) {
     document.getElementById('modalEventType').textContent = event.EventType;
     document.getElementById('modalEventDescription').textContent = event.EventDescription;
     document.getElementById('modalEventPublisher').textContent = event.Published;
-    modal.style.display = "block";
+    
+    // Make the modal visible with important flags
+    modal.style.display = "block !important";
+    modal.style.opacity = "1 !important";
+    modal.style.zIndex = "9999 !important";
+    
+    // Force display with attribute
+    modal.setAttribute('style', 'display: block !important; opacity: 1 !important; z-index: 9999 !important');
+    
+    // Also ensure the modal content is visible
+    const modalContent = modal.querySelector('.modal-content');
+    if (modalContent) {
+      modalContent.style.opacity = "1";
+      modalContent.style.transform = "translateY(0)";
+    }
+    
+    // Remove any conflicting classes
+    modal.classList.remove('hidden', 'invisible');
   }
 }
 
@@ -227,10 +251,48 @@ function generateCalendar(year, month) {
 
 // DOM ready
 document.addEventListener('DOMContentLoaded', () => {
+  // Inject the styles first before anything else
+  const modalStyles = `
+    .modal {
+      display: none !important;
+      position: fixed !important;
+      z-index: 9999 !important;
+      left: 0 !important;
+      top: 0 !important;
+      width: 100% !important;
+      height: 100% !important;
+      overflow: auto !important;
+      background-color: rgba(0,0,0,0.6) !important;
+    }
+    
+    .modal[style*="display: block"] {
+      display: block !important;
+    }
+    
+    .modal-content {
+      background-color: #fefefe !important;
+      margin: 10% auto !important;
+      padding: 20px !important;
+      border: 1px solid #888 !important;
+      width: 80% !important;
+      max-width: 600px !important;
+      border-radius: 8px !important;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3) !important;
+      position: relative !important;
+    }
+  `;
+
+  // Create and append style element
+  const styleEl = document.createElement('style');
+  styleEl.textContent = modalStyles;
+  document.head.appendChild(styleEl);
+
+  // Initialize other elements
   initializeDayNames();
   updateTime();
   fetchEvents();
 
+  // Set up month navigation
   document.getElementById('prev-month').addEventListener('click', () => {
     currentDate.setMonth(currentDate.getMonth() - 1);
     fetchEvents();
@@ -241,10 +303,33 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchEvents();
   });
 
-  span.onclick = () => modal.style.display = "none";
-  window.onclick = e => { if (e.target === modal) modal.style.display = "none"; };
+  // Modal setup - more robust
+  const modal = document.getElementById("eventDetailsModal");
+  const span = document.querySelector("#eventDetailsModal .close");
+  
+  if (span && modal) {
+    // Close button handler
+    span.addEventListener('click', () => {
+      modal.setAttribute('style', 'display: none !important');
+    });
+    
+    // Click outside modal to close
+    window.addEventListener('click', (event) => {
+      if (event.target === modal) {
+        modal.setAttribute('style', 'display: none !important');
+      }
+    });
+    
+    // Escape key to close modal
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        modal.setAttribute('style', 'display: none !important');
+      }
+    });
+  }
 });
 
+// Fix modal styling with JavaScript
 function updateTime() {
   const timeElement = document.getElementById('current-time');
   const options = {
