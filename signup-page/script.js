@@ -587,3 +587,78 @@ document.getElementById("username").addEventListener('input', debounce(async fun
     usernameError.style.color = "#ff3860";
   }
 }, 500)); // 500ms delay before checking
+
+// Add this to your script.js file where you initialize other SweetAlert messages
+
+// Custom SweetAlert styling configuration
+const customSwalStyles = {
+  // Error message styling
+  error: {
+    confirmButtonColor: '#2E2E2E', // Deep Charcoal button
+    cancelButtonColor: '#F4C430', // Church Gold for cancel buttons
+    iconColor: '#FF5252', // Bright red for error icon
+    color: '#2E2E2E', // Text color
+    background: '#FFFFFF', // White background
+    backdrop: 'rgba(0,0,0,0.4)', // Slightly darker backdrop for emphasis
+    showClass: {
+      popup: 'animate__animated animate__fadeInUp animate__faster'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutDown animate__faster'
+    },
+    // Custom styling using didOpen hook
+    didOpen: (toast) => {
+      // Add a distinctive red border at the top
+      toast.querySelector('.swal2-popup').style.borderTop = '4px solid #FF5252';
+      // Add subtle shadow for depth
+      toast.querySelector('.swal2-popup').style.boxShadow = '0 5px 25px rgba(0,0,0,0.2)';
+      // Make the title more prominent
+      const title = toast.querySelector('.swal2-title');
+      if (title) {
+        title.style.fontSize = '1.3rem';
+        title.style.fontWeight = '700';
+      }
+      // Style the content text
+      const content = toast.querySelector('.swal2-html-container');
+      if (content) {
+        content.style.fontSize = '0.95rem';
+        content.style.lineHeight = '1.5';
+        content.style.marginTop = '0.8rem';
+      }
+    }
+  }
+};
+
+// Apply the custom styling to existing SweetAlert calls
+// Update all your SweetAlert error messages to use this approach
+
+// Example of how to use this with your existing code:
+function showErrorAlert(title, text) {
+  Swal.fire({
+    icon: 'error',
+    title: title,
+    text: text,
+    confirmButtonColor: customSwalStyles.error.confirmButtonColor,
+    iconColor: customSwalStyles.error.iconColor,
+    background: customSwalStyles.error.background,
+    backdrop: customSwalStyles.error.backdrop,
+    didOpen: customSwalStyles.error.didOpen,
+    ...customSwalStyles.error.showClass,
+    ...customSwalStyles.error.hideClass
+  });
+}
+
+// Then replace your existing error alerts with this function:
+// Instead of:
+// Swal.fire({
+//   icon: 'error',
+//   title: 'Invalid Name Format',
+//   text: 'Names can only contain letters, spaces, hyphens, and apostrophes.',
+//   confirmButtonColor: '#9D62F5'
+// });
+
+// Use:
+// showErrorAlert(
+//   'Invalid Name Format', 
+//   'Names can only contain letters, spaces, hyphens, and apostrophes.'
+// );

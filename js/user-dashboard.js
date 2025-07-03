@@ -401,3 +401,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+document.getElementById("login").addEventListener("click", function () {
+    window.location.href = "/html/login-page.html"; // change this to your target page
+  });
+
+document.getElementById("signup").addEventListener("click", function () {
+    window.location.href = "/html/signup-page/signup-page.html"; // change this to your target page
+  });

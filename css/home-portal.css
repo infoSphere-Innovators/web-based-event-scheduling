@@ -256,7 +256,7 @@ body {
 
 .register-section h2 {
     font-size: 2.2rem;
-    font-weight: 700;
+    font-weight: bolder;
     margin-bottom: 28px;
     color: #222;
     position: relative;
@@ -484,6 +484,7 @@ html {
 footer {
     background: #000;
     color: rgba(255, 255, 255, 0.9);
+    box-shadow: black 0px -2px 10px rgba(0, 0, 0, 0.1);
     padding: 5rem 0;
     text-align: center;
     position: relative;
@@ -661,7 +662,7 @@ footer span {
 
 /* Vatican-style Info Tabs */
 .info-tabs {
-    background: #fff;
+    background: #ffffff;
     padding: 4rem 0 3rem 0;
     animation: fadeIn 1s ease-out 0.2s backwards;
 }

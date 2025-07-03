@@ -2,7 +2,7 @@
 body {
   margin: 0;
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(to bottom, #f5f3ff, #9D62F5);
+  background: linear-gradient(to bottom, #ffffff 30%, #F4C430);
   color: #222222;
 }
 
@@ -84,7 +84,7 @@ body {
     color: #333;
     margin-bottom: 1.2rem; /* Reduced from 1.5rem */
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid rgba(157, 98, 245, 0.2);
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
 }
 
 .form-card h1 {
@@ -123,23 +123,33 @@ select {
     border: 1px solid rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     font-size: 0.95rem;
-    transition: all 0.2s ease;
+    transition: all 0.25s ease; /* Slightly longer for smoother effect */
+    background-color: rgba(255, 255, 255, 0.8); /* Slightly transparent */
 }
 
 input:focus,
 select:focus {
-    border-color: #9D62F5;
-    box-shadow: 0 0 0 3px rgba(157, 98, 245, 0.1);
+    border-color: #F4C430; /* Match Church Gold */
+    box-shadow: 0 0 0 3px rgba(244, 196, 48, 0.15); /* Softer glow effect */
     outline: none;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother easing */
+}
+
+/* Improved hover states for inputs */
+input:hover:not(:focus),
+select:hover:not(:focus) {
+    border-color: rgba(244, 196, 48, 0.5);
+    transition: all 0.2s ease;
 }
 
 /* Dropdown arrow styling for select */
 select {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23333'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%232E2E2E'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
   background-size: 0.65rem;
   padding-right: 2rem;
+  cursor: pointer; /* Show pointer cursor for better UX */
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
@@ -163,19 +173,28 @@ select:focus::placeholder {
     width: 100%;
     padding: 1rem;
     margin-top: 1.5rem;
-    background: #9D62F5;
+    background: #2E2E2E;
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Improved transition timing */
+    position: relative;
+    overflow: hidden;
 }
 
 .submit-btn:hover {
-    background: #8445f0;
-    transform: translateY(-1px);
+    background: #000000;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow on hover */
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.1s ease;
 }
 
 /* Info Text */
@@ -195,14 +214,21 @@ select:focus::placeholder {
     background: rgba(255, 255, 255, 0.5);
     border-radius: 12px;
     border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: box-shadow 0.3s ease, transform 0.2s ease; /* Smoother transitions */
+}
+
+.form-section:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
 }
 
 .section-title {
     font-size: 1.1rem;
     color: #333;
-    margin-bottom: 1.2rem; /* Reduced from 1.5rem */
+    margin-bottom: 1.2rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid rgba(157, 98, 245, 0.2);
+    border-bottom: 2px solid #F4C430; /* Church Gold for visual hierarchy */
+    transition: all 0.3s ease;
 }
 
 .form-row {
@@ -252,17 +278,51 @@ select:focus::placeholder {
     padding: 15px;
   }
 
+  /* Improved header layout */
   .header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
+    flex-direction: row; /* Change back to row instead of column */
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 15px; /* Reduced padding */
+    background-color: rgba(255, 255, 255, 0.95); /* Add slight background */
+    position: relative; /* For positioning context */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Subtle shadow for depth */
+    border-radius: 0 0 12px 12px; /* Rounded bottom corners */
+    margin-bottom: 0.5rem;
   }
 
+  /* Fix the logo size */
+  .logo img {
+    height: 36px;
+    width: 36px;
+  }
+
+  /* Improved login button */
   .login-btn {
-    width: 100%;
+    width: auto; /* Not full width anymore */
+    padding: 0.4rem 0.8rem;
+    height: auto;
+    font-size: 0.85rem;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     text-align: center;
+    background-color: #F4C430; /* Use Church Gold for better visibility */
+    color: #2E2E2E; /* Dark text for contrast */
+    font-weight: 600;
+    transition: all 0.2s ease;
   }
 
+  .login-btn:hover, 
+  .login-btn:active {
+    background-color: #e6b82b; /* Slightly darker on interaction */
+    transform: translateY(-1px);
+  }
+  
+  .login-btn a {
+    color: #2E2E2E; /* Ensure text is dark for contrast */
+  }
+
+  /* Other existing mobile styles... */
   .form-card {
     padding: 15px;
   }
@@ -277,16 +337,35 @@ select:focus::placeholder {
     font-size: 14px;
     padding: 10px;
   }
+}
 
-  .info-text {
-    font-size: 13px;
-    text-align: center;
+/* Intermediate size for tablets and large phones */
+@media (max-width: 640px) and (min-width: 481px) {
+  .header {
+    padding: 0.8rem 20px;
   }
+  
+  .login-btn {
+    padding: 0.4rem 0.8rem;
+    height: auto;
+    font-size: 0.9rem;
+  }
+}
 
-  .login-text {
-    text-align: center;
-    font-size: 13px;
-    margin-top: 15px;
+/* Special handling for very small devices */
+@media (max-width: 350px) {
+  .header {
+    padding: 0.6rem 10px;
+  }
+  
+  .logo img {
+    height: 32px;
+    width: 32px;
+  }
+  
+  .login-btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
   }
 }
 
@@ -308,17 +387,17 @@ body {
 @keyframes fadeInUp {
   from {
     opacity: 0;
-    transform: translateY(20px); /* starts 20px below */
+    transform: translateY(15px); /* Reduced distance for subtlety */
   }
   to {
     opacity: 1;
-    transform: translateY(0); /* ends at original position */
+    transform: translateY(0);
   }
 }
 
 /* Apply to your form */
 form {
-  animation: fadeInUp 2s ease forwards;
+  animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards; /* Smoother easing */
 }
 
 /* Focus outline and error/success styles */
@@ -329,10 +408,12 @@ input:focus {
 
 input.error {
     border-color: #ff3860;
+    background-color: rgba(255, 56, 96, 0.03); /* Very subtle background */
 }
 
 input.success {
     border-color: #00d1b2;
+    background-color: rgba(0, 209, 178, 0.03); /* Very subtle background */
 }
 
 .error-message {
@@ -393,8 +474,10 @@ input#password.success + .password-error {
   background: rgba(0, 0, 0, 0.02);
   padding: 10px 14px !important;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   margin-top: 8px;
+  max-height: 1000px; /* Large value to accommodate content */
+  opacity: 0.95;
 }
 
 .password-requirement {
@@ -412,13 +495,14 @@ input#password.success + .password-error {
   border-radius: 50%;
   border: 1.5px solid #ccc;
   margin-right: 8px;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* More pronounced transition */
   display: inline-block;
 }
 
 .requirement-met .requirement-circle {
-  background-color: #9D62F5;
-  border-color: #9D62F5;
+  background-color: #F4C430; /* Church Gold for consistency */
+  border-color: #F4C430;
+  transform: scale(1.1); /* Subtle scale effect when requirement is met */
 }
 
 .requirement-met {
@@ -429,5 +513,149 @@ input#password.success + .password-error {
 #password:focus ~ #password-strength-container .password-requirements {
   background: rgba(0, 0, 0, 0.04);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+/* Improved animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px); /* Reduced distance for subtlety */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Improved loading states for buttons */
+.submit-btn.loading {
+    background-image: linear-gradient(to right, #2E2E2E 0%, #444 50%, #2E2E2E 100%);
+    background-size: 200% 100%;
+    animation: loading-gradient 1.5s infinite linear;
+    pointer-events: none; /* Prevent clicks while loading */
+}
+
+@keyframes loading-gradient {
+    0% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Subtle focus state for the entire form section */
+.form-section:focus-within {
+    border-color: rgba(244, 196, 48, 0.3);
+    box-shadow: 0 0 0 1px rgba(244, 196, 48, 0.1);
+}
+
+/* Add these styles to your stylesheet for enhanced SweetAlert appearance */
+
+/* SweetAlert2 custom styles */
+.swal2-popup {
+  font-family: 'Inter', sans-serif !important;
+  border-radius: 12px !important;
+  padding: 1.5rem !important;
+}
+
+/* Improve the icon size and appearance */
+.swal2-icon {
+  margin: 1rem auto 0.5rem auto !important;
+  transform: scale(0.85); /* Slightly smaller icon */
+}
+
+/* Better error icon */
+.swal2-icon.swal2-error {
+  border-color: rgba(255, 82, 82, 0.6) !important; /* Softer border color */
+}
+
+/* Improve the animation timing */
+.animate__animated {
+  --animate-duration: 0.4s !important; /* Faster animations */
+}
+
+/* Make the button hover states more interactive */
+.swal2-confirm:hover, 
+.swal2-cancel:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15) !important;
+  transition: all 0.2s ease !important;
+}
+
+/* Improve focus states for accessibility */
+.swal2-confirm:focus, 
+.swal2-cancel:focus {
+  box-shadow: 0 0 0 3px rgba(244, 196, 48, 0.2) !important;
+  outline: none !important;
+}
+
+/* Add responsive styles for mobile */
+@media (max-width: 480px) {
+  .swal2-popup {
+    padding: 1.2rem !important;
+    width: 85% !important; /* Slightly narrower on mobile */
+    max-width: 350px !important;
+    margin: 0 auto !important;
+  }
+  
+  .swal2-title {
+    font-size: 1.2rem !important;
+  }
+  
+  .swal2-html-container {
+    font-size: 0.85rem !important;
+  }
+  
+  .swal2-confirm,
+  .swal2-cancel {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+/* Update SweetAlert2 confirm button color */
+.swal2-confirm {
+  background-color: #E67E22 !important; /* Church Gold for regular confirm buttons */
+  color: #2E2E2E !important; /* Dark text for better contrast */
+  font-weight: 600 !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(244, 196, 48, 0.3) !important;
+}
+
+/* Update SweetAlert2 confirm button color for error modals */
+.swal2-icon-error .swal2-confirm, /* Target confirm buttons in error dialogs */
+.swal2-modal.swal2-error .swal2-confirm {
+  background-color: #FF5252 !important; /* Bright red for error confirmations */
+  color: white !important; /* White text for contrast */
+  font-weight: 600 !important;
+  border: none !important;
+  box-shadow: 0 2px 8px rgba(255, 82, 82, 0.3) !important;
+}
+
+.swal2-icon-error .swal2-confirm:hover,
+.swal2-modal.swal2-error .swal2-confirm:hover {
+  background-color: #e74c3c !important; /* Slightly darker red on hover */
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 12px rgba(255, 82, 82, 0.4) !important;
+}
+
+.swal2-icon-error .swal2-confirm:active,
+.swal2-modal.swal2-error .swal2-confirm:active {
+  transform: translateY(0) !important;
+  background-color: #c0392b !important; /* Even darker when clicked */
+  box-shadow: 0 2px 4px rgba(255, 82, 82, 0.3) !important;
+}
+
+.swal2-icon-error .swal2-confirm:focus,
+.swal2-modal.swal2-error .swal2-confirm:focus {
+  box-shadow: 0 0 0 3px rgba(255, 82, 82, 0.4) !important;
+  outline: none !important;
+}
+
+/* Error-specific popup styling */
+.swal2-icon-error.swal2-popup,
+.swal2-modal.swal2-error {
+  border-top: 4px solid #FF5252 !important; /* Red top border for error popups */
 }
 

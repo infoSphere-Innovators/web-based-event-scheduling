@@ -423,3 +423,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 });
+
+document.getElementById("login").addEventListener("click", function () {
+    window.location.href = "/html/login-page.html"; // change this to your target page
+  });
+
+document.getElementById("signup").addEventListener("click", function () {
+    window.location.href = "/signup-page/index.html"; // change this to your target page
+  });

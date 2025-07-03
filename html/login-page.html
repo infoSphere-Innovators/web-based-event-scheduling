@@ -1,52 +1,129 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Page</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | Event Scheduling</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="icon" type="image/png" href="/assets/logo.png" />
-    <link rel="stylesheet" href="/signup-page/styles.css">
-    <link rel="stylesheet" href="/css/login-page.css">
-</head>
-<body>
-    <!-- Header -->
-    <header class="header">
-    <div class="logo">
-        <img src="/assets/logo.png" alt="Logo" />
-    </div>
-    <button class="home-btn">
-        <a href="user-dashboard.html">Home</a>
-    </button>
-    </header>
-    <div class="container">
-        <div class="left-section">
-            <h1>Enter Credentials</h1>
-            <p>Enter your valid username and password to access the user view.</p>
+    <link rel="stylesheet" href="/css/login-page.css" />
+    <!-- Add Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+  </head>
+  <body>
+    <div class="login-container">
+      <!-- Left side with illustration -->
+      <div class="login-visual">
+        <div class="brand">
+          <img src="/assets/logo.png" alt="Logo" class="logo-img" />
+          <span class="brand-name">Sta.AnaParish</span>
         </div>
-        <div class="right-section">
-            <div class="sign-in-card">
-                <h2>Login</h2>
-                <form id="signInForm" class="signIn">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" id="username" placeholder="Enter Username">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" id="password" placeholder="Enter Password">
-                    </div>
-                    <!-- Sign up link -->
-                    <p class="signup-text">
-                        Don’t have an account?
-                        <a href="/signup-page/index.html">Create an account</a>
-                    </p>
-                    <button type="submit" class="sign-up-btn">Login</button>
-                </form>
+        <div class="illustration">
+          <h2 class="welcome-title">Welcome to <span class="parish-name">Sta. Ana's</span><br>Unofficial Website</h2>
+          <!-- Decorative elements -->
+          <div class="decoration"></div>
+          <div class="decoration"></div>
+          <div class="decoration"></div>
+        </div>
+      </div>
+
+      <!-- Right side with login form -->
+      <div class="login-form-container">
+        <!-- Small logo in the form section -->
+        <div class="form-logo">
+          <img src="/assets/infosphere-logo.png" alt="Logo" />
+        </div>
+
+        <div class="login-content">
+          <div class="login-header">
+            <h1>Log In</h1>
+            <p>Enter your email and password to login our dashboard.</p>
+          </div>
+
+          <form id="signInForm" class="login-form">
+            <div class="form-group">
+              <label for="username">Email</label>
+              <div class="input-container">
+                <i data-feather="mail" class="input-icon"></i>
+                <input
+                  type="email"
+                  id="username"
+                  placeholder="andoyjervin@example.com"
+                  required
+                />
+              </div>
             </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-container">
+                <i data-feather="lock" class="input-icon"></i>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="Enter your password"
+                  required
+                />
+                <button
+                  type="button"
+                  class="toggle-password"
+                  aria-label="Toggle password visibility"
+                >
+                  <i data-feather="eye" class="toggle-icon"></i>
+                </button>
+              </div>
+            </div>
+
+            <button type="submit" class="login-btn">Sign In</button>
+
+            <p class="signup-text">
+              Don't have an account?
+              <a href="/signup-page/index.html">Sign Up</a>
+            </p>
+          </form>
         </div>
+
+        <div class="home-link">
+          <a href="/html/home-portal.html" class="back-to-home">
+            <i data-feather="arrow-left" class="back-icon"></i>
+            Back to Home
+          </a>
+        </div>
+      </div>
     </div>
+
     <script type="module" src="/js/login-page.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</body>
+    <script>
+      // Initialize Feather icons
+      document.addEventListener("DOMContentLoaded", () => {
+        feather.replace();
+
+        // Toggle password visibility
+        const togglePassword = document.querySelector(".toggle-password");
+        const passwordInput = document.getElementById("password");
+        const toggleIcon = document.querySelector(".toggle-icon");
+
+        if (togglePassword) {
+          togglePassword.addEventListener("click", function () {
+            const type =
+              passwordInput.getAttribute("type") === "password"
+                ? "text"
+                : "password";
+            passwordInput.setAttribute("type", type);
+
+            // Toggle icon between eye and eye-off
+            if (type === "text") {
+              feather.replace(toggleIcon, { name: "eye-off" });
+            } else {
+              feather.replace(toggleIcon, { name: "eye" });
+            }
+          });
+        }
+      });
+    </script>
+  </body>
 </html>
