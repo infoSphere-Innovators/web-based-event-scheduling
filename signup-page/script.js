@@ -69,8 +69,9 @@ document.getElementById("trasparochial").addEventListener("change", function () 
   const chapel = document.getElementById("chapel");
 
   if (transparochial === "Yes") {
+    // Set to "No Zone" and "No Chapel" as these are valid values in your system
     zone.value = "No Zone";
-    chapel.value = "No Chapel";
+    chapel.innerHTML = '<option value="No Chapel" selected>No Chapel</option>';
     zone.disabled = true;
     chapel.disabled = true;
   } else {
@@ -170,13 +171,14 @@ document.getElementById("submit").addEventListener('click', async function (e) {
   const email = document.getElementById("email").value.trim();
   const ministry = document.getElementById("ministry").value;
 
-  // Check if all fields are filled
+  // Modified validation to account for transparochial case
   if (!firstName || !midName || !lastName || !userName || !address || !transparochial || 
-      !position || !zone || !chapel || !password || !contact || !email || !ministry) {
+      !position || !password || !contact || !email || !ministry ||
+      (transparochial === "No" && (!zone || !chapel))) {
     Swal.fire({
       icon: 'warning',
       title: 'Incomplete Fields',
-      text: 'Please fill in all fields before submitting.',
+      text: 'Please fill in all required fields before submitting.',
       confirmButtonColor: '#9D62F5'
     });
     return;
