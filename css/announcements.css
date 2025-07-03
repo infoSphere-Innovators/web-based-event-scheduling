@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: #F8F9FA;
+    background: linear-gradient(145deg, rgba(47, 62, 70, 0.95), rgba(53, 79, 82, 0.95));
   color: white;
   min-height: 100vh;
   padding: 20px;

@@ -10,7 +10,6 @@ body {
     background: linear-gradient(180deg, #006400 0%, #2F4F4F 100%);
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 .header {
@@ -62,20 +61,25 @@ body {
     color: #0054ae;
 }
 
+/* Replace flex layout with grid layout */
 .container {
-    flex: 1;
-    display: flex;
-    padding: 3rem;
-    gap: 4rem; /* Increased gap to accommodate wider form */
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Two equal columns */
+    gap: 4rem;
     align-items: center;
-    justify-content: center;
-    max-width: 1800px;
+    max-width: 1200px;
+    width: 100%;
     margin: 0 auto;
+    padding: 3rem;
+    min-height: calc(100vh - 80px); /* Ensure full height minus header */
 }
 
 .left-section {
     color: white;
+    padding-right: 2rem;
+    justify-self: end; /* Align to the end (right) of its grid cell */
     max-width: 500px;
+    width: 100%;
 }
 
 .left-section h1 {
@@ -93,15 +97,19 @@ body {
     font-weight: 500;
 }
 
+.right-section {
+    justify-self: start; /* Align to the start (left) of its grid cell */
+    max-width: 500px;
+    width: 100%;
+}
+
 .sign-in-card {
     background: rgba(255, 255, 255, 0.95);
-    padding: 3rem 3rem;
+    padding: 3rem;
     border-radius: 20px;
     width: 100%;
-    max-width: 480px; /* Adjusted for better mobile scaling */
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(10px);
-    margin: 0 auto;
 }
 
 #username, #password {
@@ -130,7 +138,7 @@ body {
 }
 
 .form-group input {
-    width: 100%; /* Full width inside container */
+    width: 100%;
     padding: 1.2rem 1.5rem;
     border: 2px solid #eee;
     border-radius: 12px;
@@ -169,67 +177,56 @@ body {
     box-shadow: 0 5px 15px rgba(0, 100, 0, 0.2);
 }
 
-@media (max-width: 768px) {
+/* Updated media queries for grid layout */
+@media (max-width: 1024px) {
     .container {
-        gap: 4rem;
         padding: 2rem;
-    }
-
-    .left-section {
-        max-width: 400px;
+        gap: 3rem;
     }
 
     .left-section h1 {
         font-size: 3rem;
     }
-}
-
-@media (max-width: 968px) {
-    .container {
-        gap: 3rem;
-    }
-
-    .left-section h1 {
-        font-size: 2.8rem;
-    }
 
     .sign-in-card {
-        padding: 2.5rem 3rem;
-        max-width: 500px;
+        padding: 2.5rem;
     }
 }
 
-@media (max-width: 768px) {
-    .container {
-        flex-direction: column;
-        text-align: left;
-        padding: 2rem;
-        gap: 2rem;
-    }
-
-    .left-section {
-        margin-bottom: 1rem;
-        max-width: 100%;
-        padding: 0 1rem;
-    }
-
+@media (max-width: 900px) {
     .left-section h1 {
         font-size: 2.5rem;
-        white-space: normal;
     }
 
     .left-section p {
-        font-size: 1rem;
+        font-size: 1.1rem;
     }
 
     .sign-in-card {
         padding: 2rem;
-        max-width: 100%;
+    }
+}
+
+/* Switch to single column layout on smaller screens */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr; /* One column */
+        gap: 2rem;
+        padding: 2rem;
     }
 
-    .form-group input {
-        width: 100%;
-        padding: 1rem 1.2rem;
+    .left-section {
+        text-align: center;
+        padding-right: 0;
+        justify-self: center;
+    }
+
+    .right-section {
+        justify-self: center;
+    }
+
+    .sign-in-card {
+        max-width: 400px;
     }
 }
 

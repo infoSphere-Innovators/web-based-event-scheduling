@@ -321,3 +321,113 @@ form {
   animation: fadeInUp 2s ease forwards;
 }
 
+/* Focus outline and error/success styles */
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 209, 178, 0.2);
+}
+
+input.error {
+    border-color: #ff3860;
+}
+
+input.success {
+    border-color: #00d1b2;
+}
+
+.error-message {
+    color: #ff3860;
+    font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+/* Password strength validation styles */
+.password-strength {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.strength-indicator {
+  height: 5px;
+  border-radius: 3px;
+  margin-top: 0.25rem;
+  transition: width 0.3s ease;
+}
+
+.strength-weak {
+  background-color: #ff3860;
+  width: 33%;
+}
+
+.strength-medium {
+  background-color: #ffdd57;
+  width: 66%;
+}
+
+.strength-strong {
+  background-color: #00d1b2;
+  width: 100%;
+}
+
+/* Error message for password strength */
+.password-error {
+  color: #ff3860;
+  font-size: 0.85rem;
+  margin-top: 0.5rem;
+  display: none; /* Hidden by default */
+}
+
+/* Show error message when password is weak */
+input#password.error + .password-error {
+  display: block;
+}
+
+/* Hide error message when password is strong */
+input#password.success + .password-error {
+  display: none;
+}
+
+/* Password requirements with circle indicators */
+.password-requirements {
+  background: rgba(0, 0, 0, 0.02);
+  padding: 10px 14px !important;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  margin-top: 8px;
+}
+
+.password-requirement {
+  display: flex;
+  align-items: center;
+  font-size: 0.8rem;
+  color: #666;
+  margin-bottom: 6px;
+  transition: color 0.3s ease;
+}
+
+.requirement-circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid #ccc;
+  margin-right: 8px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.requirement-met .requirement-circle {
+  background-color: #9D62F5;
+  border-color: #9D62F5;
+}
+
+.requirement-met {
+  color: #333;
+  font-weight: 500;
+}
+
+#password:focus ~ #password-strength-container .password-requirements {
+  background: rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+

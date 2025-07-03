@@ -146,19 +146,26 @@ body {
 }
 
 .faq-section {
-    background-color: white;
+    /* Change this gradient to match the start of the register-section gradient */
+    background: linear-gradient(to bottom, white 50%, #FFE7B0 100%);
     padding: 8rem 0;
     text-align: left;
     animation: fadeIn 1s ease-out 0.4s backwards;
 }
 
 .faq-section h2 {
-    color: #fff;
+     background-color: #fcb900;
+    color: white;
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 3rem;
     letter-spacing: -0.5px;
     text-align: center;
+    max-width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 30px;
+    border-radius: 12px;
 }
 
 .faq-container {
@@ -237,15 +244,8 @@ body {
 }
 
 .register-section {
-    background: linear-gradient(
-        -45deg,
-        #fff,
-        #FFE7B0,
-        #E8A900,
-        #FFE7B0
-    );
-    background-size: 400% 400%;
-    animation: gradientMove 15s ease infinite;
+    /* Start with the same color that the FAQ section ends with */
+    background: linear-gradient(to bottom, #FFE7B0 0%, #fcc83a 100%);
     text-align: center;
     padding: 15rem 0;
     position: relative;
@@ -253,32 +253,6 @@ body {
     animation: fadeIn 1s ease-out 0.6s backwards;
 }
 
-.register-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(
-        circle at center,
-        rgba(255, 255, 255, 0.8) 0%,
-        rgba(255, 255, 255, 0) 70%
-    );
-    pointer-events: none;
-}
-
-.register-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(45deg, rgba(157, 98, 245, 0.1), transparent);
-    z-index: -1;
-    transform: skewY(-3deg);
-}
 
 .register-section h2 {
     font-size: 2.2rem;
@@ -688,8 +662,7 @@ footer span {
 /* Vatican-style Info Tabs */
 .info-tabs {
     background: #fff;
-    padding: 4rem 0 7rem 0;
-    border-bottom: 1px solid #E8A900;
+    padding: 4rem 0 3rem 0;
     animation: fadeIn 1s ease-out 0.2s backwards;
 }
 
@@ -700,9 +673,9 @@ footer span {
 }
 
 .tab-section {
-    background: #fff;
-    border: 1px solid #E8A900;
-    border-radius: 4px;
+    background: #ffffff;
+    border: 2px solid #E8A900;
+    border-radius: 12px;
 }
 
 .tab-header {
@@ -771,7 +744,7 @@ footer span {
 .news-date, .announcement-date {
     flex: 0 0 80px;
     color: #E8A900;
-    font-weight: 600;
+    font-weight: 800;
     font-size: 0.9rem;
 }
 
@@ -781,13 +754,13 @@ footer span {
 
 .news-content h3, .announcement-content h3 {
     color: #222;
-    font-size: 1.1rem;
+    font-size: 1.25rem;
     margin-bottom: 0.5rem;
 }
 
 .news-content p, .announcement-content p {
     color: #666;
-    font-size: 0.95rem;
+    font-size: 1rem;
     line-height: 1.5;
 }
 
