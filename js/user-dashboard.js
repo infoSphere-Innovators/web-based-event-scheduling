@@ -277,31 +277,6 @@ function viewEventDescription(eventId) {
             document.getElementById('modal-type').textContent = event.EventType;
             document.getElementById('modal-description').textContent = event.EventDescription || 'No description available';
 
-            // Add bottom close button for mobile
-            const modalFooter = document.querySelector('.modal-footer');
-            if (!modalFooter) {
-                // Create footer if it doesn't exist
-                const newFooter = document.createElement('div');
-                newFooter.className = 'modal-footer';
-                
-                const closeBottomBtn = document.createElement('button');
-                closeBottomBtn.className = 'close-btn-bottom';
-                closeBottomBtn.textContent = 'Close';
-                closeBottomBtn.onclick = closeModal;
-                
-                newFooter.appendChild(closeBottomBtn);
-                document.querySelector('.modal-content').appendChild(newFooter);
-            } else {
-                // Check if bottom close button already exists
-                let closeBottomBtn = modalFooter.querySelector('.close-btn-bottom');
-                if (!closeBottomBtn) {
-                    closeBottomBtn = document.createElement('button');
-                    closeBottomBtn.className = 'close-btn-bottom';
-                    closeBottomBtn.textContent = 'Close';
-                    closeBottomBtn.onclick = closeModal;
-                    modalFooter.appendChild(closeBottomBtn);
-                }
-            }
 
             // Show modal with animation
             modal.style.display = "block";

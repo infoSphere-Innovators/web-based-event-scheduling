@@ -42,10 +42,6 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = 'login-page.html';
     });
 
-    signupBtn?.addEventListener('click', () => {
-        window.location.href = '/html/signup-page/signup-page.html';
-    });
-
     userBtn?.addEventListener('click', () => {
         const uid = userBtn.dataset.uid;
         window.location.href = `profile-details.html?uid=${uid}`;
@@ -452,5 +448,5 @@ document.getElementById("login").addEventListener("click", function () {
   });
 
 document.getElementById("signup").addEventListener("click", function () {
-    window.location.href = "/html/signup-page/signup-page.html"; // change this to your target page
+    window.location.href = "/signup-page/index.html"; // change this to your target page
   });
