@@ -254,31 +254,6 @@ td:hover .day-number {
   font-size: 16px;
 }
 
-/* Notification dropdown */
-.notification-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-.notif-dropdown {
-  display: none;
-  position: absolute;
-  right: 0;
-  top: 40px;
-  background-color: white;
-  color: black;
-  min-width: 220px;
-  padding: 10px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  border-radius: 8px;
-  z-index: 1000;
-}
-
-.notif-dropdown p {
-  margin: 0 0 8px;
-  font-size: 14px;
-}
-
 .header {
   display: flex;
   justify-content: space-between;

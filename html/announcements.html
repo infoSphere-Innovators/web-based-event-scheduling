@@ -164,5 +164,35 @@
         window.location.href = `profile-details.html?uid=${uid}`;
       });
     </script>
+
+    <script>
+      // Execute the time update immediately when the page loads
+      document.addEventListener("DOMContentLoaded", function () {
+        // Get time element
+        const timeElement = document.getElementById("current-time");
+
+        if (timeElement) {
+          const options = {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+            timeZoneName: "short",
+          };
+
+          // Update time function
+          function setTime() {
+            const now = new Date();
+            const time = now.toLocaleString("en-US", options);
+            timeElement.textContent = time;
+          }
+
+          // Initial update
+          setTime();
+
+          // Update every second instead of every minute
+          setInterval(setTime, 1000);
+        }
+      });
+    </script>
   </body>
 </html>

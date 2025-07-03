@@ -176,23 +176,23 @@ function showGuestView() {
     userBtn.style.display = 'none';
 }
 
-function updateTime() {
-    const timeElement = document.getElementById('current-time');
-    const options = {
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true,
-        timeZoneName: 'short'
-    };
+    function updateTime() {
+        const timeElement = document.getElementById("current-time");
+        const options = {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+            timeZoneName: "short",
+        };
 
-    function setTime() {
-        const time = new Date().toLocaleString('en-US', options);
-        timeElement.innerHTML = `<strong>${time}</strong>`;
+        function setTime() {
+            const time = new Date().toLocaleString("en-US", options);
+            timeElement.textContent = time;
+        }
+
+        setTime();
+        setInterval(setTime, 60000);
     }
-
-    setTime();
-    setInterval(setTime, 60000);
-}
 
 function initializePage() {
     document.getElementById('announcement-btn').classList.add('active-tab');
